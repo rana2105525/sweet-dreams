@@ -16,14 +16,18 @@
         <div class="input-box">
           <label>Email</label>
           <input type="text" placeholder="username@email.com" required />
+          <span>If you don't have an account please <a href="reg.php">SignUp</a><span>
+
         </div>
+
+
 
         <div class="input-box">
             <label>Password</label>
             <input type="password" placeholder="Enter your password" required />
+            <a href="#">Forget password?</a>
+
         </div>
-      
-         <span>If you don't have an account please <a href="reg.php">SignUp</a><span>
         
 
         <button>Submit</button>

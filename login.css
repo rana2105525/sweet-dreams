@@ -78,3 +78,11 @@ body {
 .form button:hover {
   background:#3AB9C0;
 }
+.input-box a{
+    text-decoration: none;
+    color:#3AB9C0
+}
+.input-box span{
+    text-decoration: none;
+    color:#F27144
+}
