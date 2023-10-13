@@ -11,7 +11,7 @@
   <body>
     
     <section class="container">
-    <img src="imgs/Sweet Dreams logo-01.png" alt="logo" >
+    <a href="index.php"><img src="imgs/Sweet Dreams logo-01.png" alt="logo" ></a>
       <form action="#" class="form">
         <div class="input-box">
           <label>Full Name</label>
