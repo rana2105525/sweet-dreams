@@ -22,7 +22,10 @@
             <label>Password</label>
             <input type="password" placeholder="Enter your password" required />
         </div>
-       
+      
+         <span>If you don't have an account please <a href="reg.php">SignUp</a><span>
+        
+
         <button>Submit</button>
       </form>
     </section>
