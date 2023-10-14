@@ -1,3 +1,6 @@
+<?php
+  include_once "includes/dbh.inc.php";
+?>
 <!DOCTYPE html>
 <style>
 .error {color:#FF0000;}
@@ -130,14 +133,14 @@ if(empty($_POST["birth"])){
 	$Gender=htmlspecialchars($_POST["gender"]);
 
     //insert it to database 
-	$sql="insert into user(fullname,email,password,birth_date,gender) 
+	$sql="insert into registration(fullname,email,password,birth,gender) 
 	values('$Fname','$Email','$Password','$Birth','$Gender')";
-	// $result=mysqli_query($conn,$sql);
+	 $result=mysqli_query($conn,$sql);
 
   //   //redirect the user back to index.php 
-	// if($result)	{
-	// 	header("Location:index.php");
-	// }
+	 if($result)	{
+	 	header("Location:index.php");
+   }
 }
 
 ?>
