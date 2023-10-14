@@ -10,37 +10,39 @@
 </head>
 <body>
 
+<?php 
+  function isValidEmail($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+  }
+
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
+         $name = $_POST['name'];
+         $phoneNumber = $_POST['phoneNumber'];
+         $email = $_POST['email'];
+         $password = $_POST['password'];
+
+         if (empty($name) || empty($number) || empty($email) || empty($password)) {
+             echo "<p style='color: red;'>All fields are required.</p>";
+         } elseif (!ctype_digit($number)) {
+             echo "<p style='color: red;'>Phone number should contain only numbers.</p>";    
+         } elseif (!ctype_alpha($name)) {
+           echo "<p style='color: red;'>Name should contain only letters.</p>";}
+           elseif (!isValidEmail($email)) {
+             echo "<p style='color: red;'>Invalid email format.</p>";
+         // } else {
+             
+         //     echo "<p>Name: $name</p>";
+         //     echo "<p>Phone Number: $phoneNumber</p>";
+         //     echo "<p>Email: $email</p>";
+         //     echo "<p>Password: $password</p>";
+         // }
+     }
+   }
+?>
+
 <section class="container">
     <form action="#" method="post" class="form">
         <div id="title"><h2>Add a new admin</h2></div>
-        <?php
-        function isValidEmail($email) {
-            return filter_var($email, FILTER_VALIDATE_EMAIL);
-        }
-
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $name = $_POST['name'];
-            $phoneNumber = $_POST['phoneNumber'];
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-
-            if (empty($name) || empty($phoneNumber) || empty($email) || empty($password)) {
-                echo "<p style='color: red;'>All fields are required.</p>";
-            } elseif (!ctype_digit($phoneNumber)) {
-                echo "<p style='color: red;'>Phone number should contain only numbers.</p>";    
-            } elseif (!ctype_alpha($name)) {
-              echo "<p style='color: red;'>Name should contain only letters.</p>";}
-              elseif (!isValidEmail($email)) {
-                echo "<p style='color: red;'>Invalid email format.</p>";
-            // } else {
-                
-            //     echo "<p>Name: $name</p>";
-            //     echo "<p>Phone Number: $phoneNumber</p>";
-            //     echo "<p>Email: $email</p>";
-            //     echo "<p>Password: $password</p>";
-            // }
-        }}
-        ?>
 
         <div class="input-box">
             <label for="name">Name</label>
@@ -58,8 +60,8 @@
         </div> 
 
         <div class="input-box">
-            <label for ="pass" >Password</label>
-            <input type="password" id ="pass" name="pass" placeholder="Enter your password" />
+            <label for ="password" >Password</label>
+            <input type="password" id ="password" name="password" placeholder="Enter your password" />
         </div>
         
         <div class="input-box">
