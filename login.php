@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<style>
+.error {color:#FF0000;}
+</style>
 <html lang="en">
   <head>
     <title>Login</title>
@@ -10,13 +13,42 @@
   </head>
   
   <body>
+  <?php
+    $emailerr=$passworderr="";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  // Validate email
+  if (empty($_POST["email"])) {
+    $emailerr = "Email is required";
+  } else {
+    $email = test_input($_POST["email"]);
+    // check if e-mail address is well-formed
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $emailerr = "Invalid email format";
+    }
+  }
+
+  // Validate password
+  if (empty($_POST["password"])){
+    $passworderr= "Password is required";
+  }
+}
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+?>
     
     <section class="container">
     <a href="index.php"><img src="imgs/Sweet Dreams logo-01.png" alt="logo" ></a>
-      <form action="#" class="form">
+    <form method="post" class="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div class="input-box">
           <label>Email</label>
           <input type="text" name="email" placeholder="username@email.com" required />
+          <span class="error"><?php echo $emailerr;?></span>
+          <br>
           <span>If you don't have an account please <a href="reg.php">SignUp</a><span>
 
         </div>
@@ -26,40 +58,15 @@
         <div class="input-box">
             <label>Password</label>
             <input type="password" name="password" placeholder="Enter your password" required />
+            <span class="error"><?php echo $passworderr;?></span>
             <a href="#">Forget password?</a>
 
         </div>
         
 
-        <button>Submit</button>
+        <button input type="submit" name="submit" value="Submit">Submit</button>
       </form>
     </section>
-    <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Retrieve form data
-  $email = $_POST["email"];
-  $password = $_POST["password"];
 
-  // Perform validation
-  $errors = array();
-
-  // Validate email
-  if (empty($email)) {
-    $errors[] = "Email is required";
-  } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = "Invalid email format";
-  }
-
-  // Validate password
-  if (empty($password)) {
-    $errors[] = "Password is required";
-  }
-
-  // If there are no errors, you can proceed with further processing
-  if (empty($errors)) {
-    
-  }
-}
-?>
   </body>
 </html>
