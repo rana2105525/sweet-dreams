@@ -57,7 +57,6 @@
             <label for="prod_image">Product image</label>
             <input type="file" id="prod_image" name="prod_image" accept =".png,.jpg"/>
         </div>
-        
         <button type="submit">Add Product</button>
       </form>
     </section>
