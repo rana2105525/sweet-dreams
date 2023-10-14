@@ -377,3 +377,31 @@ header button{
   text-align: center;
   color: #F27144;
 }
+@media (max-width: 767px) {
+  .box {
+    padding-left: 0;
+  }
+
+  .box button {
+    width: 100%;
+  }
+
+  .b img {
+    width: 100%;
+  }
+
+  .Contain {
+    flex-direction: column;
+  }
+
+  #col1,
+  #col2,
+  #col3 {
+    width: 100%;
+    height: auto;
+  }
+
+  .h_products h2 {
+    text-align: left;
+  }
+}
