@@ -43,6 +43,19 @@
   .input-box label {
     color: #3AB9C0;
   }
+  input::file-selector-button{
+    margin-top: 7px;
+    background-color: #F27144;
+    border: #F27144;
+    border-radius: 50px ;
+    color:white;
+  }
+
+  input::file-selector-button:hover{
+    background-color: #3AB9C0;
+    cursor: pointer;
+  }
+
   .form :where(.input-box input, .select-box) {
     position: relative;
     height: 40px;

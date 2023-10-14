@@ -30,8 +30,8 @@
         </div> 
 
         <div class="input-box">
-            <label for="image">Product image</label>
-            <input type="file" id="image" accept =".png,.jpg" />
+            <label for="prod_image">Product image</label>
+            <input type="file" id="prod_image" accept =".png,.jpg"/>
         </div>
         
 
