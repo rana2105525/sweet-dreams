@@ -15,27 +15,40 @@
       <form action="#" class="form">
         <div id="title"><h2>Add a new admin</h2></div>
         <div class="input-box">
-            <label>Name</label>
-            <input type="text" placeholder="Enter admin's name" />
+            <label for="name">Name</label>
+            <input type="text" id ="name" name="name" placeholder="Enter admin's name" />
         </div>
 
         <div class="input-box">
-            <label>Phone Number</label>
-            <input type="number" placeholder="Enter admin's number" />
+            <label for="number">Phone Number</label>
+            <input type="number" id="number" name="number" placeholder="Enter admin's number" />
         </div>
 
         <div class="input-box">
-            <label>Email</label>
-            <input type="email" placeholder="Enter admin's email" />
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter admin's email" />
         </div> 
 
         <div class="input-box">
-            <label>Password</label>
-            <input type="password" placeholder="Enter your password" />
+            <label for ="pass" >Password</label>
+            <input type="password" id ="pass" name="pass" placeholder="Enter your password" />
         </div>
         
+        <div class="input-box">
+            <label for ="gender" >Gender</label>
+        </div> 
+        <div class ="row">
+        <span class ="column">
+          <input type="radio" name="gender" id="male" value="male">
+          <label for ="male" >Male</label>
+        </span>
+        <span class ="column">
+          <input type="radio" name="gender" id="female" value="female">
+          <label for ="female" >Female</label>
+        </span>
+        </div>
 
-        <button>Add Admin</button>
+        <button type ="submit">Add Admin</button>
       </form>
     </section>
 

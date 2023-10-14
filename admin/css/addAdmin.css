@@ -80,7 +80,15 @@ body {
 #title{
     text-align: center;
     color:#F27144;
+  font-family: "Poppins", sans-serif;
+
 }
+.column {
+  float: left;
+  width: 50%;
+  margin-top: 5px;
+}
+
 /*hide arrows of number*/
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
