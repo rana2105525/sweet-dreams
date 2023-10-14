@@ -1,3 +1,6 @@
+<?php
+  include_once "includes/dbh.inc.php";
+?>
 <!DOCTYPE html>
 <style>
 .error {color:#FF0000;}
@@ -116,8 +119,30 @@ if(empty($_POST["birth"])){
           </div>
         </div>
        
-      <input type="submit" name="submit" value="Submit">
+      <button input type="submit" name="submit" value="Submit">Submit</button>
       </form>
     </section>
+    <?php
+ //grap data from user if form was submitted 
+
+  if($_SERVER["REQUEST_METHOD"]=="POST"){ //check if form was submitted
+	$Fname=htmlspecialchars($_POST["name"]);
+	$Email=htmlspecialchars($_POST["email"]);
+	$Password=htmlspecialchars($_POST["password"]);
+	$Birth=htmlspecialchars($_POST["birth"]);
+	$Gender=htmlspecialchars($_POST["gender"]);
+
+    //insert it to database 
+	$sql="insert into registration(fullname,email,password,birth,gender) 
+	values('$Fname','$Email','$Password','$Birth','$Gender')";
+	 $result=mysqli_query($conn,$sql);
+
+  //   //redirect the user back to index.php 
+	 if($result)	{
+	 	header("Location:index.php");
+   }
+}
+
+?>
   </body>
 </html>
