@@ -16,22 +16,22 @@
         <div id="title"><h2>Add a new product</h2></div>
         <div class="input-box">
             <label for ="name">Product Title</label>
-            <input type="text" id="name" placeholder="Enter product's title" required />
+            <input type="text" id="name" placeholder="Enter product's title" />
         </div>
 
         <div class="input-box">
             <label for="price" >Product price</label>
-            <input type="number" step="any" id ="price" placeholder="Enter product's price" required />
+            <input type="number" step="any" id ="price" placeholder="Enter product's price" />
         </div>
 
         <div class="input-box">
             <label for ="description">Product description</label>
-            <input type="text" id="description" placeholder="Enter product's descriptioon" required />
+            <input type="text" id="description" placeholder="Enter product's descriptioon" />
         </div> 
 
         <div class="input-box">
             <label for="image">Product image</label>
-            <input type="file" id="image" accept =".png,.jpg" required />
+            <input type="file" id="image" accept =".png,.jpg" />
         </div>
         
 

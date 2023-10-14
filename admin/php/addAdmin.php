@@ -16,22 +16,22 @@
         <div id="title"><h2>Add a new admin</h2></div>
         <div class="input-box">
             <label>Name</label>
-            <input type="text" placeholder="Enter admin's name" required />
+            <input type="text" placeholder="Enter admin's name" />
         </div>
 
         <div class="input-box">
             <label>Phone Number</label>
-            <input type="number" placeholder="Enter admin's number" required />
+            <input type="number" placeholder="Enter admin's number" />
         </div>
 
         <div class="input-box">
             <label>Email</label>
-            <input type="email" placeholder="Enter admin's email" required />
+            <input type="email" placeholder="Enter admin's email" />
         </div> 
 
         <div class="input-box">
             <label>Password</label>
-            <input type="password" placeholder="Enter your password" required />
+            <input type="password" placeholder="Enter your password" />
         </div>
         
 
