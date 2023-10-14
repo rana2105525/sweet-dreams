@@ -116,7 +116,7 @@ if(empty($_POST["birth"])){
           </div>
         </div>
        
-      <input type="submit" name="submit" value="Submit">
+      <button input type="submit" name="submit" value="Submit">Submit</button>
       </form>
     </section>
     <?php
@@ -132,12 +132,12 @@ if(empty($_POST["birth"])){
     //insert it to database 
 	$sql="insert into user(fullname,email,password,birth_date,gender) 
 	values('$Fname','$Email','$Password','$Birth','$Gender')";
-	$result=mysqli_query($conn,$sql);
+	// $result=mysqli_query($conn,$sql);
 
-    //redirect the user back to index.php 
-	if($result)	{
-		header("Location:index.php");
-	}
+  //   //redirect the user back to index.php 
+	// if($result)	{
+	// 	header("Location:index.php");
+	// }
 }
 
 ?>
