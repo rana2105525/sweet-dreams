@@ -3,22 +3,22 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-  }
-  body {
+}
+body {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
     background: #E8E0D7;
-  }
-  .container img{
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-      position: relative;
-  }
+}
+.container img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    position: relative;
+}
   
   .container {
     position: relative;
@@ -43,11 +43,12 @@
   .input-box label {
     color: #3AB9C0;
   }
+
   input::file-selector-button{
-    margin-top: 7px;
+    margin-top: 9px;
     background-color: #F27144;
     border: #F27144;
-    border-radius: 50px ;
+    border-radius: 8px ;
     color:white;
   }
 
