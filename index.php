@@ -37,6 +37,8 @@
     <label for="active" class="close"></label>
     <div class="wrapper">
       <ul>
+            <li><a href="#">Summer collection</a></li>
+            <li><a href="#">Winter collection</a></li>
             <li><a href="#">Bundle and save</a></li>
             <li><a href="#">Blog</a></li>
             <li><a href="#">Gifts</a></li>
@@ -47,31 +49,41 @@
     </div>
     </nav>
 <br>
-
-<!-- <div class="myslide">
-<input type="radio" id="trigger1" name="slider">
-<label for="trigger1">
-    <span class="sr-only"></span></label>
-<div class="slide bg1"><a href="#"><button>Shop now</button></a></div>
-
-<input type="radio" id="trigger2" name="slider" checked autofocus>
-<label for="trigger2">
-    <span class="sr-only">Slide 2 of 5. A photo of a bird eating sunflower seeds from an open hand.</span></label>
-<div class="slide bg2"></div>
-
-<input type="radio" id="trigger3" name="slider">
-<label for="trigger3">
-    <span class="sr-only">Slide 3 of 5. A photo of a concrete bridge over the river with high voltage power lines on both banks.</span></label>
-<div class="slide bg3"></div>
-
-<input type="radio" id="trigger4" name="slider">
-<label for="trigger4">
-    <span class="sr-only">Slide 4 of 5. A photo of a lake surrounded by the forest with mountains in the background.</span></label>
-<div class="slide bg4"></div>
-
-<input type="radio" id="trigger5" name="slider">
-<label for="trigger5"><span class="sr-only">Slide 5 of 5. A photo of a forest.</span></label>
-<div class="slide bg5"></div>
-</div> -->
+<header>
+    <section class='hero-header'>
+        <h1>Shop and explore our new collection to get the chance to earn gifts</h1>
+        <h2>Hurry up!!!</h2>
+        <a href="#"><button class="img_btn">Explore</button></a>
+    </section>
+</header>
+<br>
+<div class="h_products" ><h2>Our products</h2> </div><br>
+<div class="Contain">
+            <div class="box" id="col1">
+                <a href="#">
+                    <button type="button" class="b">
+                        <img src="imgs/long-sleeved-t-shirt-children-s-clothing-top-cool-summer-boy-8c83e609f4319973d698e96068482e7a.png" alt="">
+                        <p>Summer collection</p>
+                    </button>
+                </a>
+            </div>
+            <div class="box" id="col2">
+                <a href="#">
+                    <button type="button" class="b">
+                        <img src="imgs/t-shirt-pajamas-carters-boy-clothing-little-monster-baby-home-pajamas-f14325570f638347c4aa1cccd0ca5e3f.png" alt="">
+                        <p>Winter collection</p>
+                    </button>
+                </a>
+            </div>
+            <div class="box" id="col3">
+                <a href="#">
+                    <button type="button" class="b">
+                        <img src="imgs/pngegg.png" alt="">
+                        <p>Bundle and save</p>
+                    </button>
+                </a>
+            </div>
+<br>
+</div>
   </body>
 </html>
