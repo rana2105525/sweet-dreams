@@ -86,3 +86,6 @@ body {
     text-decoration: none;
     color:#F27144
 }
+.input-box .error span{
+  color:red;
+}

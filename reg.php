@@ -11,7 +11,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" href="imgs/Sweet Dreams logo-01.png"type="image/icon type" />
+    <link rel="icon" href="imgs/sweet dreams logo-01.png"type="image/icon type" />
     <link rel="stylesheet" href="reg.css" />
   </head>
   
@@ -72,7 +72,7 @@ if(empty($_POST["birth"])){
     ?>
     
     <section class="container">
-    <a href="index.php"><img src="imgs/Sweet Dreams logo-01.png" alt="logo" ></a>
+    <a href="index.php"><img src="imgs/sweet dreams logo-01.png" alt="logo" ></a>
       <form method="post" class="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div class="input-box">
           <label>Full Name</label>

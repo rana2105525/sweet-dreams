@@ -8,20 +8,23 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-  <link rel="icon" href="imgs/Sweet Dreams logo-01.png" type="image/icon type" />
+  <link rel="icon" href="imgs/sweet dreams logo-01.png" type="image/icon type" />
   <link rel="stylesheet" href="index.css" />
 </head>
 
 <body>
-  <script src="slideshow.js"></script>
+ 
 
   <nav>
     <div class="wrapper1">
-      <div class="logo"><a href="index.php"><img src="imgs/Sweet Dreams logo-01.png" alt="logo"></a></div>
+      <div class="logo"><a href="index.php"><img src="imgs/sweet dreams logo-01.png" alt="logo"></a></div>
       <ul class="nav-links">
         <li><a href="index.php">Home</a></li>
-        <li><a href="#">Shop</a></li>
         <li><a href="login.php">Login</a></li>
+        <li><a href="#"><i class="fa fa-shopping-bag"></i></a></li>
+        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+
+
       </ul>
     </div>
     <div class="wrap">
@@ -143,7 +146,7 @@
   <br>
   <footer class="pageFooter">
     <div class="col">
-      <img class="Logo " src="imgs/Sweet Dreams logo-01.png" alt="" width="145" height="100">
+      <a href="index.php"><img class="Logo" src="imgs/sweet dreams logo-01.png" alt="" width="145" height="100"></a>
       <h4>Contact</h4>
       <p><strong>Adress: </strong>Misr International University</p>
       <p><strong>Phone: </strong>010000000</p>
