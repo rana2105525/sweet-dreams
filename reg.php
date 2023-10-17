@@ -11,13 +11,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" href="imgs/Sweet Dreams logo-01.png"type="image/icon type" />
+    <link rel="icon" href="imgs/sweet dreams logo-01.png"type="image/icon type" />
     <link rel="stylesheet" href="reg.css" />
   </head>
   
   <body>
     <?php
-    $nameErr =$passwordErr=$confirmErr=$birthErr= $emailErr="";
+
+      $nameErr =$passwordErr=$confirmErr=$birthErr= $emailErr="";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (empty($_POST["name"])) {
         $nameErr = "Name is required";
@@ -60,9 +61,15 @@ if(empty($_POST["birth"])){
 }
 //Function to check if the date is valid (searching for it)
 
-    
+//hashing password
+$new_password=$_GET['password'];
+$hashed_password=password_hash($new_password1,PASSWORD_DEFAULT);
+
+
 
     }
+
+
       function test_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
@@ -72,7 +79,7 @@ if(empty($_POST["birth"])){
     ?>
     
     <section class="container">
-    <a href="index.php"><img src="imgs/Sweet Dreams logo-01.png" alt="logo" ></a>
+    <a href="index.php"><img src="imgs/sweet dreams logo-01.png" alt="logo" ></a>
       <form method="post" class="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div class="input-box">
           <label>Full Name</label>
@@ -82,15 +89,16 @@ if(empty($_POST["birth"])){
 
         <div class="input-box">
           <label>Email Address</label>
-          <input type="text" name="email" placeholder="Enter email address" required />
+          <input type="text" name="email" id="email" method="post" placeholder="Enter email address" required />
           <span class="error"><?php echo $emailErr;?></span>
         </div>
 
         <div class="input-box">
             <label>Password</label>
-            <input type="password" name="password" placeholder="Enter your password" required />
+            <input type="password" name="password" id='password' method="post" placeholder="Enter your password" required />
             <span class="error"><?php echo $passwordErr;?></span>
           </div>
+          
 
         <div class="input-box">
             <label>Confirm password</label>
@@ -134,8 +142,8 @@ if(empty($_POST["birth"])){
 	$Gender=htmlspecialchars($_POST["gender"]);
 
     //insert it to database 
-	$sql="insert into registerations(fullname,email,password,birth,gender) 
-	values('$Fname','$Email','$Password','$Birth','$Gender')";
+	$sql="insert into registrations(fullname,email,password,birth,gender) 
+	values('$Fname','$Email','$hashed_password','$Birth','$Gender')";
 	 $result=mysqli_query($conn,$sql);
 
   //   //redirect the user back to index.php 
