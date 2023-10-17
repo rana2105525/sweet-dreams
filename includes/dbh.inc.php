@@ -4,9 +4,8 @@ $username = "root";
 $password = "SweetDreams123";
 $DB = "sweetdreams";
 
-if($conn = mysqli_connect($servername,$username,$password,$DB)){
-echo "connected";
-}
+$conn = mysqli_connect($servername,$username,$password,$DB);
+
 
 
 
