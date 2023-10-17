@@ -134,7 +134,7 @@ if(empty($_POST["birth"])){
 	$Gender=htmlspecialchars($_POST["gender"]);
 
     //insert it to database 
-	$sql="insert into registerations(fullname,email,password,birth,gender) 
+	$sql="insert into registrations(fullname,email,password,birth,gender) 
 	values('$Fname','$Email','$Password','$Birth','$Gender')";
 	 $result=mysqli_query($conn,$sql);
 
