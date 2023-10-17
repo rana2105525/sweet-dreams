@@ -17,7 +17,7 @@
 
 <?php
     
-    $fnameErr = $lnameErr = $cardNumErr = $dateErr = $emailErr = $phoneErr = $addressErr = $cvcErr = "";
+    $fnameErr = $lnameErr = $cardNumErr = $cardHolderErr = $dateErr = $emailErr = $phoneErr = $addressErr = $cvcErr = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST["fname"])) {
             $fnameErr = "First name is required";
@@ -97,9 +97,10 @@
                 $cvcErr = "Invalid CVC";
             }
         }
-    
-    
         // Function to check if the date is valid (searching for it)
+
+        $new_CVC=$_GET['CVC'];
+        $hashed_CVC=password_hash($new_CVC,PASSWORD_DEFAULT);
     }
     
     function test_input($data)
@@ -188,7 +189,7 @@
             <div class="input-box">
                 <label>Card holder</label>
                 <input type="text" name="cardHolder"  required />
-                <span class="error"><?php echo $cardNum; ?></span>
+                <span class="error"><?php echo $cardHolderErr; ?></span>
 
             </div>
             
