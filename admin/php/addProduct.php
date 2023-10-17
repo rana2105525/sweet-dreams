@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href=".././css/addProduct.css" />
     <link rel="icon" href="../../imgs/Sweet Dreams logo-01.png"type="image/icon type" />
-  </head>
+  </head> 
 <body>
 
 <?php
@@ -34,7 +34,13 @@
           // }
       }
 ?>
-
+<div class="sidebar">
+  <a id ="first" href="addAdmin.php">Add Admin</a>
+  <a href="addProduct.php">Add Product</a>
+  <a href="#contact">Users</a>
+  <a href="#about">Reviews</a>
+</div>
+<div class ="content">
 <section class="container">
       <form action="#" class="form" method="post">
         <div id="title"><h2>Add a new product</h2></div>
@@ -60,6 +66,7 @@
         <button type="submit">Add Product</button>
       </form>
     </section>
+</div>
 
   </body>
 </html>

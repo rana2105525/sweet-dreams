@@ -1,50 +1,126 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: #E8E0D7;
-}
-.container img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    position: relative;
-}
-  
-  .container {
-    position: relative;
-    max-width: 700px;
-    width: 100%;
-    background: #fff;
-    padding-left: 70px;
-    padding-right: 70px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    border-radius: 50px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .container .form {
-    margin-top: 10px;
-  }
-  .form .input-box {
-    width: 100%;
-    margin-top: 20px;
-  }
-  .input-box label {
-    color: #3AB9C0;
-  }
 
-  input::file-selector-button{
+body {
+  background-color: #E8E0D7;
+}
+
+.sidebar {
+  margin-right:100px;
+  padding: 0;
+  width: 200px;
+  background-color: #ffffff;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: #3AB9C0;
+  padding: 16px;
+  text-decoration: none;
+  margin-left:15px;
+}
+#first{
+  margin-top:200px;
+}
+
+.sidebar a:hover{
+  color: #F27144;
+}
+
+div.content {
+  margin-left: 400px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+.container {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  background: #fff;
+  padding: 10px 70px 20px 70px;
+  margin:100px;
+  border-radius: 50px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+}
+
+.container .form {
+  margin-top: 10px;
+}
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+.input-box label {
+  color: #3AB9C0;
+}
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 0 15px;
+}
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.form button {
+  height: 55px;
+  width:100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background:#F27144;
+  border-radius: 50px;
+}
+.form button:hover {
+  background:#3AB9C0;
+}
+
+#title{
+    text-align: center;
+    color:#F27144;
+  font-family: "Poppins", sans-serif;
+
+}
+
+/*hide arrows of number*/
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+/*responsive*/
+@media screen and (max-width: 600px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+input::file-selector-button{
     margin-top: 9px;
     background-color: #F27144;
     border: #F27144;
@@ -55,49 +131,4 @@ body {
   input::file-selector-button:hover{
     background-color: #3AB9C0;
     cursor: pointer;
-  }
-
-  .form :where(.input-box input, .select-box) {
-    position: relative;
-    height: 40px;
-    width: 100%;
-    outline: none;
-    font-size: 1rem;
-    color: #707070;
-    margin-top: 8px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 0 15px;
-  }
-  .input-box input:focus {
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-  }
-  
-  .form button {
-    height: 55px;
-    width:100%;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 400;
-    margin-top: 30px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background:#F27144;
-    border-radius: 50px;
-  }
-  .form button:hover {
-    background:#3AB9C0;
-  }
-  
-  #title{
-      text-align: center;
-      color:#F27144;
-  }
-
-  /*hide arrows of number*/
-  input[type=number]::-webkit-inner-spin-button, 
-  input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    margin: 0; 
   }

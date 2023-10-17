@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Add admin</title>
+<title>Add admin</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href=".././css/addAdmin.css" />
     <link rel="icon" href="../../imgs/Sweet Dreams logo-01.png" type="image/icon type" />
 </head>
+
 <body>
 
 <?php 
@@ -39,8 +40,14 @@
      }
    }
 ?>
-
-<section class="container">
+<div class="sidebar">
+  <a id ="first" href="addAdmin.php">Add Admin</a>
+  <a href="addProduct.php">Add Product</a>
+  <a href="#contact">Users</a>
+  <a href="#about">Reviews</a>
+</div>
+<div class="content">
+  <section class="container">
     <form action="#" method="post" class="form">
         <div id="title"><h2>Add a new admin</h2></div>
 
@@ -81,6 +88,7 @@
         <button type ="submit">Add Admin</button>
       </form>
     </section>
+</div>
 
 </body>
 </html>

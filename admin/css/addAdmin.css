@@ -1,24 +1,44 @@
-* {
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
 body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: #E8E0D7;
+  background-color: #E8E0D7;
 }
 
-.container img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    position: relative;
+.sidebar {
+  margin-right:100px;
+  padding: 0;
+  width: 200px;
+  background-color: #ffffff;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: #3AB9C0;
+  padding: 16px;
+  text-decoration: none;
+  margin-left:15px;
+}
+#first{
+  margin-top:200px;
+}
+
+.sidebar a:hover{
+  color: #F27144;
+}
+
+div.content {
+  margin-left: 400px;
+  padding: 1px 16px;
+  height: 1000px;
 }
 
 .container {
@@ -26,12 +46,11 @@ body {
   max-width: 700px;
   width: 100%;
   background: #fff;
-  padding-left: 70px;
-  padding-right: 70px;
-  padding-top: 10px;
-  padding-bottom: 20px;
+  padding: 10px 70px 20px 70px;
+  margin:100px;
   border-radius: 50px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
 }
 
 .container .form {
@@ -88,10 +107,19 @@ body {
   width: 50%;
   margin-top: 5px;
 }
-
 /*hide arrows of number*/
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
+}
+/*responsive*/
+@media screen and (max-width: 600px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
 }
