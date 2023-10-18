@@ -36,6 +36,7 @@
 ?>
 <div class="sidebar">
   <a id ="first" href="addAdmin.php">Add Admin</a>
+  <a href="editAdmin.php">Edit Admin</a>
   <a href="addProduct.php">Add Product</a>
   <a href="#contact">Users</a>
   <a href="#about">Reviews</a>
