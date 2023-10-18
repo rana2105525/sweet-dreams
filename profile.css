@@ -256,319 +256,79 @@ nav .wrapper1 .nav-items{
      left: 50%;
      transform: translate(-50%, -50%);
    }
-   .main .shop-btn {
-    position: absolute;
-    top:70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: #555;
-    color: white;
-    font-size: 16px;
-    padding: 12px 50px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
 
-  .main .image_shop {
-    width: 100%;
-    height: auto;
-  }
-  
-  @media (max-width: 767px) {
-    .main .image_shop {
-      height: 300px;
-    }
-  }
-  header {
-    height: 500px;
-    width: 100%;
-    text-align: center;
-    padding-top: 340px;
-    color: rgb(0, 0, 0);
-    overflow: hidden;
-    /* background: #ffffff;  fallback for old browsers
-    background: #fdfdfd;  fallback for old browsers */
-    background: linear-gradient(rgba(58, 185, 192, 0.2), rgba(242, 113, 68, 0.2)), url(imgs/Copy\ of\ Omar\ &\ Asia199.jpg); 
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: auto;
-    border:none
-}
 
-header button{
-  border:none;
-  color:white;
-  background:#F27144;
-  border-radius: 30px;
-  padding-left: 60px;
-  padding-right: 60px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 20px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-@media (max-width: 767px) {
-  header {
-    height: 300px;
-    padding-top: 200px;
-  }
 
-  header button {
+   footer{
+    display:flex;
+    padding-top:40px;
+    flex-wrap:wrap;
+    justify-content: space-between;
     padding-left: 30px;
     padding-right: 30px;
-    font-size: 16px;
   }
-}
-.box
-{
-    padding-left: 130px;
-    height: 500px;
-    justify-content: space-evenly;
+  .pageFooter{
+    color:#878f88;
+  }
+  
+  footer .col{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    
+  }
+  
+  footer .Logo{
+    margin-bottom:30px;
+  
+  }
+  
+  footer h4{
+    font-size:14px;
+    padding-bottom:20px;
+  }
+  
+  footer p{
+    font-size:13px;
+    margin:0 0 8px 0;
+  }
+  
+  footer a{
+    font-size:13px;
+    text-decoration: none;
+    color:#878f88;
+    margin-bottom: 10px;
+  }
+  
+  footer .follow{
+    margin-top:20px;
    
-}
-.box button
-{
-    width:95%;
-    color:#3AB9C0;
-    border:none;
-    border-radius: 50px;
-    padding-bottom: 20px;
-    background: no-repeat;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 20px;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0,0,0,0.25);
-}
-.box button:hover
-{
-    box-shadow:20px 20px 30px rgba(0,0,0,0.6);
-}
-.b img
-{
-    width: 90%;
-    height: 200px;
-    margin-top: 10px;
-}
-
-.Contain
-{
-   width: 90%;
-   display: flex;
-}
-#col1
-{
-    width: 100%;
-    height: 50%;
-
-}
-#col2
-{
-    width: 100%;
-    height: 50%;
-}
-#col3
-{
-    width: 100%;
-    height: 50%;
-
-}
-.h_products h2{
-  align-items: center;
-  text-align: center;
-  color: #F27144;
-}
-@media (max-width: 767px) {
-  .box {
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
   }
-
-  .box button {
-    width: 100%;
-  }
-
-  .b img {
-    width: 100%;
-  }
-
-  .Contain {
-    flex-direction: row;
-  }
-
-  #col1,
-  #col2,
-  #col3 {
-    width: 100%;
-    height: auto;
-  }
-
-  .h_products h2 {
-    text-align: center;
-  }
-}
-#banner{
-display:flex;
-flex-direction:column;
-justify-content: right;
-align-items:self-end;
-text-align: right;
-/* background-image: url(imgs/newborn-concept-with-baby-shoes-pile-clothescopy.jpg); */
-background-image: url(imgs/baby-elementson-light-blue-background.jpg);
-width:100%;
-height: 50vh;
-background-size: cover;
-background-position:center;
-word-spacing: 2px;
-}
-#banner h2{
-  padding-top:130px;
-  padding-right: 160px;
-  font-size: 30;
-}
-#banner h2 span{
-  font-size:32;
-  color:#F27144;
-}
-#banner button{
-  position:absolute;
-  margin-top: 190px;
-  margin-bottom: 80px;
-  margin-left: 300px;
-  margin-right: 270px;
-  padding-left: 70px;
-  padding-right: 70px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  background-color:#F27144;
-  border-radius: 30px;
-  border:none;
-  font-size: 25 ;
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-}
-#banner a{
-  text-decoration: none;
-  font-size:18px;
-  color:#ffffff;
-}
-
-#banner button a:hover{
-
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-
-}
-#banner button:hover{
-  background:#3AB9C0;
-  background-color: #3AB9C0;
-}
-@media (max-width: 767px) {
-  #banner {
-    height: 30vh;
-    width: 100%;
-  }
-
-  #banner h2 {
-    padding-top: 50px;
-    padding-right: 50px;
-    font-size: 22px;
-  }
-
-  #banner h2 span {
-    font-size: 22px;
-  }
-
-  #banner button {
-    margin-top: 100px;
-    margin-bottom: 50px;
-    margin-left: 80px;
-    margin-right: 160px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 20px;
-  }
-
-  #banner a {
-    font-size: 14px;
-  }
-}
-footer{
-  display:flex;
-  padding-top:40px;
-  flex-wrap:wrap;
-  justify-content: space-between;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-.pageFooter{
-  color:#878f88;
-}
-
-footer .col{
-  display:flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 20px;
   
-}
-
-footer .Logo{
-  margin-bottom:30px;
-
-}
-
-footer h4{
-  font-size:14px;
-  padding-bottom:20px;
-}
-
-footer p{
-  font-size:13px;
-  margin:0 0 8px 0;
-}
-
-footer a{
-  font-size:13px;
-  text-decoration: none;
+  footer .follow i{
+  padding-right:4px;
+  cursor:pointer;
+   
+  }
+  
+  footer .install .row img{
+  border:1px solid black;
+  border-radius:6px;
+  }
+  
+  footer .install img{
+   margin: 10px 0 15px 0;
+  }
+  
+  footer .follow i:hover, 
+  footer a:hover{
+    color:red;
+  
+  }
+  
+  .copyright{
+  width:100%;
+  text-align: center;
   color:#878f88;
-  margin-bottom: 10px;
-}
-
-footer .follow{
-  margin-top:20px;
- 
-}
-
-footer .follow i{
-padding-right:4px;
-cursor:pointer;
- 
-}
-
-footer .install .row img{
-border:1px solid black;
-border-radius:6px;
-}
-
-footer .install img{
- margin: 10px 0 15px 0;
-}
-
-footer .follow i:hover, 
-footer a:hover{
-  color:red;
-
-}
-
-.copyright{
-width:100%;
-text-align: center;
-color:#878f88;
-}
+  }
