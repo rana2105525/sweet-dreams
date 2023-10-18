@@ -38,16 +38,13 @@ session_start();
              $profile = "profile.php";
              $home="signout.php";
              $signout="Logout";
-             echo "<li><a href=$profile;
-             >$fullname</a></li>";
-             echo "<li><a href=$home';
-             >$signout</a></li>";
+             echo "<li><a href=$profile>$fullname</a></li>";
+             echo "<li><a href=$home>$signout</a></li>";
 
          } else {
           $login="login.php";
           $log="Login";
-          echo "<li><a href=$login;
-          >$log</a></li>";
+          echo "<li><a href=$login>$log</a></li>";
          }
          
         ?>
