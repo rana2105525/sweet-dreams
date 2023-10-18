@@ -14,7 +14,24 @@
 
 <body>
  
+<?php
+session_start();
 
+// Check if user is logged in
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Access session variables
+$email = $_SESSION['email'];
+$fullname = $_SESSION['fullname'];
+
+// Display user information
+echo "Welcome, $fullname! Your email is $email.";
+
+// Other code and HTML content for the index page
+  ?>
   <nav>
     <div class="wrapper1">
       <div class="logo"><a href="index.php"><img src="imgs/sweet dreams logo-01.png" alt="logo"></a></div>
@@ -61,6 +78,7 @@
       <a href="#"><button class="img_btn">Explore</button></a>
     </section>
   </header>
+  
   <br>
   <div class="h_products">
     <h2>Our products</h2>
