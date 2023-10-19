@@ -14,9 +14,9 @@
   
   <body>
   <?php
-    $emailerr=$passworderr="";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$emailerr = $passworderr = "";
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Validate email
   if (empty($_POST["email"])) {
     $emailerr = "Email is required";
@@ -29,10 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   // Validate password
-  if (empty($_POST["password"])){
-    $passworderr= "Password is required";
+  if (empty($_POST["password"])) {
+    $passworderr = "Password is required";
   }
 }
+
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -40,43 +41,63 @@ function test_input($data) {
   return $data;
 }
 
-
 // Start session
 session_start();
 
 // Include database connection file
 require_once "includes/dbh.inc.php";
 
-// Grab data from user and see if it exists in the database
+// Grab data from user and see if it exists in the admins table
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $Email = $_POST["email"];
-    $Password = $_POST["password"];
-    
-    if ($conn->connect_error) {
-        die("failed" . $conn->connect_error);
-    }
+  $Email = $_POST["email"];
+  $Password = $_POST["password"];
 
-    // Select data from the database where email and password match
-    $sql = "SELECT * FROM registrations WHERE email = '$Email' AND password = '$Password';";
-    $result = mysqli_query($conn, $sql);
+  if ($conn->connect_error) {
+    die("Failed to connect to database: " . $conn->connect_error);
+  }
 
-    if ($row = mysqli_fetch_array($result)) {
-        // Store session variables
-        $_SESSION['ID'] = $row[0];
-        $_SESSION['fullname'] = $row['fullname'];
-        $_SESSION['email'] = $row['email'];
-        $_SESSION['password'] = $row['password'];
-        $_SESSION['birth'] = $row['birth'];
-        $_SESSION['gender'] = $row['gender'];
+  // Check if email exists in admins table
+  $sql_admin = "SELECT * FROM admins WHERE Email = '$Email' AND Password = '$Password'";
+  $result_admin = mysqli_query($conn, $sql_admin);
 
-        // Redirect to index.php
-        header("Location: index.php");
-        exit();
+  if ($row_admin = mysqli_fetch_assoc($result_admin)) {
+    // Store session variables for admin
+    $_SESSION['admin'] = true;
+    $_SESSION['ID'] = $row_admin['ID'];
+    $_SESSION['Name'] = $row_admin['Username'];
+    $_SESSION['Phone'] = $row_admin['Phone'];
+    $_SESSION['Email'] = $row_admin['Email'];
+    $_SESSION['Password'] = $row_admin['Password'];
+    $_SESSION['Gender'] = $row_admin['Gender'];
+
+    // Redirect to admin dashboard
+    header("Location: /sweet-dreams/admin/php/addAdmin.php");
+    exit();
+  } else {
+    // Check if email exists in registrations table
+    $sql_reg = "SELECT * FROM registrations WHERE email = '$Email' AND password = '$Password'";
+    $result_reg = mysqli_query($conn, $sql_reg);
+
+    if ($row_reg = mysqli_fetch_assoc($result_reg)) {
+      // Store session variables for regular users
+      $_SESSION['admin'] = false;
+      $_SESSION['ID'] = $row_reg['ID'];
+      $_SESSION['fullname'] = $row_reg['fullname'];
+      $_SESSION['email'] = $row_reg['email'];
+      $_SESSION['password'] = $row_reg['password'];
+      $_SESSION['birth'] = $row_reg['birth'];
+      $_SESSION['gender'] = $row_reg['gender'];
+
+      // Redirect to index.php
+      header("Location: index.php");
+      exit();
     } else {
-        echo "Invalid";
+      echo "Invalid credentials.";
     }
+  }
 }
 ?>
+
 
 <section class="container">
     <a href="index.php"><img src="imgs/sweet dreams logo-01.png" alt="logo"></a>

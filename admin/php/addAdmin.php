@@ -1,3 +1,6 @@
+<?php
+  include_once "../../includes/dbh.inc.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,19 +20,20 @@
   }
 
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
-         $name = $_POST['name'];
-         $phoneNumber = $_POST['phoneNumber'];
-         $email = $_POST['email'];
-         $password = $_POST['password'];
+    $name = $_POST['name'];
+    $phoneNumber = $_POST['number'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 
-         if (empty($name) || empty($number) || empty($email) || empty($password)) {
-             echo "<p style='color: red;'>All fields are required.</p>";
-         } elseif (!ctype_digit($number)) {
-             echo "<p style='color: red;'>Phone number should contain only numbers.</p>";    
-         } elseif (!ctype_alpha($name)) {
-           echo "<p style='color: red;'>Name should contain only letters.</p>";}
-           elseif (!isValidEmail($email)) {
-             echo "<p style='color: red;'>Invalid email format.</p>";
+    if (empty($name) || empty($phoneNumber) || empty($email) || empty($password) || empty($gender)) {
+      echo "<p style='color: red;display: inline-block;'>All fields are required, including selecting a gender.</p>";
+    } elseif (!ctype_digit($phoneNumber)) {
+      echo "<p style='color: red;display: inline-block;'>Phone number should contain only numbers.</p>";    
+    } elseif (!ctype_alpha($name)) {
+      echo "<p style='color: red; display: inline-block;'>Name should contain only letters.</p>";
+    } elseif (!isValidEmail($email)) {
+      echo "<p style='color: red; display: inline-block;'>Invalid email format.</p>";
          // } else {
              
          //     echo "<p>Name: $name</p>";
@@ -39,6 +43,25 @@
          // }
      }
    }
+   if($_SERVER["REQUEST_METHOD"]=="POST"){ //check if form was submitted
+    $Name=htmlspecialchars($_POST["name"]);
+    $Phone=htmlspecialchars($_POST["number"]);
+    $Email=htmlspecialchars($_POST["email"]);
+    $Password=htmlspecialchars($_POST["password"]);
+    $Gender=htmlspecialchars($_POST["gender"]);
+    
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);}
+      //insert it to database 
+    $sql="insert into admins(Username ,Phone ,Email ,Password ,Gender)
+    values('$Name','$Phone','$Email','$hashed_password','$Gender')";
+    $result=mysqli_query($conn,$sql);
+
+    
+    if($result)	{
+      header("Location:addAdmin.php");
+    }
+  }
 ?>
 <div class="component">
 <div class="sidebar rows">
