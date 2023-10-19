@@ -62,8 +62,9 @@ if(empty($_POST["birth"])){
 //Function to check if the date is valid (searching for it)
 
 //hashing password
-//$new_password=$_GET['password'];
-//$hashed_password=password_hash($new_password1,PASSWORD_DEFAULT);
+$new_password=$_GET['password'];
+$hashed_password=password_hash($new_password1,PASSWORD_DEFAULT);
+
 
 
 

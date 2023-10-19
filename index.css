@@ -41,6 +41,7 @@ nav .wrapper1 .nav-items{
 }
 .nav-links li{
   list-style: none;
+  font-size:14px;
 }
 .nav-links li a{
   color:#F27144;
@@ -222,21 +223,20 @@ nav .wrapper1 .nav-items{
    }
    
    .searchTerm {
-     width: 100%;
      border: none;
      padding: 5px;
      height: 30px;
      border-radius: 5px 0 0 5px;
      outline: none;
+     margin-left: 80%;
      color: #9DBFAF;
    }
    
    .searchTerm:focus{
-     color: #00B4CC;
+     color:#3AB9C0;
    }
    
    .searchButton {
-     width: 40px;
      height: 36px;
     border: none;     
     background: #F27144;
@@ -245,7 +245,6 @@ nav .wrapper1 .nav-items{
      border-radius: 0 5px 5px 0;
      cursor: pointer;
      font-size: 20px;
-     border-radius: 20px;
    }
    
    /*Resize the wrap to see the search bar change!*/

@@ -16,15 +16,6 @@
  
 <?php
 session_start();
-
-// Access session variables
-// $email = $_SESSION['email'];
-// $fullname = $_SESSION['fullname'];
-
-// Display user information
-//echo "Welcome, $fullname! Your email is $email.";
-
-// Other code and HTML content for the index page
   ?>
   <nav>
     <div class="wrapper1">
@@ -41,6 +32,7 @@ session_start();
              echo "<li><a href=$profile>$fullname</a></li>";
              echo "<li><a href=$home>$signout</a></li>";
 
+
          } else {
           $login="login.php";
           $log="Login";
@@ -56,14 +48,14 @@ session_start();
       </ul>
     </div>
 
-    <div class="wrap">
+    <!-- <div class="wrap">
       <div class="search">
         <input type="text" class="searchTerm" placeholder="What are you looking for?">
         <button type="submit" class="searchButton">
           <i class="fa fa-search"></i>
         </button>
       </div>
-    </div>
+    </div> -->
 
     <input type="checkbox" id="active">
     <label for="active" class="menu-btn"><span></span></label>

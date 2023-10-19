@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($row_reg = mysqli_fetch_assoc($result_reg)) {
       // Store session variables for regular users
       $_SESSION['admin'] = false;
-      $_SESSION['ID'] = $row_reg['ID'];
+      $_SESSION['ID'] = $row_reg['id'];
       $_SESSION['fullname'] = $row_reg['fullname'];
       $_SESSION['email'] = $row_reg['email'];
       $_SESSION['password'] = $row_reg['password'];
