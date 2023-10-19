@@ -34,7 +34,6 @@ body {
 
 div.content {
   padding: 1px 16px;
-  height: 1000px;
   justify-content: center;
   align-items: center;
   height: 60vh;
@@ -51,6 +50,15 @@ div.content {
   border-radius: 50px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   min-height: 100vh;
+}
+
+.logo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 60px;;
+  width: 80%;
+  position: relative;
 }
 
 .container .form {
@@ -141,7 +149,10 @@ input[type=number]::-webkit-outer-spin-button {
   }
   .rows{
     align-items: center;
-
+  }
+  .logo{
+    width:40%;
+    margin-bottom: 0;
   }
 }
 

@@ -1,3 +1,4 @@
+<!--connecting to database-->
 <?php
 $servername = "172.232.217.28";
 $username = "root";

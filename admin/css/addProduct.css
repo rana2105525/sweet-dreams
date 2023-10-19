@@ -52,12 +52,24 @@ div.content {
   min-height: 100vh;
 }
 
+.logo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 60px;;
+  width: 80%;
+  position: relative;
+}
 .container .form {
   margin-top: 10px;
 }
-.form .input-box textarea{
+.form .input-box {
   width: 100%;
   margin-top: 20px;
+}
+textarea{
+  width: 100%;
+
 }
 .input-box label {
   color: #3AB9C0;
@@ -75,7 +87,6 @@ div.content {
 }
 .input-box input, .select-box{
   height: 40px;
-  
 }
 .input-box input:focus {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
@@ -98,7 +109,7 @@ div.content {
   background:#3AB9C0;
 }
 
-#title{
+#header{
     text-align: center;
     color:#F27144;
 }
@@ -111,16 +122,23 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input::file-selector-button{
-    margin-top: 9px;
+    height: 100%;
     background-color: #F27144;
-    border: #F27144;
-    border-radius: 8px ;
+    border: none;
+    border-radius: 50px ;
     color:white;
-  }
+    margin-right: 10px;
+    padding:10px;
+}
 
   input::file-selector-button:hover{
     background-color: #3AB9C0;
     cursor: pointer;
+  }
+  #prod_image{
+    padding:0;
+
+
   }
   
 
@@ -151,7 +169,10 @@ input::file-selector-button{
   }
   .rows{
     align-items: center;
-
+  }
+  .logo{
+    width:40%;
+    margin-bottom: 0;
   }
 }
 
