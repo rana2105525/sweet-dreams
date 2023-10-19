@@ -27,18 +27,17 @@ body {
   text-decoration: none;
   margin-left:15px;
 }
-#first{
-  margin-top:200px;
-}
 
 .sidebar a:hover{
   color: #F27144;
 }
 
 div.content {
-  margin-left: 400px;
   padding: 1px 16px;
-  height: 1000px;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  margin-left: 25%;
 }
 
 .container {
@@ -56,16 +55,15 @@ div.content {
 .container .form {
   margin-top: 10px;
 }
-.form .input-box {
+.form .input-box textarea{
   width: 100%;
   margin-top: 20px;
 }
 .input-box label {
   color: #3AB9C0;
 }
-.form :where(.input-box input, .select-box) {
+.form :where( .input-box input, .select-box, textarea) {
   position: relative;
-  height: 40px;
   width: 100%;
   outline: none;
   font-size: 1rem;
@@ -74,6 +72,10 @@ div.content {
   border: 1px solid #ddd;
   border-radius: 20px;
   padding: 0 15px;
+}
+.input-box input, .select-box{
+  height: 40px;
+  
 }
 .input-box input:focus {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
@@ -99,8 +101,6 @@ div.content {
 #title{
     text-align: center;
     color:#F27144;
-  font-family: "Poppins", sans-serif;
-
 }
 
 /*hide arrows of number*/
@@ -108,16 +108,6 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
-}
-/*responsive*/
-@media screen and (max-width: 600px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
 }
 
 input::file-selector-button{
@@ -132,3 +122,50 @@ input::file-selector-button{
     background-color: #3AB9C0;
     cursor: pointer;
   }
+  
+
+/*responsive*/
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {
+    margin-left: 0;
+    margin-right:130px;
+  }
+}
+
+/* On screens that are less than 500px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 500px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+  .component{
+    display: grid;
+    grid-template-columns: auto, auto;
+  }
+  .rows{
+    align-items: center;
+
+  }
+}
+
+/*text*/
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 601px) {
+  #title label{
+    font-size: 20px;
+  }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  #title label{
+    font-size: 10px;
+  }
+}

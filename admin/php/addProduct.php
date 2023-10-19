@@ -10,9 +10,10 @@
   </head> 
 <body>
 
+<!--validation-->
 <?php
       if ($_SERVER["REQUEST_METHOD"] === "POST") {
-          $productName = $_POST['name'];
+          $productName = $_POST['title'];
           $productPrice = $_POST['price'];
           $productDescription = $_POST['description'];
       
@@ -24,7 +25,7 @@
               echo "<p style='color: red;'>Product price should be a number.</p>";
           } elseif (!ctype_alpha($productDescription)) {
               echo "<p style='color: red;'>Product description should contain only words.</p>";
-          } elseif (empty($_FILES['prod_image']['name'])) {
+          } elseif (empty($_FILES['prod_image']['title'])) {
               echo "<p style='color: red;'>Please upload a product image.</p>";}
           // } else {
           //  
@@ -34,38 +35,60 @@
           // }
       }
 ?>
-<div class="sidebar">
-  <a id ="first" href="addAdmin.php">Add Admin</a>
-  <a href="addProduct.php">Add Product</a>
-  <a href="#contact">Users</a>
-  <a href="#about">Reviews</a>
-</div>
-<div class ="content">
-<section class="container">
-      <form action="#" class="form" method="post">
-        <div id="title"><h2>Add a new product</h2></div>
-        <div class="input-box">
-            <label for ="name">Product Title</label>
-            <input type="text" id="name" name="name" placeholder="Enter product's title" />
+
+<div class ="component">
+  <div class="sidebar rows">
+    <a href="addAdmin.php">Add Admin</a>
+    <a href="addProduct.php">Add Product</a>
+    <a href="#contact">Users</a>
+    <a href="#about">Reviews</a>
+  </div>
+  <div class ="content rows">
+  <section class="container">
+        <form action="#" class="form" method="post">
+          <div id="title"><h2>Add a new product</h2></div>
+          <div class="input-box">
+              <label for ="title">Product Title</label>
+              <input type="text" id="title" name="title" placeholder="Enter product's title" />
+          </div>
+
+          <div class="input-box">
+              <label for="price" >Product price</label>
+              <input type="number" step="any" id ="price" name ="price" placeholder="Enter product's price" />
+          </div>
+
+          <div class="input-box">
+              <label for ="description">Product description</label>
+              <textarea id="description" name="description" rows="4" cols="85" placeholder="Enter product's description"></textarea>
+          </div> 
+
+          <div class="input-box">
+              <label for="prod_image">Product image</label>
+              <input type="file" id="prod_image" name="prod_image" accept =".png,.jpg,.jpeg"/>
+          </div>
+
+          <div class="input-box">
+              <label for ="category" >Category</label>
+          </div> 
+        <div class ="row">
+          <div>
+            <input type="radio" name="category" id="winter" value="winter">
+            <label for ="male" >Winter Collection</label>
+          </div>
+          <div>
+            <input type="radio" name="category" id="summer" value="summer">
+            <label for ="female" >Summer Collection</label>
+          </div>        
+          <div>
+            <input type="radio" name="category" id="bundle" value="bundle">
+            <label for ="female" >Bundle</label>
+          </div>
         </div>
 
-        <div class="input-box">
-            <label for="price" >Product price</label>
-            <input type="number" step="any" id ="price" name ="price" placeholder="Enter product's price" />
-        </div>
-
-        <div class="input-box">
-            <label for ="description">Product description</label>
-            <input type="text" id="description" name="description" placeholder="Enter product's descriptioon" />
-        </div> 
-
-        <div class="input-box">
-            <label for="prod_image">Product image</label>
-            <input type="file" id="prod_image" name="prod_image" accept =".png,.jpg"/>
-        </div>
-        <button type="submit">Add Product</button>
-      </form>
-    </section>
+          <button type="submit">Add Product</button>
+        </form>
+      </section>
+  </div>
 </div>
 
   </body>

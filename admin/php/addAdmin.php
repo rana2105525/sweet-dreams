@@ -40,14 +40,16 @@
      }
    }
 ?>
-<div class="sidebar">
-  <a id ="first" href="addAdmin.php">Add Admin</a>
+<div class="component">
+<div class="sidebar rows">
+  <a href="addAdmin.php">Add Admin</a>
   <a href="addProduct.php">Add Product</a>
   <a href="#contact">Users</a>
   <a href="#about">Reviews</a>
 </div>
+
 <div class="content">
-  <section class="container">
+  <section class="container rows">
     <form action="#" method="post" class="form">
         <div id="title"><h2>Add a new admin</h2></div>
 
@@ -75,19 +77,20 @@
             <label for ="gender" >Gender</label>
         </div> 
         <div class ="row">
-        <span class ="column">
+        <div class ="column">
           <input type="radio" name="gender" id="male" value="male">
           <label for ="male" >Male</label>
-        </span>
-        <span class ="column">
+        </div>
+        <div class ="column">
           <input type="radio" name="gender" id="female" value="female">
           <label for ="female" >Female</label>
-        </span>
+        </div>
         </div>
 
         <button type ="submit">Add Admin</button>
       </form>
     </section>
+</div>
 </div>
 
 </body>
