@@ -145,7 +145,8 @@
               <input type="radio" id="check-female" name="gender" value="female" />
               <label for="check-female">Female</label>
             </div>
-           
+            <label for="profilepic">Profile Pictures:</label>
+        <input type="file" name="profilepic[]" multiple="multiple" accept=".jpg, .jpeg, .png, .gif"><br>
           </div>
         </div>
        
@@ -155,16 +156,34 @@
     <?php
  //grap data from user if form was submitted 
 
-  if($_SERVER["REQUEST_METHOD"]=="POST"){ //check if form was submitted
+ if (isset($_POST['submit'])){ //check if form was submitted
 	$Fname=htmlspecialchars($_POST["name"]);
 	$Email=htmlspecialchars($_POST["email"]);
 	$Password=htmlspecialchars($_POST["password"]);
 	$Birth=htmlspecialchars($_POST["birth"]);
 	$Gender=htmlspecialchars($_POST["gender"]);
 
+  $imgnewfiles = [];
+
+  if (!empty($_FILES['profilepic']['name'][0])) {
+      $fileCount = count($_FILES['profilepic']['name']);
+
+      for ($i = 0; $i < $fileCount; $i++) {
+          $ppic = $_FILES['profilepic']['name'][$i];
+          $extension = pathinfo($ppic, PATHINFO_EXTENSION);
+
+          $imgnewfile = md5($ppic . time() . $i) . '.' . $extension;
+          move_uploaded_file($_FILES['profilepic']['tmp_name'][$i], "profilepic/" . $imgnewfile);
+
+          $imgnewfiles[] = $imgnewfile;
+      }
+  }
+
+  // Convert the array of file names into a comma-separated string
+  $imgnewfilesStr = implode(',', $imgnewfiles);
     //insert it to database 
-	$sql="insert into registrations(fullname,email,password,birth,gender) 
-	values('$Fname','$Email','$Password','$Birth','$Gender')";
+	$sql="insert into registrations(fullname,email,password,birth,gender,image) 
+	values('$Fname','$Email','$Password','$Birth','$Gender', '$imgnewfilesStr')";
 	 $result=mysqli_query($conn,$sql);
 
   //   //redirect the user back to index.php 
