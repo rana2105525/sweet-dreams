@@ -16,10 +16,6 @@
 
     <nav>
     <?php include 'partials/nav.php'; ?>
-
-      </ul>
-    </div>
-
         <!-- <div class="wrap">
       <div class="search">
         <input type="text" class="searchTerm" placeholder="What are you looking for?">

@@ -21,8 +21,6 @@
     <nav>
     <?php include 'partials/nav.php'; ?>
 
-      </ul>
-    </div>
 
         <!-- <div class="wrap">
       <div class="search">

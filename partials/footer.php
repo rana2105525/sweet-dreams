@@ -29,8 +29,8 @@
     <div class="col">
       <h4>My Account</h4>
       <a href="login.php">Sign in</a>
-      <a href="#">View cart</a>
-      <a href="#">My wishlist</a>
+      <a href="cart.php">View cart</a>
+      <a href="wishlist.php">My wishlist</a>
     </div>
 
     <div class="col install">
