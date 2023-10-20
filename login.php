@@ -4,7 +4,7 @@
 </style>
 <html lang="en">
   <head>
-    <title>Sweet Dreams</title>
+    <title>Login | Sweet Dreams</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -33,6 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $passworderr = "Password is required";
   }
 }
+
+
 
 function test_input($data) {
   $data = trim($data);

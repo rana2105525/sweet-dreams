@@ -7,7 +7,7 @@
 </style>
 <html lang="en">
   <head>
-    <title>Sweet Dreams</title>
+    <title>Registration | Sweet Dreams</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -65,6 +65,8 @@ if(empty($_POST["birth"])){
 $new_password=$_GET['password'];
 $hashed_password=password_hash($new_password1,PASSWORD_DEFAULT);
 
+$conf_pass=$_GET['confirm'];
+$hashed_confirm=password_hash($conf_pass,PASSWORD_DEFAULT);
 
 
 
@@ -144,7 +146,7 @@ $hashed_password=password_hash($new_password1,PASSWORD_DEFAULT);
 
     //insert it to database 
 	$sql="insert into registrations(fullname,email,password,birth,gender) 
-	values('$Fname','$Email','$password','$Birth','$Gender')";
+	values('$Fname','$Email','$hashed_password','$Birth','$Gender')";
 	 $result=mysqli_query($conn,$sql);
 
   //   //redirect the user back to index.php 
