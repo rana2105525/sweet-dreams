@@ -37,6 +37,7 @@ echo   	$_SESSION["email"];
 ?>
 </div>
 <button ><a href="edit_info.php"class="button" >Update info</a></button>
+<button ><a href="delete_user.php"class="button" >Delete account</a></button>
 
 </form>
 </section>

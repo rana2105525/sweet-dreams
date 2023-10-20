@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,7 +93,7 @@
 </html> 
 <?php
 
-session_start();
+
 
 // Include connection
 include_once "includes/dbh.inc.php";
@@ -121,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = mysqli_real_escape_string($conn, $email);
 
     // Update the user profile.
-    $sql = "UPDATE registrations SET fullname='$name', email='$email' WHERE ID = '" . $_SESSION['id'] . "'";
+    $sql = "UPDATE registrations SET fullname='$name', email='$email' WHERE fullname = '" . $_SESSION['fullname'] . "'";
     $result = mysqli_query($conn, $sql);
 
     // Check if the update was successful.

@@ -62,11 +62,11 @@ if(empty($_POST["birth"])){
 //Function to check if the date is valid (searching for it)
 
 //hashing password
-$new_password=$_GET['password'];
-$hashed_password=password_hash($new_password1,PASSWORD_DEFAULT);
+// $new_password=$_GET['password'];
+// $hashed_password=password_hash($new_password1,PASSWORD_DEFAULT);
 
-$conf_pass=$_GET['confirm'];
-$hashed_confirm=password_hash($conf_pass,PASSWORD_DEFAULT);
+// $conf_pass=$_GET['confirm'];
+// $hashed_confirm=password_hash($conf_pass,PASSWORD_DEFAULT);
 
 
 
@@ -146,7 +146,7 @@ $hashed_confirm=password_hash($conf_pass,PASSWORD_DEFAULT);
 
     //insert it to database 
 	$sql="insert into registrations(fullname,email,password,birth,gender) 
-	values('$Fname','$Email','$hashed_password','$Birth','$Gender')";
+	values('$Fname','$Email','$Password','$Birth','$Gender')";
 	 $result=mysqli_query($conn,$sql);
 
   //   //redirect the user back to index.php 
