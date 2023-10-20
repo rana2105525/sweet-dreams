@@ -140,9 +140,9 @@
         <label for="active" class="close"></label>
         <div class="wrapper">
             <ul>
-                <li><a href="#">Summer collection</a></li>
-                <li><a href="#">Winter collection</a></li>
-                <li><a href="#">Bundle and save</a></li>
+                <li><a href="summer.php">Summer collection</a></li>
+                <li><a href="winter.php">Winter collection</a></li>
+                <li><a href="bundle.php">Bundle and save</a></li>
                 <li><a href="#">Blog</a></li>
                 <li><a href="#">Gifts</a></li>
                 <li><a href="#">Reviews</a></li>
@@ -232,7 +232,7 @@
     </div>
     <div class="col">
       <h4>About</h4>
-      <a href="#">About us</a>
+      <a href="about.php">About us</a>
       <a href="index.php">Home</a>
       <a href="#">Privacy policy</a>
       <a href="#">Terms & conditions</a>

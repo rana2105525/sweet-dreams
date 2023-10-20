@@ -62,9 +62,9 @@ session_start();
     <label for="active" class="close"></label>
     <div class="wrapper">
       <ul>
-        <li><a href="#">Summer collection</a></li>
-        <li><a href="#">Winter collection</a></li>
-        <li><a href="#">Bundle and save</a></li>
+        <li><a href="summer.php">Summer collection</a></li>
+        <li><a href="winter.php">Winter collection</a></li>
+        <li><a href="bundle.php">Bundle and save</a></li>
         <li><a href="#">Blog</a></li>
         <li><a href="#">Gifts</a></li>
         <li><a href="#">Reviews</a></li>
@@ -88,7 +88,7 @@ session_start();
   </div><br>
   <div class="Contain">
     <div class="box" id="col1">
-      <a href="#">
+      <a href="summer.php">
         <button type="button" class="b">
           <img
             src="imgs/long-sleeved-t-shirt-children-s-clothing-top-cool-summer-boy-8c83e609f4319973d698e96068482e7a.png"
@@ -98,7 +98,7 @@ session_start();
       </a>
     </div>
     <div class="box" id="col2">
-      <a href="#">
+      <a href="winter.php">
         <button type="button" class="b">
           <img
             src="imgs/t-shirt-pajamas-carters-boy-clothing-little-monster-baby-home-pajamas-f14325570f638347c4aa1cccd0ca5e3f.png"
@@ -108,7 +108,7 @@ session_start();
       </a>
     </div>
     <div class="box" id="col3">
-      <a href="#">
+      <a href="bundle.php">
         <button type="button" class="b">
           <img src="imgs/pngegg.png" alt="">
           <p>Bundle and save</p>
@@ -185,7 +185,7 @@ session_start();
     </div>
     <div class="col">
       <h4>About</h4>
-      <a href="#">About us</a>
+      <a href="about.php">About us</a>
       <a href="index.php">Home</a>
       <a href="#">Privacy policy</a>
       <a href="#">Terms & conditions</a>

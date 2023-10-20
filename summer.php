@@ -24,7 +24,7 @@
             <ul class="nav-links">
 
                 <?php
-
+session_start();
                 if (isset($_SESSION['fullname'])) {
                     $fullname = $_SESSION['fullname'];
                     $profile = "profile.php";
@@ -207,7 +207,7 @@
         </div>
         <div class="col">
             <h4>About</h4>
-            <a href="#">About us</a>
+            <a href="about.php">About us</a>
             <a href="index.php">Home</a>
             <a href="#">Privacy policy</a>
             <a href="#">Terms & conditions</a>
