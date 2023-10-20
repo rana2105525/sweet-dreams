@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['Gender'] = $row_admin['Gender'];
 
     // Redirect to admin dashboard
-    header("Location: /sweet-dreams/admin/php/addAdmin.php");
+    header("Location: /sweet-dreams/admin/php/viewAdmin.php");
     exit();
   } else {
     // Check if email exists in registrations table
