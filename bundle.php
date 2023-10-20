@@ -19,7 +19,7 @@
             <div class="logo"><a href="index.php"><img src="imgs/sweet dreams logo-01.png" alt="logo"></a></div>
             <ul class="nav-links">
 
-                <?php
+            <?php
 session_start();
 if (isset($_SESSION['fullname'])) {
     $fullname = $_SESSION['fullname'];
@@ -27,12 +27,12 @@ if (isset($_SESSION['fullname'])) {
     $home = "signout.php";
     $signout = "Logout";
     $cart="cart.php";
-    $cart_class="fa fa-shopping-bag";
-    $wisht="wishlist.php";
-    $wish_class="fa fa-heart";
+    $cart_class="Cart";
+    $wish="wishlist.php";
+    $wish_class="Wishlist";
     echo "<li><a href=$profile>$fullname</a></li>";
-    echo"<li><a href=$cart><i class=$cart_class></i></a></li>";
-    echo"<li><a href=$wish><i class=$wish_class></i></a></li>";
+    echo"<li><a href=$cart>$cart_class</a></li>";
+    echo"<li><a href=$wish>$wish_class</a></li>";
     echo "<li><a href=$home>$signout</a></li>";
 
 
@@ -43,10 +43,9 @@ if (isset($_SESSION['fullname'])) {
 }
 
 ?>
-<li><a href="index.php">Home</a></li>
 
-            </ul>
-        </div>
+      </ul>
+    </div>
 
         <!-- <div class="wrap">
       <div class="search">
