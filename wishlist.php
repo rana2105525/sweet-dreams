@@ -15,6 +15,10 @@
 <body>
 
 <nav>
+
+
+
+
 <?php include 'partials/nav.php'; ?>
 
     <!-- <div class="wrap">
@@ -28,53 +32,73 @@
     <?php include 'partials/side.php'; ?>
 
   </nav>
+  <?php
+  if (isset($_POST['add_to_wishlist'])) {
+    $product_id = $_POST['product_id'];
+    include_once "includes/dbh.inc.php";
+    // Retrieve the product attributes from the database based on the product ID
+    $sql = "SELECT * FROM products WHERE id = $product_id";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
 
+    // Check if the wishlist array exists in the session
+    if (!isset($_SESSION['wishlist'])) {
+        $_SESSION['wishlist'] = array();
+    }
+
+    // Add the product ID and attributes to the wishlist array
+    $_SESSION['wishlist'][] = array(
+        'id' => $product_id,
+        'title' => $row['title'],
+        'description' => $row['description'],
+        'price' => $row['price'],
+        'prod_image' => $row['prod_image'],
+        'category' => $row['category']
+    );
+  
+}
+  ?>
+
+<!-- Add the rest of the code for wishlist.php here -->
 
             <h1>My Wishlist</h1>
             <div class="our_Products">
         <table>
+<?php
 
-                <div class="products">
-                
-                <div class="prod">
-                            <img src="imgs/Copy of Omar & Asia8.jpg">  
-                            <div class="design">  
+// Loop through the wishlist array and display the product information for each item in the array
 
-                                <h5>mmm</h5>
-                                <h6>cc</h6>
-                                <h6>cc</h6>
-                               <button class="btn">Move to cart <i class="fa fa-heart"> </i></button>
-                               <button class="btn">Remove <i class="fa fa-remove"> </i></button>
 
-                            </div>
-                           
-                        </div>
+// Loop through the wishlist array and display the product information for each item in the array
+foreach ($_SESSION['wishlist'] as $key => $item) {
 
-                        
-                        
-        </table>
-        <div class="our_Products">
-        <table>
+?>
 
-                <div class="products">
-                
-                <div class="prod">
-                            <img src="imgs/Copy of Omar & Asia8.jpg">  
-                            <div class="design">  
+<div class="products">
+  <div class="prod">
 
-                                <h5>mmm</h5>
-                                <h6>cc</h6>
-                                <h6>cc</h6>
-                               <button class="btn">Move to cart <i class="fa fa-heart"> </i></button>
-                               <button class="btn">Remove <i class="fa fa-remove"> </i></button>
-
-                            </div>
-                           
-                        </div>
-                        
-        </table>
-
+    <img src="<?php echo $item['prod_image']; ?>">
+    <div class="design">
+      <h5><?php echo $item['title']; ?></h5>
+      <h6><?php echo $item['description']; ?></h6>
+      <h6><?php echo $item['price']; ?></h6>
+      <button class="btn">Move to cart <i class="fa fa-heart"> </i></button>
+      <form method="post" action="remove_item.php">
+        <input type="hidden" name="item_index" value="<?php echo $key; ?>">
+        <button type="submit" class="btn" name="remove_from_wishlist">Remove <i class="fa fa-remove"></i></button>
+      </form>
+    </div>
+  </div>
 </div>
+
+<?php
+
+}
+
+?>
+
+
+
 <?php include 'partials/footer.php'; ?>
 
 
