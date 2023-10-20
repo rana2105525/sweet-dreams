@@ -14,7 +14,7 @@
   
   <body>
   <?php
-$emailerr = $passworderr = "";
+$emailerr = $passworderr =$error="";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Validate email
@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       header("Location: index.php");
       exit();
     } else {
-      echo "Invalid credentials.";
+      $error ="Invalid credentials.";
     }
   }
 }
@@ -116,6 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>Password</label>
             <input type="password" name="password" placeholder="Enter your password" required />
             <span class="error"><?php echo $passworderr;?></span>
+            <span class="error"><?php echo $error;?></span>
             <a href="#">Forget password?</a>
         </div>
 

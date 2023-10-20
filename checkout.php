@@ -58,7 +58,7 @@
     
             // Check if the phone number is 11 digits long
             if (strlen($phone) === 11) {
-                echo "Phone number is valid";
+              $phoneErr ="";
             } else {
                 $phoneErr = "Phone number is invalid";
             }
@@ -68,10 +68,7 @@
 
     if (empty($_POST["address"])) {
         $addressErr = "Address is required";
-    } else {
-        $address = test_input($_POST["address"]);
-        // Additional validation checks can be added if necessary
-    }
+    } 
 
     
         if (empty($_POST["exp_date"])) {
@@ -99,8 +96,8 @@
         }
         // Function to check if the date is valid (searching for it)
 
-        $new_CVC=$_GET['CVC'];
-        $hashed_CVC=password_hash($new_CVC,PASSWORD_DEFAULT);
+      //  $new_CVC=$_GET['CVC'];
+      //  $hashed_CVC=password_hash($new_CVC,PASSWORD_DEFAULT);
     }
     
     function test_input($data)
@@ -113,6 +110,8 @@
     ?>
 
 <body>
+  <nav>
+
 <?php include 'partials/nav.php'; ?>
 
 
@@ -137,7 +136,7 @@
     <br>
     <h1>Checkout</h1>
     <section class="container">
-        <form method="post" class="form" action="">
+    <form method="post" class="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div class="input-box">
                 <label>First name</label>
                 <input type="text" name="fname"  required />
@@ -167,9 +166,9 @@
 
             </div>
             <div class="input-box">
-                <label>Card holder</label>
-                <input type="text" name="cardHolder"  required />
-                <span class="error"><?php echo $cardHolderErr; ?></span>
+                <label>Card Num</label>
+                <input type="text" name="cardNum"  required />
+                <span class="error"><?php echo $cardNumErr; ?></span>
 
             </div>
             

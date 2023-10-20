@@ -17,7 +17,8 @@
 <?php
 
   ?>
-<?php include 'partials/nav.php'; ?>
+  <nav>
+  <?php include 'partials/nav.php'; ?>
 
       </ul>
     </div>
