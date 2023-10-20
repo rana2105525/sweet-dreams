@@ -54,11 +54,29 @@
     else{
       $confirmErr="passwords doesn't match";
     }
-    }  
- 
-if(empty($_POST["birth"])){
-  $birthErr="Enter your birth";
-}
+    }  function getTodayDate() {
+      return date('Y-m-d');
+    }
+    
+    function isDateValid($date) {
+      $maxDate = getTodayDate(); // Get the current date
+    
+      if ($date > $maxDate) {
+        return false; // Date is in the future
+      }
+    
+      return true; // Date is valid
+    }
+    
+    if (empty($_POST["birth"])) {
+      $birthErr = "Enter your birth";
+    } else {
+      $birth = test_input($_POST["birth"]);
+    
+      if (!isDateValid($birth)) {
+        $birthErr = "Birth date cannot be in the future";
+      }
+    }
 //Function to check if the date is valid (searching for it)
 
 //hashing password
@@ -120,11 +138,11 @@ if(empty($_POST["birth"])){
           <h3>Gender</h3>
           <div class="gender-option">
             <div class="gender">
-              <input type="radio" id="check-male" name="gender" checked />
+              <input type="radio" id="check-male" name="gender" value="male"checked />
               <label for="check-male">Male</label>
             </div>
             <div class="gender">
-              <input type="radio" id="check-female" name="gender" />
+              <input type="radio" id="check-female" name="gender" value="female" />
               <label for="check-female">Female</label>
             </div>
            
