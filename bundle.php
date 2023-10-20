@@ -67,7 +67,10 @@
                                 <h6><?php echo $description; ?></h6>
                                 <h6><?php echo $price; ?></h6>
                                 <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                                <button class="btn"> <i class="fa fa-heart"></i></button>
+                                <form method="post" action="wishlist.php">
+    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+    <button type="submit" class="btn" name="add_to_wishlist"><i class="fa fa-heart"></i></button>
+</form>
                             </div>
                         </div>
             <?php
