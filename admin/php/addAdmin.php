@@ -59,7 +59,7 @@
 
     
     if($result)	{
-      header("Location:addAdmin.php");
+      header("Location: /sweet-dreams/login.php");
     }
   }
 ?>
