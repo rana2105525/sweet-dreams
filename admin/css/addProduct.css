@@ -137,14 +137,12 @@ input::file-selector-button{
   }
   #prod_image{
     padding:0;
-
-
   }
   
 
 /*responsive*/
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1000px) {
   .sidebar {
     width: 100%;
     height: auto;
@@ -154,6 +152,10 @@ input::file-selector-button{
   div.content {
     margin-left: 0;
     margin-right:130px;
+  }
+  .logo{
+    width:40%;
+    margin-bottom: 0;
   }
 }
 

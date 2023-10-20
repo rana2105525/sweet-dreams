@@ -29,19 +29,14 @@
     $extensions = array('jpg', 'jpeg', 'png'); //extensions 
 
     if(in_array($file_extension,$extensions)){
-      $upload_image='../../uploads/'.$image_filename; //save image inside uploads folder
+      $upload_image='uploads/'.$image_filename; //save image inside uploads folder
       move_uploaded_file($image_filetemp,$upload_image);
 
       $sql="INSERT INTO products (title,price,description,prod_image,category)
        VALUES('$title','$price','$description','$upload_image','$category');";
        $result = mysqli_query($conn,$sql);//excute query
-       if($result){?>
-          <div class="alert">
-          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            This is an alert box.
-          </div>
-       <?php }
-       else die(mysqli_error($conn));
+       if(!$result)
+        die(mysqli_error($conn));
     }
  }
 ?>
@@ -76,13 +71,14 @@
     <a href="../../index.php"><img class ="logo" src="../../imgs/sweet dreams logo-01.png" alt="logo" ></a>
     <a href="addAdmin.php">Add Admin</a>
     <a href="addProduct.php">Add Product</a>
+    <a href="allProducts.php">Products</a>
     <a href="#contact">Users</a>
     <a href="#about">Reviews</a>
   </div>
 
   <div class ="content rows">
   <section class="container">
-        <form action="./allProducts.php" class="form" method="post" enctype= "multipart/form-data">
+        <form action="" class="form" method="post" enctype= "multipart/form-data">
           <div id="header"><h2>Add a new product</h2></div>
 
           <div class="input-box">
@@ -106,20 +102,20 @@
           </div>
 
           <div class="input-box">
-              <label for ="category" >Category</label>
+              <label for ="category">Category</label>
           </div> 
         <div>
           <div>
-            <input type="radio" name="category" id="winter" value="winter">
-            <label for ="winter" >Winter Collection</label>
+            <input type="radio" name="category" id="Winter_Collection" value="Winter_Collection">
+            <label for ="Winter_Collection" >Winter Collection</label>
           </div>
           <div>
-            <input type="radio" name="category" id="summer" value="summer">
-            <label for ="summer" >Summer Collection</label>
+            <input type="radio" name="category" id="Summer_Collection" value="Summer_Collection">
+            <label for ="Summer_Collection" >Summer Collection</label>
           </div>        
           <div>
-            <input type="radio" name="category" id="bundle" value="bundle">
-            <label for ="bundle" >Bundle</label>
+            <input type="radio" name="category" id="Bundle" value="Bundle">
+            <label for ="Bundle" >Bundle</label>
           </div>
         </div>
 
