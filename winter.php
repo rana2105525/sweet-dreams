@@ -84,93 +84,41 @@
 </form>
 </div>
 </section> -->
+<?php
+    $sql = "SELECT * FROM products WHERE category='Winter_Collection'";
+    include_once "includes/dbh.inc.php";
+    $result = mysqli_query($conn, $sql);
+    ?>
+
     <div class="our_Products">
         <table>
-            <tr>
+        <?php
+            // Loop through the products and display them dynamically
+            while ($row = mysqli_fetch_assoc($result)) {
+              $id = $row["id"];
+              $title = $row["title"];
+              $price = $row["price"];
+              $description = $row["description"];
+              $prod_image = $row["prod_image"];
+              $category = $row["category"];
+            ?>
                 <div class="products">
 
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg" alt="bed1">
 
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
+                <div class="prod">
+                            <img src="<?php echo $prod_image; ?>">
+
+                            <div class="design">
+                                <h5><?php echo $title; ?></h5>
+                                <h6><?php echo $description; ?></h6>
+                                <h6><?php echo $price; ?></h6>
+                                <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
+                                <button class="btn"> <i class="fa fa-heart"></i></button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg" alt="bed2">
-
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
-                        </div>
-                    </div>
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg " alt="bed3">
-
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
-                        </div>
-                    </div>
-
-
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg " alt="bed4">
-
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
-                        </div>
-                    </div>
-                    </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg ">
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
-                        </div>
-                    </div>
-                </td>
-
-                <td>
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg">
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
-                        </div>
-                    </div>
-                </td>
-
-                <td>
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg">
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
-                        </div>
-                    </div>
-                </td>
-            </tr>
+                    <?php
+            }
+            ?>
         </table>
     </div>
 

@@ -126,38 +126,40 @@ session_start();
 
 
   </section>
+  <?php
+    $sql = "SELECT * FROM products";
+    include_once "includes/dbh.inc.php";
+    $result = mysqli_query($conn, $sql);
+    ?>
   <br>
   <br>
   <div class="h_products">
     <h2>New arrivals</h2>
   </div><br>
+  <div class="our_Products">
+        <table>
+        <?php
+            // Loop through the products and display them dynamically
+            while ($row = mysqli_fetch_assoc($result)) {
+              $id = $row["id"];
+              $title = $row["title"];
+              $price = $row["price"];
+              $description = $row["description"];
+              $prod_image = $row["prod_image"];
+              $category = $row["category"];
+            ?>
   <div class="Contain">
     <div class="box" id="col1">
       <a href="#">
         <button type="button" class="b">
           <img
-            src="imgs/long-sleeved-t-shirt-children-s-clothing-top-cool-summer-boy-8c83e609f4319973d698e96068482e7a.png"
+            src="<?php echo $prod_image; ?>"
             alt="">
-          <p>Summer collection</p>
+          <p><?php echo $title; ?></p>
         </button>
       </a>
     </div>
-    <div class="box" id="col2">
-      <a href="#">
-        <button type="button" class="b">
-          <img
-            src="imgs/t-shirt-pajamas-carters-boy-clothing-little-monster-baby-home-pajamas-f14325570f638347c4aa1cccd0ca5e3f.png"
-            alt="">
-          <p>Winter collection</p>
-        </button>
-      </a>
-    </div>
-    <div class="box" id="col3">
-      <a href="#">
-        <button type="button" class="b">
-          <img src="imgs/pngegg.png" alt="">
-          <p>Bundle and save</p>
-        </button>
+
       </a>
     </div>
     <br>
@@ -165,6 +167,10 @@ session_start();
   <br>
   <br>
   <br>
+<?php
+            }
+?>
+
   <footer class="pageFooter">
     <div class="col">
       <a href="index.php"><img class="Logo" src="imgs/sweet dreams logo-01.png" alt="" width="145" height="100"></a>

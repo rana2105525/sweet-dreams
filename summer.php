@@ -120,8 +120,8 @@ session_start();
                                 <button class="btn"> <i class="fa fa-heart"></i></button>
                             </div>
                         </div>
-                    </td>
-                    <!-- Add more <td> elements here if needed -->
+                    
+                    
                 
             <?php
             }
