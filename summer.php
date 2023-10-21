@@ -19,35 +19,8 @@
 
 
     <nav>
-        <div class="wrapper1">
-            <div class="logo"><a href="index.php"><img src="imgs/sweet dreams logo-01.png" alt="logo"></a></div>
-            <ul class="nav-links">
+    <?php include 'partials/nav.php'; ?>
 
-                <?php
-session_start();
-                if (isset($_SESSION['fullname'])) {
-                    $fullname = $_SESSION['fullname'];
-                    $profile = "profile.php";
-                    $home = "signout.php";
-                    $signout = "Logout";
-                    echo "<li><a href=$profile>$fullname</a></li>";
-                    echo "<li><a href=$home>$signout</a></li>";
-
-
-                } else {
-                    $login = "login.php";
-                    $log = "Login";
-                    echo "<li><a href=$login>$log</a></li>";
-                }
-
-                ?>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i></a></li>
-                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-
-
-            </ul>
-        </div>
 
         <!-- <div class="wrap">
       <div class="search">
@@ -57,22 +30,7 @@ session_start();
         </button>
       </div>
     </div> -->
-
-        <input type="checkbox" id="active">
-        <label for="active" class="menu-btn"><span></span></label>
-        <label for="active" class="close"></label>
-        <div class="wrapper">
-            <ul>
-                <li><a href="summer.php">Summer collection</a></li>
-                <li><a href="winter.php">Winter collection</a></li>
-                <li><a href="bundle.php">Bundle and save</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Gifts</a></li>
-                <li><a href="#">Reviews</a></li>
-                <li><a href="about.php">About us</a></li>
-                <li><a href="#">Contact us</a></li>
-            </ul>
-        </div>
+    <?php include 'partials/side.php'; ?>
     </nav>
     <h2>Summer collection</h2>
 
@@ -88,93 +46,54 @@ session_start();
 </form>
 </div>
 </section> -->
+<?php
+    $sql = "SELECT * FROM products WHERE category='Summer_Collection'";
+    include_once "includes/dbh.inc.php";
+    $result = mysqli_query($conn, $sql);
+    ?>
+
     <div class="our_Products">
         <table>
-            <tr>
+        <?php
+            // Loop through the products and display them dynamically
+            while ($row = mysqli_fetch_assoc($result)) {
+              $id = $row["id"];
+              $title = $row["title"];
+              $price = $row["price"];
+              $description = $row["description"];
+              $prod_image = $row["prod_image"];
+              $category = $row["category"];
+            ?>
+          
                 <div class="products">
 
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg" alt="bed1">
+                <div class="prod">
+                            <img src="<?php echo $prod_image; ?>">
 
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
+                            <div class="design">
+                                <h5><?php echo $title; ?></h5>
+                                <h6><?php echo $description; ?></h6>
+                                <h6><?php echo $price; ?></h6>
+                                <form method="post" action="wishlist.php">
+    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+    <button type="submit" class="btn" name="add_to_wishlist"><i class="fa fa-heart"></i></button>
+</form>
+<form method="post" action="cart.php">
+    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+    <button type="submit" class="btn" name="add_to_cart"><i class="fa fa-shopping-bag"></i></button>
+</form>                    
+
+                               
+                            </div>
                         </div>
-                    </div>
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg" alt="bed2">
-
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
-                        </div>
-                    </div>
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg " alt="bed3">
-
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
-                        </div>
-                    </div>
-
-
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg " alt="bed4">
-
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
-                        </div>
-                    </div>
-                    </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg ">
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
-                        </div>
-                    </div>
-                </td>
-
-                <td>
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg">
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
-                        </div>
-                    </div>
-                </td>
-
-                <td>
-                    <div class="prod">
-                        <img src="imgs/Copy of Omar & Asia8.jpg">
-                        <div class="design">
-                            <h5>Suret osyy</h5>
-                            <h6>ay haga</h6>
-                            <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
-                            <button class="btn"> <i class="fa fa-heart"></i></button>
-                        </div>
-                    </div>
-                </td>
-            </tr>
+                    
+                    
+                
+            <?php
+            }
+            ?>
+    
+    
         </table>
     </div>
 
@@ -186,63 +105,7 @@ session_start();
 
 
 
-    <footer class="pageFooter">
-        <div class="col">
-            <a href="index.php"><img class="Logo" src="imgs/sweet dreams logo-01.png" alt="" width="145"
-                    height="100"></a>
-            <h4>Contact</h4>
-            <p><strong>Adress: </strong>Misr International University</p>
-            <p><strong>Phone: </strong>010000000</p>
-            <p><strong>Hours: </strong>9 am - 12 am . Mon-Sat</p>
-            <div class="follow">
-                <h4>Follow us</h4>
-                <div class="icon">
-                    <a href="https://www.facebook.com/"> <i class="fab fa-facebook-f"></i></a>
-                    <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.pinterest.com/"><i class="fab fa-pinterest"></i></a>
-                    <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <h4>About</h4>
-            <a href="about.php">About us</a>
-            <a href="index.php">Home</a>
-            <a href="#">Privacy policy</a>
-            <a href="#">Terms & conditions</a>
-
-        </div>
-
-        <div class="col">
-            <h4>My Account</h4>
-            <a href="login.php">Sign in</a>
-            <a href="#">View cart</a>
-            <a href="#">My wishlist</a>
-        </div>
-
-        <div class="col install">
-            <h4>Install app</h4>
-            <p>From App-Store or Google play</p>
-            <div class="row">
-                <img src="imgs/appStore.png" width="130" height="40">
-                <img src="imgs/googlePlay (2).png" width="130" height="40">
-            </div>
-            <p>Secured payment geteways</p>
-            <img src="imgs/Payment.png" width="300" height="50">
-
-        </div>
-
-
-    </footer>
-
-
-    <div class="copyright">
-        <p>© 2023, Sweet dreams - E-Commerce</p>
-    </div>
-
-
-
+    <?php include 'partials/footer.php'; ?>
 </body>
 
 </html>

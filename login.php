@@ -11,10 +11,10 @@
     <link rel="icon" href="imgs/sweet dreams logo-01.png"type="image/icon type" />
     <link rel="stylesheet" href="login.css" />
   </head>
-  
+
   <body>
   <?php
-$emailerr = $passworderr = "";
+$emailerr = $passworderr =$error="";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Validate email
@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['Gender'] = $row_admin['Gender'];
 
     // Redirect to admin dashboard
-    header("Location: /sweet-dreams/admin/php/addAdmin.php");
+    header("Location: /sweet-dreams/admin/php/viewAdmin.php");
     exit();
   } else {
     // Check if email exists in registrations table
@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       header("Location: index.php");
       exit();
     } else {
-      echo "Invalid credentials.";
+      $error ="Invalid credentials.";
     }
   }
 }
@@ -108,6 +108,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>Email</label>
             <input type="text" name="email" placeholder="username@email.com" required />
             <span class="error" style="color:red"><?php echo $emailerr;?></span>
+          
+
             <br>
             <span>If you don't have an account please <a href="reg.php">SignUp</a><span>
         </div>
@@ -116,6 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>Password</label>
             <input type="password" name="password" placeholder="Enter your password" required />
             <span class="error"><?php echo $passworderr;?></span>
+            <span class="error"><?php echo $error;?></span>
             <a href="#">Forget password?</a>
         </div>
 

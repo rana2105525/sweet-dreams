@@ -57,9 +57,11 @@ include_once "../../includes/dbh.inc.php";
  ?> 
 
 <div class="sidebar">
+ <a href="../../index.php"><img class ="logo" src="../../imgs/sweet dreams logo-01.png" alt="logo" ></a>
   <a id ="first" href="addAdmin.php">Add Admin</a>
-  <a href="editAdmin.php">Edit Admin</a>
+  <a href="viewAdmin.php">View Admin</a>
   <a href="addProduct.php">Add Product</a>
+  <a href="allProducts.php">Products</a>
   <a href="#contact">Users</a>
   <a href="#about">Reviews</a>
 </div>

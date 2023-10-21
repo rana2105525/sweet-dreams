@@ -59,7 +59,7 @@
 
     
     if($result)	{
-      header("Location:addAdmin.php");
+      header("Location: /sweet-dreams/login.php");
     }
   }
 ?>
@@ -67,6 +67,7 @@
 <div class="sidebar rows">
   <a href="../../index.php"><img class ="logo" src="../../imgs/sweet dreams logo-01.png" alt="logo" ></a>
   <a href="addAdmin.php">Add Admin</a>
+  <a href="viewAdmin.php">View Admin</a>
   <a href="addProduct.php">Add Product</a>
   <a href="allProducts.php">Products</a>
   <a href="#contact">Users</a>
@@ -103,11 +104,11 @@
         </div> 
         <div class ="row">
         <div class ="column">
-          <input type="radio" name="gender" id="male" value="male">
+          <input type="radio" name="gender" id="male" value="Male">
           <label for ="male" >Male</label>
         </div>
         <div class ="column">
-          <input type="radio" name="gender" id="female" value="female">
+          <input type="radio" name="gender" id="female" value="Female">
           <label for ="female" >Female</label>
         </div>
         </div>

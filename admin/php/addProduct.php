@@ -70,6 +70,7 @@
   <div class="sidebar rows">
     <a href="../../index.php"><img class ="logo" src="../../imgs/sweet dreams logo-01.png" alt="logo" ></a>
     <a href="addAdmin.php">Add Admin</a>
+    <a href="viewAdmin.php">View Admin</a>
     <a href="addProduct.php">Add Product</a>
     <a href="allProducts.php">Products</a>
     <a href="#contact">Users</a>
