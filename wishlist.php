@@ -12,6 +12,18 @@
     <link rel="stylesheet" href="cart.css" />
 </head>
 
+<style>
+        .empty-wishlist-message {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: auto;
+            margin-top;
+            height: 50vh;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
 <body>
 
 <nav>
@@ -64,18 +76,16 @@
             <h1>My Wishlist</h1>
             <div class="our_Products">
         <table>
-<?php
-
-// Loop through the wishlist array and display the product information for each item in the array
-
-
-// Loop through the wishlist array and display the product information for each item in the array
-foreach ($_SESSION['wishlist'] as $key => $item) {
-
-?>
+        <?php
+    if (empty($_SESSION['wishlist'])) {
+      echo '<div class="empty-wishlist-message">Your wishlist is empty.</div>';
+    } else {
+        foreach ($_SESSION['wishlist'] as $key => $item) {
+    ?>
 
 <div class="products">
   <div class="prod">
+  
 
     <img src="<?php echo $item['prod_image']; ?>">
     <div class="design">
@@ -97,6 +107,7 @@ foreach ($_SESSION['wishlist'] as $key => $item) {
 <?php
 
 }
+    }
 
 ?>
 

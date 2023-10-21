@@ -12,6 +12,19 @@
     <link rel="stylesheet" href="cart.css" />
 </head>
 
+<style>
+        .empty-cart-message {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: auto;
+            margin-top;
+            height: 50vh;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+
 <body>
 
 <nav> 
@@ -59,8 +72,11 @@
 
 <div class="our-products">
  <table>
-    <?php
-    foreach ($_SESSION['cart'] as $key => $item) {
+ <?php
+ if (empty($_SESSION['cart'])) {
+      echo '<div class="empty-cart-message">Your cart is empty.</div>';
+    } else {
+        foreach ($_SESSION['cart'] as $key => $item) {
     ?>
         <div class="product">
         <img src="<?php echo $item['prod_image']; ?>">
@@ -81,13 +97,14 @@
        
 </div>
         </div>
-        
-    <?php
-    }
-    ?>
-     <div class="checkout-btn">
+        <div class="checkout-btn">
     <button><a href="checkout.php">Checkout</a></button>
 </div>
+    <?php
+    }
+  }
+    ?>
+     
   </table>
 
 
