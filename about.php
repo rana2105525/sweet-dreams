@@ -50,6 +50,7 @@
                 moms and babies in Egypt. We aim to be the guiding light for moms, providing the tools they need for
                 their babies to experience sweet, peaceful dreams.
             </p>
+            
     </section>
     <?php include 'partials/footer.php'; ?>
 
