@@ -31,7 +31,7 @@
                   <th class = "tableHeader">Title</th>
                   <th class = "tableHeader">Price</th>
                   <th class = "tableHeader">Description</th>
-                  <th class = "tableHeader">Product  Image</th>
+                  <th class = "tableHeader">Product &nbsp; Image</th>
                   <th class = "tableHeader">Category</th>
                   <th class = "tableHeader">Operation</th>
                 </tr>

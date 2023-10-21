@@ -73,7 +73,7 @@
     <a href="addProduct.php">Add Product</a>
     <a href="allProducts.php">Products</a>
     <a href="#contact">Users</a>
-    <a href="#about">Reviews</a>
+    <a href="reviews.php">Reviews</a>
   </div>
 
   <div class ="content rows">

@@ -46,7 +46,7 @@ div.content {
   width: 100%;
   background: #fff;
   padding: 10px 70px 20px 70px;
-  margin:100px;
+  margin:50px 100px 100px 100px;
   border-radius: 50px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   min-height: 100vh;
