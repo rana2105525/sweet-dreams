@@ -39,9 +39,6 @@
         <div id="title"><h2>Admin Profile</h2></div>
 
 <div>
-<?php
-session_start();
-?>
 <label> Name: </label> <?php echo $_SESSION["Name"]; ?><br>
 <label> Phone: </label> <?php echo $_SESSION["Phone"]; ?><br>
 <label> Email: </label> <?php echo $_SESSION["Email"]; ?><br>
