@@ -33,6 +33,11 @@
 
   <body>
   <?php
+  function isStrongPassword($password) {
+    // Password requirements: at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character
+    $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/';
+    return preg_match($pattern, $password);
+}
 include_once "includes/dbh.inc.php";
 
 // Define variables to hold error messages
@@ -69,9 +74,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Validate the password field
-    if (empty($_POST["password"])) {
-        $passwordErr = "Password is required";
-    }
+  // Validate the password field
+if (empty($_POST["password"])) {
+  $passwordErr = "Password is required";
+} elseif (!isStrongPassword($_POST["password"])) {
+  $passwordErr = "Password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, one number, and one special character";
+}
 
     // Validate the confirm password field
     if (empty($_POST["confirm"])) {
