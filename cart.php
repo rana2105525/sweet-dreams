@@ -14,10 +14,8 @@
 
 <body>
 
-<nav>
-<?php include 'partials/nav.php'; ?>
-
-    <!-- <div class="wrap">
+<nav> 
+  <!-- <div class="wrap">
       <div class="search">
         <input type="text" class="searchTerm" placeholder="What are you looking for?">
         <button type="submit" class="searchButton">
@@ -25,56 +23,75 @@
         </button>
       </div>
     </div> -->
+<?php include 'partials/nav.php'; ?>
+
+   
     <?php include 'partials/side.php'; ?>
   </nav>
+  <?php
+  if (isset($_POST['add_to_cart'])) {
+    $product_id = $_POST['product_id'];
+    include_once "includes/dbh.inc.php";
+    // Retrieve the product attributes from the database based on the product ID
+    $sql = "SELECT * FROM products WHERE id = $product_id";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
 
+    // Check if the cart array exists in the session
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = array();
+    }
 
-            <h1>My cart</h1>
-            <div class="our_Products">
-        <table>
+    // Add the product ID and attributes to the cart array
+    $_SESSION['cart'][] = array(
+        'id' => $product_id,
+        'title' => $row['title'],
+        'description' => $row['description'],
+        'price' => $row['price'],
+        'prod_image' => $row['prod_image'],
+        'category' => $row['category']
+    );
+  
+}
+  ?>
 
-                <div class="products">
-                
-                <div class="prod">
-                            <img src="imgs/Copy of Omar & Asia8.jpg">  
-                            <div class="design">  
+<h1>My Cart</h1>
 
-                                <h5>mmm</h5>
-                                <h6>cc</h6>
-                                <h6>cc</h6>
-                               <button class="btn">Move to wishlist <i class="fa fa-heart"> </i></button>
-                               <button class="btn">Remove <i class="fa fa-remove"> </i></button>
-
-                            </div>
-                           
-                        </div>
-
-                        
-                        
-        </table>
-        <div class="our_Products">
-        <table>
-
-                <div class="products">
-                
-                <div class="prod">
-                            <img src="imgs/Copy of Omar & Asia8.jpg">  
-                            <div class="design">  
-
-                                <h5>mmm</h5>
-                                <h6>cc</h6>
-                                <h6>cc</h6>
-                               <button class="btn">Move to wishlist <i class="fa fa-heart"> </i></button>
-                               <button class="btn">Remove <i class="fa fa-remove"> </i></button>
-
-                            </div>
-                           
-                        </div>
-                        
-        </table>
-        <div class="checkout_btn">
-        <button ><a href="checkout.php">Checkout</a></button>
+<div class="our-products">
+ <table>
+    <?php
+    foreach ($_SESSION['cart'] as $key => $item) {
+    ?>
+        <div class="product">
+        <img src="<?php echo $item['prod_image']; ?>">
+    <div class="design">
+            <h5><?php echo $item['title']; ?></h5>
+            <h6><?php echo $item['description']; ?></h6>
+            <h6><?php echo $item['price']; ?></h6>
+                <form method="post" action="remove_item.php">
+                    <input type="hidden" name="item_index" value="<?php echo $key; ?>">
+                    <button type="submit" class="btn" name="remove_from_cart">Remove <i class="fa fa-remove"></i></button>
+                </form>
+                <form method="post" action="wishlist.php">
+                    <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
+                    <button type="submit" class="btn" name="move_to_wishlist">Move to Wishlist <i class="fa fa-heart"></i></button>
+                </form>
+            </div>
+        </div>
+       
 </div>
+        </div>
+        
+    <?php
+    }
+    ?>
+     <div class="checkout-btn">
+    <button><a href="checkout.php">Checkout</a></button>
+</div>
+  </table>
+
+
+        
 
 <?php include 'partials/footer.php'; ?>
 

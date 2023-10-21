@@ -78,9 +78,12 @@
     <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
     <button type="submit" class="btn" name="add_to_wishlist"><i class="fa fa-heart"></i></button>
 </form>
-                                
+<form method="post" action="cart.php">
+    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+    <button type="submit" class="btn" name="add_to_cart"><i class="fa fa-shopping-bag"></i></button>
+</form>                    
 
-                                <button class="btn"> <i class="fa fa-shopping-bag"></i></button>
+                               
                             </div>
                         </div>
                     

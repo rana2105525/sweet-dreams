@@ -82,7 +82,10 @@ foreach ($_SESSION['wishlist'] as $key => $item) {
       <h5><?php echo $item['title']; ?></h5>
       <h6><?php echo $item['description']; ?></h6>
       <h6><?php echo $item['price']; ?></h6>
-      <button class="btn">Move to cart <i class="fa fa-heart"> </i></button>
+      <form method="post" action="cart.php">
+    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+    <button type="submit" class="btn" name="add_to_cart"><i class="fa fa-shopping-bag"></i></button> 
+</form>
       <form method="post" action="remove_item.php">
         <input type="hidden" name="item_index" value="<?php echo $key; ?>">
         <button type="submit" class="btn" name="remove_from_wishlist">Remove <i class="fa fa-remove"></i></button>
