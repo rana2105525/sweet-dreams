@@ -60,6 +60,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $emailErr = "Invalid email format";
         }
     }
+    $email = test_input($_POST["email"]);
+    $sql = "SELECT * FROM registrations WHERE email = '$email'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $emailErr = "Email is already taken";
+        $emailTaken = true;
+    }
 
     // Validate the password field
     if (empty($_POST["password"])) {
@@ -89,7 +96,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Check if there are any errors
-    if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($confirmErr) && empty($birthErr)) {
+    if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($confirmErr) && empty($birthErr)&& 
+    !$emailTaken) {
         // Grap data from user if form was submitted
         $Fname = htmlspecialchars($_POST["name"]);
         $Email = htmlspecialchars($_POST["email"]);
