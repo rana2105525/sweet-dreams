@@ -1,6 +1,6 @@
 <?php
   include_once "../../includes/dbh.inc.php";
-?>
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,16 +67,16 @@
 <div class="sidebar rows">
   <a href="../../index.php"><img class ="logo" src="../../imgs/sweet dreams logo-01.png" alt="logo" ></a>
   <a href="addAdmin.php">Add Admin</a>
-  <a href="viewAdmin.php">View Admin</a>
   <a href="addProduct.php">Add Product</a>
   <a href="allProducts.php">Products</a>
+  <a href="viewAdmin.php">Admins</a>
   <a href="#contact">Users</a>
   <a href="reviews.php">Reviews</a>
 </div>
 
 <div class="content">
   <section class="container rows">
-    <form action="#" method="post" class="form">
+    <form action="/" method="post" class="form">
         <div id="title"><h2>Add a new admin</h2></div>
 
         <div class="input-box">
@@ -103,7 +103,7 @@
             <label for ="gender" >Gender</label>
         </div> 
         <div class ="row">
-        <div class ="column">
+        <div class ="column"> 
           <input type="radio" name="gender" id="male" value="Male">
           <label for ="male" >Male</label>
         </div>
