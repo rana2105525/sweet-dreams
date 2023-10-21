@@ -11,92 +11,154 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" href="imgs/sweet dreams logo-01.png"type="image/icon type" />
+    <link rel="icon" href="imgs/sweet dreams logo-01.png"type="image/icon type" />` 
     <link rel="stylesheet" href="reg.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#email').on('blur', function() {
+          var email = $(this).val();
+          $.ajax({
+            url: 'check_email.php',
+            type: 'POST',
+            data: { email: email },
+            success: function(response) {
+              $('#email-error').text(response);
+            }
+          });
+        });
+      });
+    </script>
   </head>
-  
-  <body>
-    <?php
 
-      $nameErr =$passwordErr=$confirmErr=$birthErr= $emailErr="";
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if (empty($_POST["name"])) {
+  <body>
+  <?php
+include_once "includes/dbh.inc.php";
+
+// Define variables to hold error messages
+$nameErr = $emailErr = $passwordErr = $confirmErr = $birthErr = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Validate the name field
+    if (empty($_POST["name"])) {
         $nameErr = "Name is required";
-      } else {
+    } else {
         $name = test_input($_POST["name"]);
         // check if name only contains letters and whitespace
-        if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-          $nameErr = "Only letters and white space allowed";
+        if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
+            $nameErr = "Only letters and white space allowed";
         }
-      }
-      if (empty($_POST["email"])) {
-      $emailErr = "Email is required";
-    } else {
-      $email = test_input($_POST["email"]);
-      // check if e-mail address is well-formed
-      if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "Invalid email format";
-      }
     }
-    //check password and confirm not empty and the passwords are equal
+
+    // Validate the email field
+    if (empty($_POST["email"])) {
+        $emailErr = "Email is required";
+    } else {
+        $email = test_input($_POST["email"]);
+        // check if e-mail address is well-formed
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid email format";
+        }
+    }
+
+    // Validate the password field
     if (empty($_POST["password"])) {
-      $passwordErr = "Password is required";
+        $passwordErr = "Password is required";
     }
 
+    // Validate the confirm password field
     if (empty($_POST["confirm"])) {
-      $confirmErr = "Confirm is required";
+        $confirmErr = "Confirm is required";
     } else {
-      $confirm = test_input($_POST["confirm"]);
-      
-      if ($_POST["password"] === $_POST["confirm"]){
-      $confirmErr="";
+        $confirm = test_input($_POST["confirm"]);
+
+        if ($_POST["password"] !== $_POST["confirm"]) {
+            $confirmErr = "Passwords don't match";
+        }
     }
-    else{
-      $confirmErr="passwords doesn't match";
-    }
-    }  function getTodayDate() {
-      return date('Y-m-d');
-    }
-    
-    function isDateValid($date) {
-      $maxDate = getTodayDate(); // Get the current date
-    
-      if ($date > $maxDate) {
-        return false; // Date is in the future
-      }
-    
-      return true; // Date is valid
-    }
-    
+
+    // Validate the birth date field
     if (empty($_POST["birth"])) {
-      $birthErr = "Enter your birth";
+        $birthErr = "Enter your birth date";
     } else {
-      $birth = test_input($_POST["birth"]);
+        $birth = test_input($_POST["birth"]);
+
+        if (!isDateValid($birth)) {
+            $birthErr = "Birth date cannot be in the future";
+        }
+    }
+
+    // Check if there are any errors
+    if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($confirmErr) && empty($birthErr)) {
+        // Grap data from user if form was submitted
+        $Fname = htmlspecialchars($_POST["name"]);
+        $Email = htmlspecialchars($_POST["email"]);
+        $Password = htmlspecialchars($_POST["password"]);
+        $Birth = htmlspecialchars($_POST["birth"]);
+        $Gender = htmlspecialchars($_POST["gender"]);
+
+        $imgnewfiles = [];
+
+        if (!empty($_FILES['profilepic']['name'][0])) {
+            $fileCount = count($_FILES['profilepic']['name']);
+
+            for ($i = 0; $i < $fileCount; $i++) {
+                $ppic = $_FILES['profilepic']['name'][$i];
+                $extension = pathinfo($ppic, PATHINFO_EXTENSION);
+
+                $imgnewfile = md5($ppic . time() . $i) . '.' . $extension;
+                move_uploaded_file($_FILES['profilepic']['tmp_name'][$i], "profilepic/" . $imgnewfile);
+
+                $imgnewfiles[] = $imgnewfile;
+            }
+        }
+
+        // Convert the array of file names into a comma-separated string
+        $imgnewfilesStr = implode(',', $imgnewfiles);
+
+        // Insert data into the database
+        $sql = "INSERT INTO registrations(fullname,email,password,birth,gender,image) 
+                VALUES ('$Fname','$Email','$Password','$Birth','$Gender', '$imgnewfilesStr')";
+        $result = mysqli_query($conn, $sql);
+
+        // Check if the data was inserted successfully
+        if ($result) {
+            // Redirect the user back to index.php
+            header('Location: index.php');
+            exit();
+        } else {
+            // Handle the database insertion error
+            echo "Error inserting data into the database: " . mysqli_error($conn);
+        }
+    }
+}
+
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+function getTodayDate()
+{
+    return date('Y-m-d');
+}
+
+function isDateValid($date)
+{
+    $maxDate = getTodayDate(); // Get the current date
+
+    if ($date > $maxDate) {
+        return false; // Date is in the future
+    }
+
+    return true; // Date is valid
+}
+
+
     
-      if (!isDateValid($birth)) {
-        $birthErr = "Birth date cannot be in the future";
-      }
-    }
-//Function to check if the date is valid (searching for it)
-
-//hashing password
-// $new_password=$_GET['password'];
-// $hashed_password=password_hash($new_password1,PASSWORD_DEFAULT);
-
-// $conf_pass=$_GET['confirm'];
-// $hashed_confirm=password_hash($conf_pass,PASSWORD_DEFAULT);
-
-
-
-    }
-
-
-      function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-      }
     ?>
     
     <section class="container">
@@ -110,8 +172,10 @@
 
         <div class="input-box">
           <label>Email Address</label>
-          <input type="text" name="email" id="email" method="post" placeholder="Enter email address" required />
+          <input type="text" name="email" id="email" placeholder="username@email.com" required />
           <span class="error"><?php echo $emailErr;?></span>
+      <span class="error"  id="email-error"></span>
+
         </div>
 
         <div class="input-box">
@@ -149,8 +213,8 @@
         <input type="file" name="profilepic[]" multiple="multiple" accept=".jpg, .jpeg, .png, .gif"><br>
           </div>
         </div>
-       
-      <button input type="submit" name="submit" value="Submit">Submit</button>
+      
+      <button input type="submit" name="submit" id="submit-button" value="Submit">Submit</button>
       </form>
     </section>
     <?php
@@ -181,15 +245,11 @@
 
   // Convert the array of file names into a comma-separated string
   $imgnewfilesStr = implode(',', $imgnewfiles);
-    //insert it to database 
-	$sql="insert into registrations(fullname,email,password,birth,gender,image) 
-	values('$Fname','$Email','$Password','$Birth','$Gender', '$imgnewfilesStr')";
-	 $result=mysqli_query($conn,$sql);
+
 
   //   //redirect the user back to index.php 
-  if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($confirmErr) && empty($birthErr)) {
-    header('location:index.php');
-  }
+
+
 }
 
 ?>

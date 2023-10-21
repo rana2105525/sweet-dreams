@@ -21,8 +21,8 @@
       <h4>About</h4>
       <a href="about.php">About us</a>
       <a href="index.php">Home</a>
-      <a href="#">Privacy policy</a>
-      <a href="#">Terms & conditions</a>
+      <a href="privacy.php">Privacy policy</a>
+      <a href="t&cond">Terms & conditions</a>
 
     </div>
 

@@ -11,7 +11,7 @@
     <link rel="icon" href="imgs/sweet dreams logo-01.png"type="image/icon type" />
     <link rel="stylesheet" href="login.css" />
   </head>
-  
+
   <body>
   <?php
 $emailerr = $passworderr =$error="";
@@ -108,6 +108,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>Email</label>
             <input type="text" name="email" placeholder="username@email.com" required />
             <span class="error" style="color:red"><?php echo $emailerr;?></span>
+          
+
             <br>
             <span>If you don't have an account please <a href="reg.php">SignUp</a><span>
         </div>
