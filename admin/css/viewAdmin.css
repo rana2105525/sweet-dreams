@@ -40,61 +40,91 @@ body {
   width: 80%;
   position: relative;
 }
-label{
-color: #3AB9C0;
-}
+
+
 div.content {
   padding: 1px 16px;
   justify-content: center;
   align-items: center;
-  height: 60vh;
+  height: 40vh;
   margin-left: 25%;
 }
+
 .container {
-    position: relative;
-    max-width: 700px;
-    width: 100%;
-    background: #fff;
-    padding: 10px 70px 20px 70px;
-    margin:100px;
-    border-radius: 50px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    height: 40vh;
-  }
- 
-.centered-content {
-    display: flex;
-    justify-content: center;
-    height: 120vh;
-    text-align:left; 
- }
- button{
-    height: 45px;
-    width:25%;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 400;
-    margin-top: 15px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background:#F27144;
-    border-radius: 50px;
-}
-button a {
-    color: #fff;
-    text-decoration: none;
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  background: #fff;
+  padding: 10px 70px 20px 70px;
+  margin:150px 100px 100px 100px;
+  border-radius: 50px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  min-height: 70vh;
 }
 
- button:hover {
-    background:#3AB9C0;
-  }
- 
+.container .form {
+  margin-top: 10px;
+}
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+.input-box label {
+  color: #3AB9C0;
+}
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 40px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 0 15px;
+}
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.form button {
+  height: 55px;
+  width:100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background:#F27144;
+  border-radius: 50px;
+}
+.form button:hover {
+  background:#3AB9C0;
+}
+button a{
+  color:white;
+  text-decoration: none;
+}
 #title{
     text-align: center;
     color:#F27144;
-    margin-bottom: 40px;
 }
+.column {
+  float: left;
+  width: 50%;
+  margin-top: 5px;
+}
+
+/*hide arrows of number*/
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 
 /*responsive*/
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
