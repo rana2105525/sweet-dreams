@@ -10,16 +10,26 @@
 </head>
 
 <body>
+<?php
+// session_start();
+// echo "<h1>Your Profile</h1>";
+// echo "Name: "     .   $_SESSION["Name"]."<br>";
+// echo "Phone: "    .   $_SESSION["Phone"]."<br>";
+// echo "Email :"    .   $_SESSION["Email"]."<br>";
+// echo "Gender: "   .   $_SESSION["Gender"]."<br><br>";
+?>
+<div class ="component">
+  <div class="sidebar rows">
+    <a href="../../index.php"><img class ="logo" src="../../imgs/sweet dreams logo-01.png" alt="logo" ></a>
+    <a href="addAdmin.php">Add Admin</a>
+    <a href="viewAdmin.php">View Admin</a>
+    <a href="addProduct.php">Add Product</a>
+    <a href="allProducts.php">Products</a>
+    <a href="#contact">Users</a>
+    <a href="#about">Reviews</a>
+  </div>
 
-<div class="component">
-<div class="sidebar rows">
-  <a href="../../index.php"><img class ="logo" src="../../imgs/sweet dreams logo-01.png" alt="logo" ></a>
-  <a href="addAdmin.php">Add Admin</a>
-  <a href="addProduct.php">Add Product</a>
-  <a href="allProducts.php">Products</a>
-  <a href="viewAdmin.php">Admins</a>
-  <a href="#contact">Users</a>
-  <a href="reviews.php">Reviews</a>
+  
 </div>
 
 <div class="content">
@@ -28,31 +38,16 @@
       <?php session_start();?>
         <div id="title"><h2>Admin Profile</h2></div>
 
-        <div class="input-box">
-            <label for="name:">Name: &nbsp;</label>
-              <?php echo $_SESSION["Name"];?>
-            </div>
+<div>
+<label> Name: </label> <?php echo $_SESSION["Name"]; ?><br>
+<label> Phone: </label> <?php echo $_SESSION["Phone"]; ?><br>
+<label> Email: </label> <?php echo $_SESSION["Email"]; ?><br>
+<label> Gender: </label> <?php echo $_SESSION["Gender"]; ?><br><br>
 
-        <div class="input-box">
-            <label for="number">Phone Number: &nbsp;</label>
-            <?php echo $_SESSION["Phone"]; ?>
-        </div>
-
-        <div class="input-box">
-            <label for="email">Email: &nbsp;</label>
-            <?php echo $_SESSION["Email"]; ?>
-        </div> 
-
-        <div class="input-box">
-            <label for ="gender" >Gender: &nbsp;</label>
-            <?php echo $_SESSION["Gender"]; ?>
-        </div> 
-
-        <button><a href="editAdmin.php">Edit</a></button>
-        <button>Delete</button>
 </div>
-    </section>
-</div>
+<button type ="submit"><a href="editAdmin.php">Edit Admin </a></button>
+<button type ="submit">Delete Admin</button>
+</section>
 </div>
 
 </body>

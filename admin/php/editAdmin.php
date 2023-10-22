@@ -49,7 +49,7 @@ include_once "../../includes/dbh.inc.php";
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-            header("Location: editAdmin.php");
+          header("Location: /sweet-dreams/login.php");
         } else {
             echo "<p style='color: red;'>Error updating admin information.</p>";
         }}
