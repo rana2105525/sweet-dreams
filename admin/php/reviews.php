@@ -18,6 +18,7 @@
         <a href="addProduct.php">Add Product</a>
         <a href="allProducts.php">Products</a>
         <a href="users.php">Users</a>
+        <a href="allAdmins.php">Admins</a>
         <a href="reviews.php">Reviews</a>
       </div>
 
