@@ -62,7 +62,7 @@ $email = $_POST['email'];
 
 
     if (empty($nameErr) && empty($emailErr)) {
-        $sql = "UPDATE registrations SET fullname='$name', email='$email' WHERE fullname = '" . $_SESSION['fullname'] . "'";
+        $sql = "UPDATE registrations SET fullname='$name', email='$email' WHERE email = '" . $_SESSION['email'] . "'";
         $result = mysqli_query($conn, $sql);
 
         // Check if the update was successful.

@@ -115,26 +115,14 @@ if (empty($_POST["password"])) {
 
         $imgnewfiles = [];
 
-        if (!empty($_FILES['profilepic']['name'][0])) {
-            $fileCount = count($_FILES['profilepic']['name']);
-
-            for ($i = 0; $i < $fileCount; $i++) {
-                $ppic = $_FILES['profilepic']['name'][$i];
-                $extension = pathinfo($ppic, PATHINFO_EXTENSION);
-
-                $imgnewfile = md5($ppic . time() . $i) . '.' . $extension;
-                move_uploaded_file($_FILES['profilepic']['tmp_name'][$i], "profilepic/" . $imgnewfile);
-
-                $imgnewfiles[] = $imgnewfile;
-            }
-        }
+  
 
         // Convert the array of file names into a comma-separated string
         $imgnewfilesStr = implode(',', $imgnewfiles);
 
         // Insert data into the database
-        $sql = "INSERT INTO registrations(fullname,email,password,birth,gender,image) 
-                VALUES ('$Fname','$Email','$Password','$Birth','$Gender', '$imgnewfilesStr')";
+        $sql = "INSERT INTO registrations(fullname,email,password,birth,gender) 
+                VALUES ('$Fname','$Email','$Password','$Birth','$Gender')";
         $result = mysqli_query($conn, $sql);
 
         // Check if the data was inserted successfully
@@ -225,9 +213,7 @@ function isDateValid($date)
               <input type="radio" id="check-female" name="gender" value="female" />
               <label for="check-female">Female</label>
             </div>
-            <label for="profilepic">Profile Pictures:</label>
-        <input type="file" name="profilepic[]" multiple="multiple" accept=".jpg, .jpeg, .png, .gif"><br>
-          </div>
+           
         </div>
       
       <button input type="submit" name="submit" id="submit-button" value="Submit">Submit</button>

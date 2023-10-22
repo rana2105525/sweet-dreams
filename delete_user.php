@@ -13,10 +13,10 @@ if (!isset($_SESSION['fullname'])) {
 }
 
 // Escape the user input.
-$fullname = mysqli_real_escape_string($conn, $_SESSION['fullname']);
+$email = mysqli_real_escape_string($conn, $_SESSION['email']);
 
 // Delete the user from the database.
-$sql = "DELETE FROM registrations WHERE fullname = '$fullname'";
+$sql = "DELETE FROM registrations WHERE email = '$email'";
 $result = mysqli_query($conn, $sql);
 
 // Check if the deletion was successful.

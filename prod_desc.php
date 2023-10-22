@@ -16,7 +16,6 @@
 
     <nav>
     <?php include 'partials/nav.php'; ?>
-
         <!-- <div class="wrap">
       <div class="search">
         <input type="text" class="searchTerm" placeholder="What are you looking for?">
@@ -27,45 +26,81 @@
     </div> -->
     <?php include 'partials/side.php'; ?>
     </nav>
+    <?php
+//     session_start();
+//   if (isset($_POST['prod_desc'])) {
+//     $product_id = $_POST['product_id'];
+//     include_once "includes/dbh.inc.php";
+//     // Retrieve the product attributes from the database based on the product ID
+//     $sql = "SELECT * FROM products WHERE id = $product_id";
+//     $result = mysqli_query($conn, $sql);
+//     $row = mysqli_fetch_assoc($result);
 
+//     // Check if the wishlist array exists in the session
+//     if (!isset($_SESSION['prod_desc'])) {
+//         $_SESSION['prod_desc'] = array();
+//     }
+
+//     // Add the product ID and attributes to the wishlist array
+//     $_SESSION['prod_desc'][] = array(
+//         'id' => $product_id,
+//         'title' => $row['title'],
+//         'description' => $row['description'],
+//         'price' => $row['price'],
+//         'prod_image' => $row['prod_image'],
+//         'category' => $row['category']
+//     );
+  
+// }
+  ?>
+
+<?php
+session_start();
+
+if (isset($_POST['submit'])) {
+
+  $fullname = $_POST['fullname'];
+  $review = $_POST['review'];
+  include_once "includes/dbh.inc.php";
+
+  $sql = "INSERT INTO reviews (fullname, review) VALUES ('$fullname', '$review');";
+
+  $result = mysqli_query($conn, $sql);
+
+  if (!$result) {
+    die(mysqli_error($conn));
+  }
+}
+
+?>
 
     <body>
   <div class="cont">
     <div class="product-img">
-      <img src="imgs/Copy of Omar & Asia4.jpg" height="420" width="327">
-    </div>
+    <img src="" height="420" width="327">    </div>
     <div class="product-info">
       <div class="product-text">
-        <h1>Test</h1>
-        <p>nkuihneunouatrjnboalrtjnoujntr </p>
+      <h1></h1>
+      <p></p>
       </div>
       <div class="product-price-btn">
-        <p><span>78</span>$</p>
+        <p></p>
         <button type="button">buy now</button>
       </div>
     </div>
   </div>
 
   <h2>Customer Reviews</h2>
+  <form action="" class="form" method="post" >
 
   <div class="text-field">
-    <label for="name">Review</label>
-    <input type="text" id="name" name="name" placeholder="Write your review">
-    <button>Submit</button>
+    <label for="name">Review</label> 
+    <input type="text" id="fullname" name="fullname" placeholder="Write your name">
+    <input type="text" id="review" name="review" placeholder="Write your review">
+    <button type="submit" class="btn" name="submit">Submit</button>
 </div>
-  <div class="review-section">
+</form>
 
-    <div class="review">
-        <img src="customer1.jpg" alt="Customer 1">
-        <h3>John Doe</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tristique justo ac nibh posuere, vel varius nunc feugiat. Sed vitae metus sed lectus dignissim tristique. Praesent eu feugiat elit.</p>
-    </div>
-    <div class="review">
-        <img src="customer2.jpg" alt="Customer 2">
-        <h3>Jane Smith</h3>
-        <p>Ut eu ligula volutpat, porta mauris in, fermentum odio. Vivamus tincidunt eros quam, sed efficitur libero consectetur ut. Curabitur eget suscipit nisl. Mauris sit amet lectus dignissim, volutpat tortor et, lacinia purus.</p>
-    </div>
-</div>
 
 
 <?php include 'partials/footer.php'; ?>
