@@ -15,7 +15,7 @@
 <body>
 
     <nav>
-   <?php include 'partials/nav.php'; ?>
+    <?php include 'partials/nav.php'; ?>
         <!-- <div class="wrap">
       <div class="search">
         <input type="text" class="searchTerm" placeholder="What are you looking for?">
@@ -53,26 +53,7 @@
   
 }
   ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
 
 <?php
 
@@ -96,10 +77,10 @@ if (isset($_POST['submit'])) {
 
     <body>
     <?php
-    if (empty($_SESSION['wishlist'])) {
-      echo '<div class="empty-wishlist-message">Your wishlist is empty.</div>';
+    if (empty($_SESSION['description'])) {
+      echo '<div class="empty-wishlist-message">.</div>';
     } else {
-        foreach ($_SESSION['wishlist'] as $key => $item) {
+        foreach ($_SESSION['description'] as $key => $item) {
     ?>
   <div class="cont">
     <div class="product-img">
