@@ -56,11 +56,8 @@
     $sql="insert into admins(Username ,Phone ,Email ,Password ,Gender)
     values('$Name','$Phone','$Email','$hashed_password','$Gender')";
     $result=mysqli_query($conn,$sql);
-
-    
-    if($result)	{
-      header("Location: /sweet-dreams/login.php");
-    }
+    if(!$result)
+      die(mysqli_error($conn));
   }
 ?>
 <div class="component">
@@ -76,7 +73,7 @@
 
 <div class="content">
   <section class="container rows">
-    <form action="/" method="post" class="form">
+    <form action="" method="post" class="form">
         <div id="title"><h2>Add a new admin</h2></div>
 
         <div class="input-box">
