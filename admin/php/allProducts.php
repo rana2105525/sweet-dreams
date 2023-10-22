@@ -57,14 +57,12 @@
                             <td><img class="table_img" src="'.$prod_image.'"alt='.$title.'/></td>
                             <td>'.$category.'</td>
                             <td>
-                              <button class = "buttons" id ="edit"><a href="editProduct.php">Edit</a></button>
+                              <button class = "buttons" id ="edit"><a href="editProduct.php?update_id='.$id.'">Edit</a></button>
                               <button class = "buttons" id ="delete"><a href="deleteProduct.php?delete_id='.$id.'">Delete</a></button>
                             </td>
                           </tr>';
                   }
-                ?>
-              
-                
+                ?>  
               </tbody>
             </table>
         </div>

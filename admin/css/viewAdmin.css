@@ -59,12 +59,10 @@ div.content {
   margin:150px 100px 100px 100px;
   border-radius: 50px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  min-height: 70vh;
+  min-height: 60vh;
 }
 
-.container .form {
-  margin-top: 10px;
-}
+
 .form .input-box {
   width: 100%;
   margin-top: 20px;
@@ -100,6 +98,7 @@ div.content {
   transition: all 0.2s ease;
   border-radius: 50px;
 }
+
 #edit{
   background-color: #F27144;
 }
@@ -127,13 +126,6 @@ button a{
   float: left;
   width: 50%;
   margin-top: 5px;
-}
-
-/*hide arrows of number*/
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
 }
 
 
