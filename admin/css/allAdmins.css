@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+    
+body {
+    background-color: #E8E0D7;
+}
+
+.sidebar {
+    margin-right:100px;
+    padding: 0;
+    width: 200px;
+    background-color: #ffffff;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+  
+.sidebar a {
+    display: block;
+    color: #3AB9C0;
+    padding: 16px;
+    text-decoration: none;
+    margin-left:15px;
+}
+  
+.sidebar a:hover{
+    color: #F27144;
+}
+
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;;
+    width: 80%;
+    position: relative;
+}
+
+div.content {
+    padding: 1px 16px;
+}
+
+#header{
+    color:#F27144;
+    text-align: center;
+    margin-top:2%;
+}
+
+.tablecont{
+    margin-top: 2%;
+    margin-left: 20%;
+}
+
+table{
+    border-collapse: collapse;
+    width: 80%;
+    margin-bottom: 100px;
+}
+
+
+.tablehead{
+    text-transform: uppercase;
+    color:#3AB9C0;
+}
+
+td, th {
+    border: 1px solid #000000;
+    text-align: center;
+    padding: 8px;
+}
+.tableHeader{
+    border-bottom: 3px solid #000000 ;
+}
+ 
+tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+
+/*responsive*/
+/* On screens that are less than 2000px wide, make the sidebar into a topbar */
+@media screen and (max-width: 1500px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    .tablecont {
+      margin-left: 0;
+      margin-right:15%;
+    }
+    .logo{
+        width:20%;
+        margin-bottom: 0;
+    }
+  }
+/* On screens that are less than 500px, display the bar vertically, instead of horizontally */
+@media screen and (max-width: 600px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+    .component{
+      display: grid;
+      grid-template-columns: auto, auto;
+    }
+    .rows{
+      align-items: center;
+    }
+    .logo{
+      width:20%;
+      margin-bottom: 0;
+    }
+}
+  
+/*text*/
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 601px) {
+    #header{
+      font-size: 20px;
+    }
+  }
+  
+  /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+  @media screen and (max-width: 600px) {
+    #header{
+      font-size: 20px;
+    }
+}
