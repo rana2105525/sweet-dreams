@@ -1,9 +1,3 @@
-<?php
-session_start();
-
-include_once "../../includes/dbh.inc.php";
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,46 +9,55 @@ include_once "../../includes/dbh.inc.php";
     <link rel="icon" href="../../imgs/Sweet Dreams logo-01.png" type="image/icon type" />
 </head>
 <body>
-   <?php
-   function isValidEmail($email) {
-    return filter_var($email, FILTER_VALIDATE_EMAIL);
-  }
+<?php
+session_start();
 
-  if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = $_POST['name'];
-    $phoneNumber = $_POST['number'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+include_once "../../includes/dbh.inc.php";
+
+function isValidEmail($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $name = isset($_POST['name']) ? $_POST['name'] : '';
+    $phoneNumber = isset($_POST['number']) ? $_POST['number'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
     $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 
     if (empty($name) || empty($phoneNumber) || empty($email) || empty($password) || empty($gender)) {
-      echo "<p style='color: red;'>All fields are required, including selecting a gender.</p>";
+        echo "<p style='color: red;'>All fields are required, including selecting a gender.</p>";
     } elseif (!ctype_digit($phoneNumber)) {
-      echo "<p style='color: red;'>Phone number should contain only numbers.</p>";    
+        echo "<p style='color: red;'>Phone number should contain only numbers.</p>";
     } elseif (!ctype_alpha($name)) {
-      echo "<p style='color: red;'>Name should contain only letters.</p>";
+        echo "<p style='color: red;'>Name should contain only letters.</p>";
     } elseif (!isValidEmail($email)) {
-      echo "<p style='color: red;'>Invalid email format.</p>";
-    }} 
+        echo "<p style='color: red;'>Invalid email format.</p>";
+    }
 
-    if($_SERVER["REQUEST_METHOD"]=="POST"){ //check if form was submitted
-        $Name=htmlspecialchars($_POST["name"]);
-        $Phone=htmlspecialchars($_POST["number"]);
-        $Email=htmlspecialchars($_POST["email"]);
-        $Password=htmlspecialchars($_POST["password"]);
-        $Gender=htmlspecialchars($_POST["gender"]);
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Update the session variables based on form data
+        $_SESSION['Name'] = $name;
+        $_SESSION['number'] = $phoneNumber;
+        $_SESSION['email'] = $email;
+        $_SESSION['password'] = $password;
+        $_SESSION['gender'] = $gender;
+
+        // Now you can proceed to update the admin information in the database
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        $sql = "update admins set Username='$name', Phone='$phoneNumber', Email='$email', Password='$hashed_password', Gender='$gender' WHERE ID=".$_SESSION['ID'];
+        $sql = "UPDATE admins SET Username='$name', Phone='$phoneNumber', Email='$email', Password='$hashed_password', Gender='$gender' WHERE Username='" . $_SESSION['Name'] . "'";
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-          header("Location: /sweet-dreams/login.php");
+            // Redirect to the login page after updating admin info
+            header("Location: /sweet-dreams/login.php");
+            exit();
         } else {
             echo "<p style='color: red;'>Error updating admin information.</p>";
-        }}
-     
- ?> 
+        }
+    }
+}
+?>
 
 <div class="sidebar">
  <a href="../../index.php"><img class ="logo" src="../../imgs/sweet dreams logo-01.png" alt="logo" ></a>
@@ -67,46 +70,45 @@ include_once "../../includes/dbh.inc.php";
 </div>
 <div class="content">
   <section class="container">
-    <form action="#" method="post" class="form">
-        <div id="title"><h2>Edit admin</h2></div>
+  <form action="" method="post" class="form">
+    <div id="title"><h2>Edit admin</h2></div>
 
-        <div class="input-box">
-            <label for="name">Name</label>
-            <input type="text" id ="name" name="name" placeholder="Enter admin's name" value="<?=$_SESSION['name']?>"/>
-        </div>
+    <div class="input-box">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter admin's name" />
+    </div>
 
-        <div class="input-box">
-            <label for="number">Phone Number</label>
-            <input type="number" id="number" name="number" placeholder="Enter admin's number" value="<?=$_SESSION['number']?>"/>
-       </div>
+    <div class="input-box">
+        <label for="number">Phone Number</label>
+        <input type="number" id="number" name="number" placeholder="Enter admin's number" />
+    </div>
 
+    <div class="input-box">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter admin's email" />
+    </div> 
 
-        <div class="input-box">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter admin's email" value="<?=$_SESSION['email']?>" />
-        </div> 
-
-        <div class="input-box">
-            <label for ="password" >Password</label>
-            <input type="password" id ="password" name="password" placeholder="Enter your password" value="<?=$_SESSION['password']?>" />
-        </div>
-        
-        <div class="input-box">
-            <label for ="gender" >Gender</label>
-        </div> 
-        <div class ="row">
-        <span class ="column">
-        <input type="radio" name="gender" id="male" value="male" <?= ($_SESSION['gender'] == 'male') ? 'checked' : '' ?>>
-          <label for ="male" >Male</label>
+    <div class="input-box">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" />
+    </div>
+    
+    <div class="input-box">
+        <label for="gender">Gender</label>
+    </div> 
+    <div class="row">
+        <span class="column">
+            <input type="radio" name="gender" id="male" value="Male">
+            <label for="male">Male</label>
         </span>
-        <span class ="column">
-        <input type="radio" name="gender" id="female" value="female" <?= ($_SESSION['gender'] == 'female') ? 'checked' : '' ?>>
-          <label for ="female" >Female</label>
+        <span class="column">
+            <input type="radio" name="gender" id="female" value="Female">
+            <label for="female">Female</label>
         </span>
-        </div>
+    </div>
 
-        <button type ="submit">Edit Admin</button>
-      </form>
+    <button type="submit">Edit Admin</button>
+</form>
     </section>
 </div>
 </body>
