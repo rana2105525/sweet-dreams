@@ -16,7 +16,7 @@
 </style>
 
 <?php
-    
+    include_once "includes/dbh.inc.php";
     $fnameErr = $lnameErr = $cardNumErr = $cardHolderErr = $dateErr = $emailErr = $phoneErr = $addressErr = $cvcErr = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST["fname"])) {
@@ -98,8 +98,32 @@
 
       //  $new_CVC=$_GET['CVC'];
       //  $hashed_CVC=password_hash($new_CVC,PASSWORD_DEFAULT);
-    }
     
+    
+    if (empty($fnameErr) && empty($lnameErr) && empty($cardNumErr)  && empty($dateErr)&& empty($emailErr)&& empty($phoneErr)&&empty($addressErr)&& empty($cvcErr)) {
+      $Fname = htmlspecialchars($_POST["fname"]);
+      $Lname = htmlspecialchars($_POST["lname"]);
+      $Email = htmlspecialchars($_POST["email"]);
+      $phone = htmlspecialchars($_POST["phone"]);
+      $address = htmlspecialchars($_POST["address"]);
+      $cardNum = htmlspecialchars($_POST["cardNum"]);
+      $date = htmlspecialchars($_POST["exp_date"]);
+      $cvc = htmlspecialchars($_POST["CVC"]);
+
+    $sql=  "INSERT INTO checkout(firstname,lastname,email,phone,address,card_holder,expiring_date,cvc) 
+      VALUES ('$Fname','$lname','$Email','$phone','$address','$cardNum','$date', '$cvc')";
+$result = mysqli_query($conn, $sql);
+
+if ($result) {
+  // Redirect the user back to index.php
+  echo"purchase succesfull";
+  exit();
+} else {
+  // Handle the database insertion error
+  echo "Error inserting data into the database: " . mysqli_error($conn);
+}
+    }
+  }
     function test_input($data)
     {
         $data = trim($data);
@@ -191,6 +215,20 @@
             <button input type="submit" name="submit" value="Submit">Checkout</button>
         </form>
     </section>
+    <?php
+    if (isset($_POST['submit'])){ //check if form was submitted
+	    $Fname = htmlspecialchars($_POST["fname"]);
+      $Lname = htmlspecialchars($_POST["lname"]);
+      $Email = htmlspecialchars($_POST["email"]);
+      $phone = htmlspecialchars($_POST["phone"]);
+      $address = htmlspecialchars($_POST["address"]);
+      $cardNum = htmlspecialchars($_POST["cardNum"]);
+      $date = htmlspecialchars($_POST["exp_date"]);
+      $cvc = htmlspecialchars($_POST["CVC"]);
+
+}
+
+?>    
     <?php include 'partials/footer.php'; ?>
   
 </body>
