@@ -88,10 +88,13 @@ tbody tr:nth-child(odd) {
     margin: 2px;
     border:none;
 }
-
 #delete{
+
     background-color: rgb(246, 3, 3);
+}
+button a{
     color: #ffffff;
+    text-decoration: none;
 }
 
 #delete:hover{
