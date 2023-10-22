@@ -15,23 +15,23 @@
 <?php
  //whenever this submit button is clicked, this functions will be performed 
  $id= $_GET ["update_id"];//taken from url
+ $query="SELECT * FROM products WHERE id = '$id';";
+
+ $result = mysqli_query($conn,$query);
+ $row = mysqli_fetch_assoc($result);
+ $title= $row ["title"];
+ $price= $row ["price"];
+ $description= $row ["description"];
+ $prod_image= $row ["prod_image"];
+ $category= $row ["category"];
+
  if(isset($_POST['submit'])){
-  echo $id;
     //storing values 
     $title = $_POST['title'];
     $price = $_POST['price'];
     $description = $_POST['description'];
-    $prod_image =$_FILES['prod_image'];
+    $prod_image = $_FILES['prod_image'];
     $category = $_POST['category'];
-
-
-    $sql="UPDATE products SET id= $id, title = '$title', price= '$price',
-    description='$description', prod_image = '$prod_image', category = '$category';";
-
-    $result = mysqli_query($conn,$sql);//excute query
-    if($result)
-      echo"updated";
-    else die(mysqli_error($conn));
 
     //image
     $image_filename = $prod_image['name']; //get image name
@@ -39,11 +39,19 @@
     $filename_separate=explode('.',$image_filename);  //separate name by dot(array)
     $file_extension=strtolower(end($filename_separate)); //get file extension
     $extensions = array('jpg', 'jpeg', 'png'); //extensions 
-
+  
     if(in_array($file_extension,$extensions)){
       $upload_image='uploads/'.$image_filename; //save image inside uploads folder
       move_uploaded_file($image_filetemp,$upload_image);
     }
+
+    $sql="UPDATE products SET title = '$title', price= '$price',
+    description='$description', prod_image='$upload_image', category = '$category'
+    WHERE id ='$id';";
+
+    $result = mysqli_query($conn,$sql);//excute query
+    if(!$result)
+     die(mysqli_error($conn));
  }
 ?>
 <!--validations-->
@@ -91,22 +99,22 @@
 
           <div class="input-box">
               <label for ="title">Product Title</label>
-              <input type="text" id="title" name="title" placeholder="Enter product's title" />
+              <input type="text" id="title" name="title" value="<?php echo "$title"?>" />
           </div>
 
           <div class="input-box">
               <label for="price" >Product price</label>
-              <input type="number" step="any" id ="price" name ="price" placeholder="Enter product's price" />
+              <input type="number" step="any" id ="price" name ="price"  value="<?php echo "$price"?>" />
           </div>
 
           <div class="input-box">
               <label for ="description">Product description</label>
-              <textarea id="description" name="description" rows="4" cols="85" placeholder="Enter product's description"></textarea>
+              <textarea id="description" name="description" rows="4" cols="85"  value="<?php echo "$description"?>"></textarea>
           </div> 
 
           <div class="input-box">
               <label for="prod_image">Product image</label>
-              <input type="file" id="prod_image" name="prod_image" accept =".png,.jpg,.jpeg"/>
+              <input type="file" id="prod_image" name="prod_image"  value="<?php echo "$prod_image"?>" accept =".png,.jpg,.jpeg"/>
           </div>
 
           <div class="input-box">
