@@ -62,8 +62,8 @@ include_once "../../includes/dbh.inc.php";
   <a href="viewAdmin.php">View Admin</a>
   <a href="addProduct.php">Add Product</a>
   <a href="allProducts.php">Products</a>
-  <a href="#contact">Users</a>
-  <a href="#about">Reviews</a>
+  <a href="users.php">Users</a>
+  <a href="reviews.php">Reviews</a>
 </div>
 <div class="content">
   <section class="container">

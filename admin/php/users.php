@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="../css/allProducts.css" />
+    <link rel="stylesheet" href="../css/users.css" />
     <link rel="icon" href="../../imgs/Sweet Dreams logo-01.png"type="image/icon type" />
   </head> 
 
@@ -18,47 +18,43 @@
         <a href="viewAdmin.php">Admin</a>
         <a href="addProduct.php">Add Product</a>
         <a href="allProducts.php">Products</a>
-        <a href="users.php">Users</a>
+        <a href="allUsers.php">Users</a>
         <a href="reviews.php">Reviews</a>
       </div>
 
       <div class="content">
-      <div id="header"><h2>All Products</h2></div>
+      <div id="header"><h2>All Users</h2></div>
         <div class="tablecont">
             <table>
               <thead class="tablehead">
                 <tr>
                   <th class = "tableHeader">#ID</th>
-                  <th class = "tableHeader">Title</th>
-                  <th class = "tableHeader">Price</th>
-                  <th class = "tableHeader">Description</th>
-                  <th class = "tableHeader">Product &nbsp; Image</th>
-                  <th class = "tableHeader">Category</th>
+                  <th class = "tableHeader">Full Name</th>
+                  <th class = "tableHeader">Email</th>
+                  <th class = "tableHeader">Date of Birth</th>
+                  <th class = "tableHeader">Gender</th>
                   <th class = "tableHeader">Operation</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                  $sql = "SELECT * FROM products";
+                  $sql = "SELECT * FROM registrations";
                   $result = mysqli_query($conn,$sql);
                    //fetch all data inside the database
                   while($row = mysqli_fetch_assoc($result)){
                     $id = $row["id"];
-                    $title = $row["title"];
-                    $price = $row["price"];
-                    $description = $row["description"];
-                    $prod_image = $row["prod_image"];
-                    $category = $row["category"];
+                    $fullname = $row["fullname"];
+                    $email = $row["email"];
+                    $birth = $row["birth"];
+                    $gender = $row["gender"];
                     echo '<tr>
                             <td> #'.$id.'</td>
-                            <td>'.$title.'</td>
-                            <td>'.$price.'</td>
-                            <td>'.$description.'</td>
-                            <td><img class="table_img" src="'.$prod_image.'"alt='.$title.'/></td>
-                            <td>'.$category.'</td>
+                            <td>'.$fullname.'</td>
+                            <td>'.$email.'</td>
+                            <td>'.$birth.'</td>
+                            <td>'.$gender.'</td>
                             <td>
-                              <button class = "buttons" id ="edit"><a href="editProduct.php">Edit</a></button>
-                              <button class = "buttons" id ="delete"><a href="deleteProduct.php?delete_id='.$id.'">Delete</a></button>
+                              <button class = "buttons" id ="delete"><a href="deleteUser.php?delete_id='.$id.'">Delete</a></button>
                             </td>
                           </tr>';
                   }
