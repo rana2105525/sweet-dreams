@@ -45,8 +45,8 @@
 <label> Gender: </label> <?php echo $_SESSION["Gender"]; ?><br><br>
 
 </div>
-<button type ="submit"><a href="editAdmin.php">Edit Admin </a></button>
-<button type ="submit">Delete Admin</button>
+<button id ="edit"><a href="editAdmin.php">Edit Admin </a></button>
+<button id ="delete">Delete Admin</button>
 </section>
 </div>
 

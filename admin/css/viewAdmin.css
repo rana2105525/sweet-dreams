@@ -98,8 +98,19 @@ div.content {
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  background:#F27144;
   border-radius: 50px;
+}
+#edit{
+  background-color: #F27144;
+}
+#edit:hover{
+  background-color: #3AB9C0;
+}
+#delete{
+  background-color: rgb(246, 3, 3);
+}
+#delete:hover{
+  background-color: rgb(195, 6, 6);
 }
 .form button:hover {
   background:#3AB9C0;
