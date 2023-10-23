@@ -45,13 +45,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 
   if (empty($name) || empty($phoneNumber) || empty($email) || empty($password) || empty($gender)) {
-      echo "<p style='color: red;'>All fields are required, including selecting a gender.</p>";
+      echo "<p style='color: red; text-align: center;'>All fields are required, including selecting a gender.</p>";
   } elseif (!ctype_digit($phoneNumber)) {
-      echo "<p style='color: red;'>Phone number should contain only numbers.</p>";
+      echo "<p style='color: red; text-align: center;'>Phone number should contain only numbers.</p>";
   } elseif (!ctype_alpha($name)) {
-      echo "<p style='color: red;'>Name should contain only letters.</p>";
+      echo "<p style='color: red; text-align: center;'>Name should contain only letters.</p>";
   } elseif (!isValidEmail($email)) {
-      echo "<p style='color: red;'>Invalid email format.</p>";
+      echo "<p style='color: red; text-align: center;'>Invalid email format.</p>";
   } else {
 if (isset($_POST['submit'])) {
     $Name = mysqli_real_escape_string($conn, $_POST["name"]);
