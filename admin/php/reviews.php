@@ -50,8 +50,8 @@
                             <td>'.$review.'</td>
                             <td>'.$added_at.'</td>
                             <td>
-                              <form action="deleteProduct.php" method="post">
-                                <button><a href="deleteProduct.php?delete_id='.$id.'">Delete</button>
+                              <form action="reviews.php" method="post">
+                                <button><a href="deleteReview.php?delete_id='.$id.'">Delete</button>
                               </form>
                             </td>
                           </tr>';
