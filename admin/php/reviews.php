@@ -29,52 +29,33 @@
             <table>
               <thead class="tablehead">
                 <tr>
-                  <th class = "tableHeader">#User &nbsp; ID</th>
                   <th class = "tableHeader">User &nbsp; name</th>
-                  <th class = "tableHeader">Product &nbsp; title</th>
-                  <th class = "tableHeader">Product &nbsp; Image</th>
-                  <th class = "tableHeader">Review</th>
+                  <th class = "tableHeader">Customer &nbsp; Review</th>
+                  <th class = "tableHeader">Added &nbsp; At</th>
                   <th class = "tableHeader">Operation</th>
                 </tr>
               </thead>
               <tbody>
-
-             <td> #45 </td>
-             <td>sara</td>
-             <td>little monster baby home pyjamas</td>
-             <td> <img class="table_img" src="../../imgs/t-shirt-pajamas-carters-boy-clothing-little-monster-baby-home-pajamas-f14325570f638347c4aa1cccd0ca5e3f.png"/></td>
-             <td>Perfect material</td>
-             <td>
-                <button class = "buttons" id ="delete" type="">Delete</button>
-             </td>
                 <?php
-                //   $sql = "SELECT * FROM products";
-                //   $result = mysqli_query($conn,$sql);
-                //    //fetch all data inside the database
-                //   while($row = mysqli_fetch_assoc($result)){
-                //     $id = $row["id"];
-                //     $title = $row["title"];
-                //     $price = $row["price"];
-                //     $description = $row["description"];
-                //     $prod_image = $row["prod_image"];
-                //     $category = $row["category"];
-                //     echo '<tr>
-                //             <td> #'.$id.'</td>
-                //             <td>'.$title.'</td>
-                //             <td>'.$price.'</td>
-                //             <td>'.$description.'</td>
-                //             <td><img class="table_img" src="'.$prod_image.'"alt='.$title.'/></td>
-                //             <td>'.$category.'</td>
-                //             <td>
-                //               <form action="editProduct.php" method="post">
-                //                 <button class = "buttons" id ="edit" type="">Edit</button>
-                //               </form>
-                //               <form action="deleteProduct.php" method="post">
-                //                 <button class = "buttons" id ="delete" type="">Delete</button>
-                //               </form>
-                //             </td>
-                //           </tr>';
-                //   }
+                  $sql = "SELECT * FROM reviews";
+                  $result = mysqli_query($conn,$sql);
+                   //fetch all data inside the database
+                  while($row = mysqli_fetch_assoc($result)){
+                    $id = $row["id"];
+                    $fullname = $row["fullname"];
+                    $review = $row["review"];
+                    $added_at = $row["added_at"];
+                    echo '<tr>
+                            <td>'.$fullname.'</td>
+                            <td>'.$review.'</td>
+                            <td>'.$added_at.'</td>
+                            <td>
+                              <form action="deleteProduct.php" method="post">
+                                <button><a href="deleteProduct.php?delete_id='.$id.'">Delete</button>
+                              </form>
+                            </td>
+                          </tr>';
+                  }
                 ?>
               </tbody>
             </table>

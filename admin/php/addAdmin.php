@@ -32,7 +32,6 @@
 </head>
 
 <body>
-
 <?php
 if (isset($_POST['submit'])) {
     $Name = mysqli_real_escape_string($conn, $_POST["name"]);

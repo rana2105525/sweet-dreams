@@ -7,7 +7,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href=".././css/addProduct.css" />
+    <link rel="stylesheet" href=".././css/editProduct.css" />
     <link rel="icon" href="../../imgs/Sweet Dreams logo-01.png"type="image/icon type" />
   </head> 
 <body>
@@ -16,8 +16,8 @@
  //whenever this submit button is clicked, this functions will be performed 
  $id= $_GET ["update_id"];//taken from url
  $query="SELECT * FROM products WHERE id = '$id';";
-
  $result = mysqli_query($conn,$query);
+
  $row = mysqli_fetch_assoc($result);
  $title= $row ["title"];
  $price= $row ["price"];
@@ -25,7 +25,9 @@
  $prod_image= $row ["prod_image"];
  $category= $row ["category"];
 
- if(isset($_POST['submit'])){
+ print_r($prod_image);echo "b4 IF<br>";
+
+ if(isset($_POST['update'])){
     //storing values 
     $title = $_POST['title'];
     $price = $_POST['price'];
@@ -33,28 +35,48 @@
     $prod_image = $_FILES['prod_image'];
     $category = $_POST['category'];
 
+    
     //image
     $image_filename = $prod_image['name']; //get image name
     $image_filetemp = $prod_image['tmp_name']; //get temp path
     $filename_separate=explode('.',$image_filename);  //separate name by dot(array)
     $file_extension=strtolower(end($filename_separate)); //get file extension
     $extensions = array('jpg', 'jpeg', 'png'); //extensions 
-  
+    
+
+
     if(in_array($file_extension,$extensions)){
       $upload_image='uploads/'.$image_filename; //save image inside uploads folder
       move_uploaded_file($image_filetemp,$upload_image);
     }
+        // print_r($prod_image);
+        // echo $upload_image;
+
+    // if(empty($prod_image)) {
+    //   print_r($prod_image);
+    //   //$sql ="UPDATE products SET title = '$prod_image' WHERE id = '$id';";
+    //   //$result = mysqli_query($conn,$sql);//excute query
+    //   // $row = mysqli_fetch_assoc($result);
+    //   echo "old";
+    // }
+
 
     $sql="UPDATE products SET title = '$title', price= '$price',
     description='$description', prod_image='$upload_image', category = '$category'
     WHERE id ='$id';";
 
     $result = mysqli_query($conn,$sql);//excute query
-    if($result)
-      header("Location: allProducts.php");
-    else
+    if(!$result)
+    //   header("Location: allProducts.php");
+    // else
      die(mysqli_error($conn));
  }
+
+//else{
+  //$sql="UPDATE products SET prod_image='$prod_image' WHERE id ='$id';";
+  //$result = mysqli_query($conn,$sql);//excute query
+  //echo "new";
+//}
 ?>
 <!--validations-->
 <?php
@@ -116,7 +138,9 @@
 
           <div class="input-box">
               <label for="prod_image">Product image</label>
-              <input type="file" id="prod_image" name="prod_image"  value="<?php echo "$prod_image"?>" accept =".png,.jpg,.jpeg"/>
+              <input type="file" id="prod_image" name="prod_image" value="<?php print_r ($prod_image)?>" accept =".png,.jpg,.jpeg"/>
+              <?php echo
+               '<img class = "product_image" src="'.$prod_image.'"/>'?>
           </div>
 
           <div class="input-box">
@@ -137,7 +161,7 @@
           </div>
           </div>
 
-          <button type="submit" name="submit">Update</button>
+          <button type="submit" name="update">Update</button>
         </form>
       </section>
   </div>
