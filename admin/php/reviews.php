@@ -24,13 +24,13 @@
       </div>
 
       <div class="content">
-      <div id="header"><h2>Users' &nbsp; Reviews</h2></div>
+      <div id="header"><h2>Customers' &nbsp; Reviews</h2></div>
         <div class="tablecont">
             <table>
               <thead class="tablehead">
                 <tr>
                   <th class = "tableHeader">User &nbsp; name</th>
-                  <th class = "tableHeader">Customer &nbsp; Review</th>
+                  <th class = "tableHeader">User &nbsp; Review</th>
                   <th class = "tableHeader">Added &nbsp; At</th>
                   <th class = "tableHeader">Operation</th>
                 </tr>

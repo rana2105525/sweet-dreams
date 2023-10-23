@@ -24,22 +24,18 @@
 
     $image_filename = $prod_image['name']; //get image name
     $image_filetemp = $prod_image['tmp_name']; //get temp path
-    $filename_separate=explode('.',$image_filename);  //separate name by dot(array)
-    $file_extension=strtolower(end($filename_separate)); //get file extension
-    $extensions = array('jpg', 'jpeg', 'png'); //extensions 
 
-    if(in_array($file_extension,$extensions)){
-      $upload_image='imgs/'.$image_filename; //save image inside uploads folder
+      $upload_image='imgs/'.$image_filename; //save image inside imgs folder
       $destination='../../'.$upload_image;
       move_uploaded_file($image_filetemp,$destination);
-      
+
       $sql="INSERT INTO products (title,price,description,prod_image,category)
        VALUES('$title','$price','$description','$upload_image','$category');";
        $result = mysqli_query($conn,$sql);//excute query
        if(!$result)
         die(mysqli_error($conn));
     }
- }
+ 
 ?>
 <!--validation-->
 <?php
@@ -81,7 +77,7 @@
 
   <div class ="content rows">
   <section class="container">
-        <form action="" class="form" method="post" enctype= "multipart/form-data">
+        <form action="addProduct.php" class="form" method="post" enctype= "multipart/form-data">
           <div id="header"><h2>Add a new product</h2></div>
 
           <div class="input-box">

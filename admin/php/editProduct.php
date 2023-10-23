@@ -13,95 +13,52 @@
 <body>
 
 <?php
+  //whenever this submit button is clicked, these functions will be performed 
+  $id= $_GET ["update_id"];//taken from url
+  $query="SELECT * FROM products WHERE id = '$id';";
+  $result = mysqli_query($conn,$query);
+
+  $row = mysqli_fetch_assoc($result);
+  $title= $row ["title"];
+  $price= $row ["price"];
+  $description= $row ["description"];
+  $prod_image= $row ["prod_image"];
+  $category= $row ["category"];
+
  //whenever this submit button is clicked, this functions will be performed 
- $id= $_GET ["update_id"];//taken from url
- $query="SELECT * FROM products WHERE id = '$id';";
- $result = mysqli_query($conn,$query);
-
- $row = mysqli_fetch_assoc($result);
- $title= $row ["title"];
- $price= $row ["price"];
- $description= $row ["description"];
- $prod_image= $row ["prod_image"];
- $category= $row ["category"];
-
- print_r($prod_image);echo "b4 IF<br>";
-
  if(isset($_POST['update'])){
     //storing values 
     $title = $_POST['title'];
     $price = $_POST['price'];
     $description = $_POST['description'];
-    $prod_image = $_FILES['prod_image'];
+    $prod_image =$_FILES['prod_image'];//2D global array
     $category = $_POST['category'];
 
-    
-    //image
     $image_filename = $prod_image['name']; //get image name
     $image_filetemp = $prod_image['tmp_name']; //get temp path
-    $filename_separate=explode('.',$image_filename);  //separate name by dot(array)
-    $file_extension=strtolower(end($filename_separate)); //get file extension
-    $extensions = array('jpg', 'jpeg', 'png'); //extensions 
-    
+    $upload_image='imgs/'.$image_filename; //save image inside imgs folder
+    $destination='../../'.$upload_image;
+    move_uploaded_file($image_filetemp,$destination);
 
-
-    if(in_array($file_extension,$extensions)){
-      $upload_image='uploads/'.$image_filename; //save image inside uploads folder
-      move_uploaded_file($image_filetemp,$upload_image);
+    if($image_filename!=""){
+      $sql="UPDATE products SET title = '$title',price='$price',
+      description='$description',prod_image='$upload_image',category='$category' WHERE id='$id';";
+      $result = mysqli_query($conn,$sql);//excute query
+      if($result)
+        header("Location: allProducts.php");  
+      else die(mysqli_error($conn));
     }
-        // print_r($prod_image);
-        // echo $upload_image;
-
-    // if(empty($prod_image)) {
-    //   print_r($prod_image);
-    //   //$sql ="UPDATE products SET title = '$prod_image' WHERE id = '$id';";
-    //   //$result = mysqli_query($conn,$sql);//excute query
-    //   // $row = mysqli_fetch_assoc($result);
-    //   echo "old";
-    // }
+    else{
+      $sql="UPDATE products SET title = '$title',price='$price',
+      description='$description',category='$category' WHERE id='$id';";
+      $result = mysqli_query($conn,$sql);//excute query
+      if($result)
+        header("Location: allProducts.php");  
+      else die(mysqli_error($conn));
+    }
 
 
-    $sql="UPDATE products SET title = '$title', price= '$price',
-    description='$description', prod_image='$upload_image', category = '$category'
-    WHERE id ='$id';";
-
-    $result = mysqli_query($conn,$sql);//excute query
-    if(!$result)
-    //   header("Location: allProducts.php");
-    // else
-     die(mysqli_error($conn));
  }
-
-//else{
-  //$sql="UPDATE products SET prod_image='$prod_image' WHERE id ='$id';";
-  //$result = mysqli_query($conn,$sql);//excute query
-  //echo "new";
-//}
-?>
-<!--validations-->
-<?php
-      // if ($_SERVER["REQUEST_METHOD"] === "POST") {
-      //     $productName = $_POST['title'];
-      //     $productPrice = $_POST['price'];
-      //     $productDescription = $_POST['description'];
-      
-      //     if (empty($productName) || empty($productPrice) || empty($productDescription)) {
-      //         echo "<p style='color: red;'>All fields are required.</p>";
-      //     } elseif (!ctype_alpha($productName)) {
-      //         echo "<p style='color: red;'>Product title should contain only words.</p>";
-      //     } elseif (!ctype_digit($productPrice)) {
-      //         echo "<p style='color: red;'>Product price should be a number.</p>";
-      //     } elseif (!ctype_alpha($productDescription)) {
-      //         echo "<p style='color: red;'>Product description should contain only words.</p>";
-      //     } elseif (empty($_FILES['prod_image']['title'])) {
-      //         echo "<p style='color: red;'>Please upload a product image.</p>";}
-          // } else {
-          //  
-          //     echo "<p>Product Title: $productName</p>";
-          //     echo "<p>Product Price: $productPrice</p>";
-          //     echo "<p>Product Description: $productDescription</p>";
-          // }
-      //}
 ?>
 
 <div class ="component">
@@ -123,45 +80,43 @@
 
           <div class="input-box">
               <label for ="title">Product Title</label>
-              <input type="text" id="title" name="title" value="<?php echo "$title"?>" />
+              <input type="text" id="title" name="title" value="<?php echo $title?>" />
           </div>
 
           <div class="input-box">
               <label for="price" >Product price</label>
-              <input type="number" step="any" id ="price" name ="price"  value="<?php echo "$price"?>" />
+              <input type="number" step="any" id ="price" name ="price" value="<?php echo $price?>" />
           </div>
 
           <div class="input-box">
               <label for ="description">Product description</label>
-              <textarea id="description" name="description" rows="4" cols="85"><?php echo "$description"?></textarea>
+              <textarea id="description" name="description" rows="4" cols="85"><?php echo $title?></textarea>
           </div> 
 
           <div class="input-box">
               <label for="prod_image">Product image</label>
-              <input type="file" id="prod_image" name="prod_image" value="<?php print_r ($prod_image)?>" accept =".png,.jpg,.jpeg"/>
-              <?php echo
-               '<img class = "product_image" src="'.$prod_image.'"/>'?>
+              <input type="file" id="prod_image" name="prod_image" accept =".png,.jpg,.jpeg"/>
           </div>
 
           <div class="input-box">
               <label for ="category">Category</label>
           </div> 
+        <div>
           <div>
-          <div>
-            <input type="radio" name="category" id="Winter_Collection" value="Winter_Collection"  <?php if ($value = "Winter_Collection") echo 'checked="checked"'; ?>>
+            <input type="radio" name="category" id="Winter_Collection" value="Winter_Collection" <?php if($category == "Winter_Collection") echo 'checked="checked"';?>>
             <label for ="Winter_Collection" >Winter Collection</label>
           </div>
           <div>
-            <input type="radio" name="category" id="Summer_Collection" value="Summer_Collection" <?php if ($value = "Summer_Collection") echo 'checked="checked"'; ?>>
+            <input type="radio" name="category" id="Summer_Collection" value="Summer_Collection" <?php if($category == "Summer_Collection") echo 'checked="checked"';?>>
             <label for ="Summer_Collection" >Summer Collection</label>
           </div>        
           <div>
-            <input type="radio" name="category" id="Bundle" value="Bundle" <?php if ($value = "Bundle") echo 'checked="checked"'; ?>>
-            <label for ="Bundle">Bundle</label>
+            <input type="radio" name="category" id="Bundle" value="Bundle" <?php if($category == "Bundle") echo 'checked="checked"';?>>
+            <label for ="Bundle" >Bundle</label>
           </div>
-          </div>
+        </div>
 
-          <button type="submit" name="update">Update</button>
+          <button type="submit" name="update">Update Product</button>
         </form>
       </section>
   </div>
@@ -169,3 +124,18 @@
 
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
