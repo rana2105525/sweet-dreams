@@ -3,7 +3,11 @@
 ?> 
 <!DOCTYPE html>
 <style>
-.error {color:#FF0000;}
+.error {color: #FF0000;}
+.error-container {
+    text-align: center;
+    margin-top: 20px; 
+}
 </style>
 <html lang="en">
 <head>
@@ -34,44 +38,73 @@
 <body>
 <?php
 function isValidEmail($email) {
-  return filter_var($email, FILTER_VALIDATE_EMAIL);
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  $name = isset($_POST['name']) ? $_POST['name'] : '';
-  $phoneNumber = isset($_POST['number']) ? $_POST['number'] : '';
-  $email = isset($_POST['email']) ? $_POST['email'] : '';
-  $password = isset($_POST['password']) ? $_POST['password'] : '';
-  $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
+    $name = isset($_POST['name']) ? $_POST['name'] : '';
+    $phoneNumber = isset($_POST['number']) ? $_POST['number'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 
-  if (empty($name) || empty($phoneNumber) || empty($email) || empty($password) || empty($gender)) {
-      echo "<p style='color: red; text-align: center;'>All fields are required, including selecting a gender.</p>";
-  } elseif (!ctype_digit($phoneNumber)) {
-      echo "<p style='color: red; text-align: center;'>Phone number should contain only numbers.</p>";
-  } elseif (!ctype_alpha($name)) {
-      echo "<p style='color: red; text-align: center;'>Name should contain only letters.</p>";
-  } elseif (!isValidEmail($email)) {
-      echo "<p style='color: red; text-align: center;'>Invalid email format.</p>";
-  } else {
-if (isset($_POST['submit'])) {
-    $Name = mysqli_real_escape_string($conn, $_POST["name"]);
-    $Phone = mysqli_real_escape_string($conn, $_POST["number"]);
-    $Email = mysqli_real_escape_string($conn, $_POST["email"]);
-    $Password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Hash the password
-    $Gender = mysqli_real_escape_string($conn, $_POST["gender"]);
-
-    // Insert data into the "admins" table
-    $sql = "INSERT INTO admins (Username, Phone, Email, Password, Gender) VALUES ('$Name', '$Phone', '$Email', '$Password', '$Gender')";
-    $result = mysqli_query($conn, $sql);
-
-    if ($result) {
-        echo "Admin added successfully!";
-    } else {
-        echo "Error: " . mysqli_error($conn);
+    $errors = [];
+    if (empty($name)&&empty($phoneNumber)&&empty($email)&&empty($password)&&empty($gender))
+    {
+      $errors[] = "All fields are required, including selecting a gender.";
     }
-}}
+    elseif (empty($name)) {
+        $errors[] = "Name is required";
+    }
+    
+    elseif (empty($phoneNumber)) {
+        $errors[] = "Phone number is required";
+    } elseif (!ctype_digit($phoneNumber)) {
+        $errors[] = "Phone number should contain only numbers";
+    }
+
+    elseif (empty($email)) {
+        $errors[] = "Email is required";
+    } elseif (!isValidEmail($email)) {
+        $errors[] = "Invalid email format";
+    }
+
+    elseif (empty($password)) {
+        $errors[] = "Password is required";
+    }
+
+    elseif (empty($gender)) {
+        $errors[] = "Gender is required";
+    }
+
+    if (count($errors) === 0) {
+        // All fields are valid, proceed to insert into the database
+        $Name = mysqli_real_escape_string($conn, $name);
+        $Phone = mysqli_real_escape_string($conn, $phoneNumber);
+        $Email = mysqli_real_escape_string($conn, $email);
+        $Password = password_hash($password, PASSWORD_DEFAULT); // Hash the password
+        $Gender = mysqli_real_escape_string($conn, $gender);
+
+        // Insert data into the "admins" table
+        $sql = "INSERT INTO admins (Username, Phone, Email, Password, Gender) VALUES ('$Name', '$Phone', '$Email', '$Password', '$Gender')";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            echo "Admin added successfully!";
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+    } else {
+        // Display the validation errors
+        echo "<div class='error-container'>";
+        foreach ($errors as $error) {
+            echo "<p class='error'>$error</p>";
+        }
+        echo "</div>";
+    }
 }
 ?>
+
 
 <div class="component">
 <div class="sidebar rows">
