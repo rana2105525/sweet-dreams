@@ -11,5 +11,5 @@ if(isset($_GET['delete_id'])){//delete_id in the url
     if(!$result){
         die(mysqli_error($conn));
     }
-}
+} 
 ?>
