@@ -217,14 +217,15 @@ if ($result) {
     </section>
     <?php
     if (isset($_POST['submit'])){ //check if form was submitted
-	    $Fname = htmlspecialchars($_POST["fname"]);
+
+	  $Fname = htmlspecialchars($_POST["fname"]);
       $Lname = htmlspecialchars($_POST["lname"]);
       $Email = htmlspecialchars($_POST["email"]);
       $phone = htmlspecialchars($_POST["phone"]);
       $address = htmlspecialchars($_POST["address"]);
       $cardNum = htmlspecialchars($_POST["cardNum"]);
       $date = htmlspecialchars($_POST["exp_date"]);
-      $cvc = htmlspecialchars($_POST["CVC"]);
+      $cvc = password_hash($_POST['CVC'], PASSWORD_DEFAULT);
 
 }
 
