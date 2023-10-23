@@ -1,31 +1,34 @@
 <?php
-include("../../includes/dbh.inc.php");
+
 session_start();
-function deleteUser($userId) {
-    global $conn;  
 
-    $sql = "DELETE FROM admins WHERE id=".$_SESSION['ID'];
+// Include connection
+include_once "../../includes/dbh.inc.php";
 
-
-    if (mysqli_query($conn, $sql)) {
-        return true;  
-    } else {
-        return false;  
-    }
+// Check if the user is logged in.
+if (!isset($_SESSION['Username'])) {
+    // Redirect the user to the login page.
+    header("Location: /sweet-dreams/login.php");
+    exit();
 }
 
-if ($_SESSION['ID']) {
-    $userId = $_SESSION['ID'];
+// Escape the user input.
+$username = mysqli_real_escape_string($conn, $_SESSION['Username']);
 
-    if (deleteUser($_SESSION['ID'])) {
-        echo "User deleted successfully.";
+// Delete the user from the database.
+$sql = "DELETE FROM admins WHERE fullname = '$username'";
+$result = mysqli_query($conn, $sql);
 
-        $_SESSION = array();
+// Check if the deletion was successful.
+if ($result) {
+    // Destroy the session.
+    session_destroy();
 
-        session_destroy();
-
-        header("Location: /sweet-dreams/login.php");
-        exit();
-    }
+    // Display a success message.
+    header("Location: /sweet-dreams/admin/php/users.php");
+} else {
+    // Display an error message.
+    echo 'Error deleting user.';
 }
+
 ?>
