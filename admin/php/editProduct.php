@@ -50,7 +50,9 @@
     WHERE id ='$id';";
 
     $result = mysqli_query($conn,$sql);//excute query
-    if(!$result)
+    if($result)
+      header("Location: allProducts.php");
+    else
      die(mysqli_error($conn));
  }
 ?>
@@ -108,7 +110,7 @@
 
           <div class="input-box">
               <label for ="description">Product description</label>
-              <textarea id="description" name="description" rows="4" cols="85"  value="<?php echo "$description"?>"></textarea>
+              <textarea id="description" name="description" rows="4" cols="85"><?php echo "$description"?></textarea>
           </div> 
 
           <div class="input-box">
@@ -119,20 +121,20 @@
           <div class="input-box">
               <label for ="category">Category</label>
           </div> 
-        <div>
           <div>
-            <input type="radio" name="category" id="Winter_Collection" value="Winter_Collection">
+          <div>
+            <input type="radio" name="category" id="Winter_Collection" value="Winter_Collection"  <?php if ($value = "Winter_Collection") echo 'checked="checked"'; ?>>
             <label for ="Winter_Collection" >Winter Collection</label>
           </div>
           <div>
-            <input type="radio" name="category" id="Summer_Collection" value="Summer_Collection">
+            <input type="radio" name="category" id="Summer_Collection" value="Summer_Collection" <?php if ($value = "Summer_Collection") echo 'checked="checked"'; ?>>
             <label for ="Summer_Collection" >Summer Collection</label>
           </div>        
           <div>
-            <input type="radio" name="category" id="Bundle" value="Bundle">
-            <label for ="Bundle" >Bundle</label>
+            <input type="radio" name="category" id="Bundle" value="Bundle" <?php if ($value = "Bundle") echo 'checked="checked"'; ?>>
+            <label for ="Bundle">Bundle</label>
           </div>
-        </div>
+          </div>
 
           <button type="submit" name="submit">Update</button>
         </form>

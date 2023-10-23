@@ -34,6 +34,7 @@
                   <th class = "tableHeader">Description</th>
                   <th class = "tableHeader">Product &nbsp; Image</th>
                   <th class = "tableHeader">Category</th>
+                  <th class = "tableHeader">Added &nbsp; at</th>
                   <th class = "tableHeader">Operation</th>
                 </tr>
               </thead>
@@ -48,14 +49,16 @@
                     $price = $row["price"];
                     $description = $row["description"];
                     $prod_image = $row["prod_image"];
+                    $added_at = $row["added_at"];
                     $category = $row["category"];
                     echo '<tr>
-                            <td> #'.$id.'</td>
-                            <td>'.$title.'</td>
-                            <td>'.$price.'</td>
-                            <td>'.$description.'</td>
+                            <td class ="cell"> #'.$id.'</td>
+                            <td class ="cell">'.$title.'</td>
+                            <td class ="cell">'.$price.'</td>
+                            <td class ="cell">'.$description.'</td>
                             <td><img class="table_img" src="'.$prod_image.'"alt='.$title.'/></td>
-                            <td>'.$category.'</td>
+                            <td class ="cell">'.$category.'</td>
+                            <td class ="cell">'.$added_at.'</td>
                             <td>
                               <button class = "buttons" id ="edit"><a href="editProduct.php?update_id='.$id.'">Edit</a></button>
                               <button class = "buttons" id ="delete"><a href="deleteProduct.php?delete_id='.$id.'">Delete</a></button>

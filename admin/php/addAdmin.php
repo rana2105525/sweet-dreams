@@ -14,50 +14,24 @@
 
 <body>
 
-<?php 
-  function isValidEmail($email) {
-    return filter_var($email, FILTER_VALIDATE_EMAIL);
-  }
-
-  if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = $_POST['name'];
-    $phoneNumber = $_POST['number'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
-
-    if (empty($name) || empty($phoneNumber) || empty($email) || empty($password) || empty($gender)) {
-      echo "<p style='color: red;display: inline-block;'>All fields are required, including selecting a gender.</p>";
-    } elseif (!ctype_digit($phoneNumber)) {
-      echo "<p style='color: red;display: inline-block;'>Phone number should contain only numbers.</p>";    
-    } elseif (!ctype_alpha($name)) {
-      echo "<p style='color: red; display: inline-block;'>Name should contain only letters.</p>";
-    } elseif (!isValidEmail($email)) {
-      echo "<p style='color: red; display: inline-block;'>Invalid email format.</p>";
-         // } else {
-             
-         //     echo "<p>Name: $name</p>";
-         //     echo "<p>Phone Number: $phoneNumber</p>";
-         //     echo "<p>Email: $email</p>";
-         //     echo "<p>Password: $password</p>";
-         // }
-     }
-   }
-   if($_SERVER["REQUEST_METHOD"]=="POST"){ //check if form was submitted
+<?php
+   if(isset($_POST['submit'])){ //check if form was submitted
     $Name=htmlspecialchars($_POST["name"]);
     $Phone=htmlspecialchars($_POST["number"]);
     $Email=htmlspecialchars($_POST["email"]);
     $Password=htmlspecialchars($_POST["password"]);
     $Gender=htmlspecialchars($_POST["gender"]);
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);}
+
+    $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
       //insert it to database 
     $sql="insert into admins(Username ,Phone ,Email ,Password ,Gender)
     values('$Name','$Phone','$Email','$hashed_password','$Gender')";
     $result=mysqli_query($conn,$sql);
+
+    
     if(!$result)
       die(mysqli_error($conn));
+    
   }
 ?>
 <div class="component">

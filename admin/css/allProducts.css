@@ -52,13 +52,12 @@ div.content {
 }
 
 .tablecont{
-    margin-top: 2%;
-    margin-left: 20%;
+    margin: 2% 10% 10% 20%;
 }
 
 table{
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
     margin-bottom: 100px;
 }
 
@@ -72,6 +71,9 @@ td, th {
     border: 1px solid #000000;
     text-align: center;
     padding: 8px;
+}
+.cell{
+    white-space: nowrap;
 }
 .tableHeader{
     border-bottom: 3px solid #000000 ;
