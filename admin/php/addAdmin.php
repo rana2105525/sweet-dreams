@@ -32,39 +32,7 @@
       });
     });
   });
-  function validateForm() {
-    var name = document.getElementById("name").value;
-    var number = document.getElementById("number").value;
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
-    var gender = document.querySelector('input[name="gender"]:checked');
-
-    if (name === "" || number === "" || email === "" || password === "" || !gender) {
-      alert("All fields are required, including selecting a gender.");
-      return false; // Prevent form submission
-    }
-
-    if (!/^\d+$/.test(number)) {
-      alert("Phone number should contain only numbers.");
-      return false; // Prevent form submission
-    }
-
-    if (!/^[a-zA-Z]*$/.test(name)) {
-      alert("Name should contain only letters.");
-      return false; // Prevent form submission
-    }
-
-    if (!isValidEmail(email)) {
-      alert("Invalid email format.");
-      return false; // Prevent form submission
-    }
-    
-    return true; // Submit the form
-  }
-
-
-
-
+  
 </script>
 </head>
 
@@ -153,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <div class="content">
   <section class="container rows">
-    <form action="" method="post" onclick="return validateForm();" class="form">
+    <form action="" method="post" class="form">
         <div id="title"><h2>Add a new admin</h2></div>
 
         <div class="input-box">
