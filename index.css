@@ -357,6 +357,11 @@ header button{
    width: 90%;
    display: flex;
 }
+.Contain1
+{
+   width: 90%;
+   display: flex;
+}
 #col1
 {
     width: 100%;
@@ -498,14 +503,13 @@ word-spacing: 2px;
     font-size: 14px;
   }
 }
-footer{
-  display:flex;
-  padding-top:40px;
-  flex-wrap:wrap;
-  justify-content: space-between;
-  padding-left: 30px;
-  padding-right: 30px;
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
+
 .pageFooter{
   color:#878f88;
 }
