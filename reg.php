@@ -112,17 +112,10 @@ if (empty($_POST["password"])) {
         $Password = htmlspecialchars($_POST["password"]);
         $Birth = htmlspecialchars($_POST["birth"]);
         $Gender = htmlspecialchars($_POST["gender"]);
-
-        $imgnewfiles = [];
-
-  
-
-        // Convert the array of file names into a comma-separated string
-        $imgnewfilesStr = implode(',', $imgnewfiles);
-
+        $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         // Insert data into the database
         $sql = "INSERT INTO registrations(fullname,email,password,birth,gender) 
-                VALUES ('$Fname','$Email','$Password','$Birth','$Gender')";
+                VALUES ('$Fname','$Email','$hashed_password','$Birth','$Gender')";
         $result = mysqli_query($conn, $sql);
 
         // Check if the data was inserted successfully
@@ -228,30 +221,6 @@ function isDateValid($date)
 	$Password=htmlspecialchars($_POST["password"]);
 	$Birth=htmlspecialchars($_POST["birth"]);
 	$Gender=htmlspecialchars($_POST["gender"]);
-
-  $imgnewfiles = [];
-
-  if (!empty($_FILES['profilepic']['name'][0])) {
-      $fileCount = count($_FILES['profilepic']['name']);
-
-      for ($i = 0; $i < $fileCount; $i++) {
-          $ppic = $_FILES['profilepic']['name'][$i];
-          $extension = pathinfo($ppic, PATHINFO_EXTENSION);
-
-          $imgnewfile = md5($ppic . time() . $i) . '.' . $extension;
-          move_uploaded_file($_FILES['profilepic']['tmp_name'][$i], "profilepic/" . $imgnewfile);
-
-          $imgnewfiles[] = $imgnewfile;
-      }
-  }
-
-  // Convert the array of file names into a comma-separated string
-  $imgnewfilesStr = implode(',', $imgnewfiles);
-
-
-  //   //redirect the user back to index.php 
-
-
 }
 
 ?>

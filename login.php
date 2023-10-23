@@ -17,30 +17,30 @@
 $emailerr = $passworderr =$error="";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Validate email
-  if (empty($_POST["email"])) {
-    $emailerr = "Email is required";
-  } else {
-    $email = test_input($_POST["email"]);
-    // check if e-mail address is well-formed
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $emailerr = "Invalid email format";
-    }
-  }
 
-  // Validate password
-  if (empty($_POST["password"])) {
-    $passworderr = "Password is required";
-  }
+ if (empty($_POST["email"])) {
+ $emailerr = "Email is required";
+ } else {
+ $email = test_input($_POST["email"]);
+
+ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+ $emailerr = "Invalid email format";
+ }
+}
+
+
+if (empty($_POST["password"])) {
+ $passworderr = "Password is required";
+ }
 }
 
 
 
 function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
+ $data = trim($data);
+ $data = stripslashes($data);
+ $data = htmlspecialchars($data);
+ return $data;
 }
 
 // Start session
@@ -51,54 +51,63 @@ require_once "includes/dbh.inc.php";
 
 // Grab data from user and see if it exists in the admins table
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $Email = $_POST["email"];
-  $Password = $_POST["password"];
+$Email = $_POST["email"];
+ $Password = $_POST["password"];
 
-  if ($conn->connect_error) {
-    die("Failed to connect to database: " . $conn->connect_error);
-  }
+ if ($conn->connect_error) {
+ die("Failed to connect to database: " . $conn->connect_error);
+ }
 
-  // Check if email exists in admins table
-  $sql_admin = "SELECT * FROM admins WHERE Email = '$Email' AND Password = '$Password'";
-  $result_admin = mysqli_query($conn, $sql_admin);
 
-  if ($row_admin = mysqli_fetch_assoc($result_admin)) {
-    // Store session variables for admin
-    $_SESSION['admin'] = true;
-    $_SESSION['ID'] = $row_admin['ID'];
-    $_SESSION['Name'] = $row_admin['Username'];
-    $_SESSION['Phone'] = $row_admin['Phone'];
-    $_SESSION['Email'] = $row_admin['Email'];
-    $_SESSION['Password'] = $row_admin['Password'];
-    $_SESSION['Gender'] = $row_admin['Gender'];
+ $sql_admin = "SELECT * FROM admins WHERE Email = '$Email'";
+ $result_admin = mysqli_query($conn, $sql_admin);
 
-    // Redirect to admin dashboard
-    header("Location: /sweet-dreams/admin/php/viewAdmin.php");
-    exit();
-  } else {
-    // Check if email exists in registrations table
-    $sql_reg = "SELECT * FROM registrations WHERE email = '$Email' AND password = '$Password'";
-    $result_reg = mysqli_query($conn, $sql_reg);
+ if ($row_admin = mysqli_fetch_assoc($result_admin)) {
+ if (password_verify($Password, $row_admin['Password'])) {
+ $_SESSION['admin'] = true;
+ $_SESSION['ID'] = $row_admin['ID'];
+$_SESSION['Name'] = $row_admin['Username'];
+ $_SESSION['Phone'] = $row_admin['Phone'];
+ $_SESSION['Email'] = $row_admin['Email'];
+ $_SESSION['Password'] = $row_admin['Password'];
+ $_SESSION['Gender'] = $row_admin['Gender'];
 
-    if ($row_reg = mysqli_fetch_assoc($result_reg)) {
-      // Store session variables for regular users
-      $_SESSION['admin'] = false;
-      $_SESSION['ID'] = $row_reg['id'];
-      $_SESSION['fullname'] = $row_reg['fullname'];
-      $_SESSION['email'] = $row_reg['email'];
-      $_SESSION['password'] = $row_reg['password'];
-      $_SESSION['birth'] = $row_reg['birth'];
-      $_SESSION['gender'] = $row_reg['gender'];
+ header("Location: /sweet-dreams/admin/php/viewAdmin.php");
+ exit();
+ } else {
+ $error = "Invalid credentials.";
+ }
+ } else {
 
-      // Redirect to index.php
-      header("Location: index.php");
-      exit();
-    } else {
-      $error ="Invalid credentials.";
-    }
-  }
+ $sql_reg = "SELECT * FROM registrations WHERE email = '$Email'";
+ $result_reg = mysqli_query($conn, $sql_reg);
+
+if ($row_reg = mysqli_fetch_assoc($result_reg)) {
+
+if (password_verify($Password, $row_reg['password'])) {
+
+ $_SESSION['admin'] = false;
+ $_SESSION['ID'] = $row_reg['id'];
+ $_SESSION['fullname'] = $row_reg['fullname'];
+ $_SESSION['email'] = $row_reg['email'];
+ $_SESSION['password'] = $row_reg['password'];
+ $_SESSION['birth'] = $row_reg['birth'];
+ $_SESSION['gender'] = $row_reg['gender'];
+
+
+header("Location: index.php");
+exit();
+} else {
+$error = "Invalid credentials.";
+ }
+ } else {
+ $error = "Invalid credentials.";
+}
+}
 }
 ?>
+
+
 
 
 <section class="container">

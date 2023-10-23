@@ -33,19 +33,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "<p style='color: red;'>Name should contain only letters.</p>";
     } elseif (!isValidEmail($email)) {
         echo "<p style='color: red;'>Invalid email format.</p>";
-    }
+    } else {
+        // Sanitize and escape user input to prevent SQL injection
+        $name = mysqli_real_escape_string($conn, $name);
+        $phoneNumber = mysqli_real_escape_string($conn, $phoneNumber);
+        $email = mysqli_real_escape_string($conn, $email);
+        $password = mysqli_real_escape_string($conn, $password);
+        $gender = mysqli_real_escape_string($conn, $gender);
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Update the session variables based on form data
-        $_SESSION['Name'] = $name;
+        $_SESSION['name'] = $name;
         $_SESSION['number'] = $phoneNumber;
         $_SESSION['email'] = $email;
         $_SESSION['password'] = $password;
         $_SESSION['gender'] = $gender;
 
-        // Now you can proceed to update the admin information in the database
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "UPDATE admins SET Username='$name', Phone='$phoneNumber', Email='$email', Password='$hashed_password', Gender='$gender' WHERE Username='" . $_SESSION['Name'] . "'";
+        // Update the admin information in the database
+        $sql = "UPDATE admins SET Username='$name', Phone='$phoneNumber', Email='$email', Password='$password', Gender='$gender' WHERE Email='" . $_SESSION['email'] . "'";
         $result = mysqli_query($conn, $sql);
 
         if ($result) {

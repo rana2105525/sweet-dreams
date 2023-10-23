@@ -50,7 +50,7 @@
         </div> 
 
         <button id ="edit"><a href="editAdmin.php">Edit</a></button>
-        <button id ="delete">Delete</button>
+        <button id ="delete"><a href="deleteAdmin.php">Delete</button>
 
 </div>
     </section>

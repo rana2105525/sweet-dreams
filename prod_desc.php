@@ -15,18 +15,13 @@
 <body>
 
     <nav>
-    <?php include 'partials/nav.php'; ?>
-        <!-- <div class="wrap">
-      <div class="search">
-        <input type="text" class="searchTerm" placeholder="What are you looking for?">
-        <button type="submit" class="searchButton">
-          <i class="fa fa-search"></i>
-        </button>
-      </div>
-    </div> -->
-    <?php include 'partials/side.php'; ?>
+        <?php include 'partials/nav.php'; ?>
+        <?php include 'partials/side.php'; ?>
     </nav>
+
     <?php
+    
+  
     if (isset($_POST['add_to_description'])) {
         $product_id = $_POST['product_id'];
         include_once "includes/dbh.inc.php";
@@ -34,19 +29,26 @@
         $sql = "SELECT * FROM products WHERE id = $product_id";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
+
+        // Store the product information in a session variable
+        $_SESSION['product_description'] = $row;
+    }
+
+    if (isset($_SESSION['product_description'])) {
+        $product = $_SESSION['product_description'];
     ?>
 
         <div class="cont">
             <div class="product-img">
-                <img src="<?php echo $row['prod_image']; ?>" height="420" width="327">
+                <img src="<?php echo $product['prod_image']; ?>" height="420" width="327">
             </div>
             <div class="product-info">
                 <div class="product-text">
-                    <h1><?php echo $row['title']; ?></h1>
-                    <p><?php echo $row['description']; ?></p>
+                    <h1><?php echo $product['title']; ?></h1>
+                    <p><?php echo $product['description']; ?></p>
                 </div>
                 <div class="product-price-btn">
-                    <p><?php echo $row['price']; ?></p>
+                    <p><?php echo $product['price']; ?></p>
                     <button type="button">buy now</button>
                 </div>
             </div>
@@ -55,7 +57,6 @@
     <?php
     }
     ?>
-
   <h2>Customer Reviews</h2>
   <form action="" class="form" method="post" >
 
@@ -73,3 +74,4 @@
 
 
 </body>
+</html>

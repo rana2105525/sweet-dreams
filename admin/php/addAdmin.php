@@ -2,6 +2,9 @@
   include_once "../../includes/dbh.inc.php";
 ?> 
 <!DOCTYPE html>
+<style>
+.error {color:#FF0000;}
+</style>
 <html lang="en">
 <head>
 <title>Sweet Dreams</title>
@@ -10,6 +13,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href=".././css/addAdmin.css" />
     <link rel="icon" href="../../imgs/Sweet Dreams logo-01.png" type="image/icon type" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+  $(document).ready(function() {
+    $('#email').on('blur', function() {
+      var email = $(this).val();
+      $.ajax({
+        url: 'check_emails.php', // Updated the URL to match the correct filename
+        type: 'POST',
+        data: { Email: email }, // Updated the key to match the PHP code
+        success: function(response) {
+          $('#email-error').text(response);
+        }
+      });
+    });
+  });
+</script>
 </head>
 
 <body>
@@ -63,6 +82,7 @@
         <div class="input-box">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="Enter admin's email" />
+            <span class="error"  id="email-error"></span>
         </div> 
 
         <div class="input-box">
