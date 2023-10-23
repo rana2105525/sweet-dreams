@@ -34,25 +34,25 @@
 <body>
 
 <?php
-   if(isset($_POST['submit'])){ //check if form was submitted
-    $Name=htmlspecialchars($_POST["name"]);
-    $Phone=htmlspecialchars($_POST["number"]);
-    $Email=htmlspecialchars($_POST["email"]);
-    $Password=htmlspecialchars($_POST["password"]);
-    $Gender=htmlspecialchars($_POST["gender"]);
+if (isset($_POST['submit'])) {
+    $Name = mysqli_real_escape_string($conn, $_POST["name"]);
+    $Phone = mysqli_real_escape_string($conn, $_POST["number"]);
+    $Email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $Password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Hash the password
+    $Gender = mysqli_real_escape_string($conn, $_POST["gender"]);
 
-    $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-      //insert it to database 
-    $sql="insert into admins(Username ,Phone ,Email ,Password ,Gender)
-    values('$Name','$Phone','$Email','$hashed_password','$Gender')";
-    $result=mysqli_query($conn,$sql);
+    // Insert data into the "admins" table
+    $sql = "INSERT INTO admins (Username, Phone, Email, Password, Gender) VALUES ('$Name', '$Phone', '$Email', '$Password', '$Gender')";
+    $result = mysqli_query($conn, $sql);
 
-    
-    if(!$result)
-      die(mysqli_error($conn));
-    
-  }
+    if ($result) {
+        echo "Admin added successfully!";
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+}
 ?>
+
 <div class="component">
 <div class="sidebar rows">
   <a href="../../index.php"><img class ="logo" src="../../imgs/sweet dreams logo-01.png" alt="logo" ></a>
