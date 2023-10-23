@@ -33,6 +33,26 @@
 
 <body>
 <?php
+function isValidEmail($email) {
+  return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  $name = isset($_POST['name']) ? $_POST['name'] : '';
+  $phoneNumber = isset($_POST['number']) ? $_POST['number'] : '';
+  $email = isset($_POST['email']) ? $_POST['email'] : '';
+  $password = isset($_POST['password']) ? $_POST['password'] : '';
+  $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
+
+  if (empty($name) || empty($phoneNumber) || empty($email) || empty($password) || empty($gender)) {
+      echo "<p style='color: red;'>All fields are required, including selecting a gender.</p>";
+  } elseif (!ctype_digit($phoneNumber)) {
+      echo "<p style='color: red;'>Phone number should contain only numbers.</p>";
+  } elseif (!ctype_alpha($name)) {
+      echo "<p style='color: red;'>Name should contain only letters.</p>";
+  } elseif (!isValidEmail($email)) {
+      echo "<p style='color: red;'>Invalid email format.</p>";
+  } else {
 if (isset($_POST['submit'])) {
     $Name = mysqli_real_escape_string($conn, $_POST["name"]);
     $Phone = mysqli_real_escape_string($conn, $_POST["number"]);
@@ -49,6 +69,7 @@ if (isset($_POST['submit'])) {
     } else {
         echo "Error: " . mysqli_error($conn);
     }
+}}
 }
 ?>
 
