@@ -112,9 +112,10 @@ if (empty($_POST["password"])) {
         $Password = htmlspecialchars($_POST["password"]);
         $Birth = htmlspecialchars($_POST["birth"]);
         $Gender = htmlspecialchars($_POST["gender"]);
+        $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         // Insert data into the database
         $sql = "INSERT INTO registrations(fullname,email,password,birth,gender) 
-                VALUES ('$Fname','$Email','$Password','$Birth','$Gender')";
+                VALUES ('$Fname','$Email','$hashed_password','$Birth','$Gender')";
         $result = mysqli_query($conn, $sql);
 
         // Check if the data was inserted successfully
