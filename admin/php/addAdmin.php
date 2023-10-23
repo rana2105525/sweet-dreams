@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-            echo "Admin added successfully!";
+          header("Location: /sweet-dreams/admin/php/addAdmin.php");
         } else {
             echo "Error: " . mysqli_error($conn);
         }
