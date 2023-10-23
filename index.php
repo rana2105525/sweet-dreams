@@ -87,46 +87,40 @@
 
 
   </section>
+  <?php
+    $sql = "SELECT id, title, price, prod_image FROM products ORDER BY id DESC LIMIT 3;";
+    include_once "includes/dbh.inc.php";
+    $result = mysqli_query($conn, $sql);
+    ?>
   <br>
   <br>
   <div class="h_products">
     <h2>New arrivals</h2>
   </div><br>
   <div class="Contain">
+  <?php
+
+            // Loop through the products and display them dynamically
+            while ($row = mysqli_fetch_assoc($result)) {
+              $id = $row["id"];
+              $title = $row["title"];
+              $price = $row["price"];
+              $prod_image = $row["prod_image"];
+            
+            ?>
     <div class="box" id="col1">
       <a href="#">
         <button type="button" class="b">
           <img
-            src="imgs/long-sleeved-t-shirt-children-s-clothing-top-cool-summer-boy-8c83e609f4319973d698e96068482e7a.png"
-            alt="">
-          <p>Summer collection</p>
-        </button>
-      </a>
-    </div>
-    <div class="box" id="col2">
-      <a href="#">
-        <button type="button" class="b">
-          <img
-            src="imgs/t-shirt-pajamas-carters-boy-clothing-little-monster-baby-home-pajamas-f14325570f638347c4aa1cccd0ca5e3f.png"
-            alt="">
-          <p>Winter collection</p>
-        </button>
-      </a>
-    </div>
-    <div class="box" id="col3">
-      <a href="#">
-        <button type="button" class="b">
-          <img src="imgs/pngegg.png" alt="">
-          <p>Bundle and save</p>
-        </button>
-      </a>
-    </div>
-    <br>
+            src="<?php echo $prod_image; ?>";
+              alt="">
+            <p><?php echo $title; ?></p>
+          </button>
+        </a>
+     
+      </div> <?php } ?>
   </div>
-  <br>
-  <br>
-  <br>
-  <?php include 'partials/footer.php'; ?>
+  <?php include "partials/footer.php";?>
 </body>
 
 </html>
