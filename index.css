@@ -504,7 +504,15 @@ word-spacing: 2px;
   }
 }
 footer {
-  position: fixed;
+display: flex;
+
+flex-wrap: wrap;
+flex-direction: row;
+justify-content: space-between;
+padding-left: 30px;
+padding-right: 30px;
+padding-top: 80px;
+
   bottom: 0;
   left: 0;
   right: 0;
