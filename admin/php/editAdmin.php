@@ -13,7 +13,6 @@
 session_start();
 
 include_once "../../includes/dbh.inc.php";
-
 function isValidEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }

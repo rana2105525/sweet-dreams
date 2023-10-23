@@ -81,36 +81,25 @@ tbody tr:nth-child(odd) {
     background-color: #ffffff;
 }
 
-.buttons{
+button{
     padding:5px;
     border-radius: 5px;
     width:60%;
     margin: 2px;
     border:none;
-}
-
-#delete{
     background-color: rgb(246, 3, 3);
     color: #ffffff;
 }
+button a{
+    color: #ffffff;
+    text-decoration: none;
+}
 
-#delete:hover{
+button:hover{
     cursor:pointer;
     background-color: rgb(195, 6, 6);
 }
-#edit{
-    background-color: #F27144;
-    color: #ffffff;
-}
 
-#edit:hover{
-    cursor:pointer;
-    background-color:#3AB9C0;
-}
-
-.table_img{
-    width:50%;
-}
 /*responsive*/
 /* On screens that are less than 2000px wide, make the sidebar into a topbar */
 @media screen and (max-width: 1500px) {
