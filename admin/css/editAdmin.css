@@ -68,7 +68,7 @@ div.content {
 .input-box label {
   color: #3AB9C0;
 }
-.form :where(.input-box input, .select-box) {
+.form :where(.input-box input) {
   position: relative;
   height: 40px;
   width: 100%;

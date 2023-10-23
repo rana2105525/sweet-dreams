@@ -29,9 +29,10 @@
     $extensions = array('jpg', 'jpeg', 'png'); //extensions 
 
     if(in_array($file_extension,$extensions)){
-      $upload_image='uploads/'.$image_filename; //save image inside uploads folder
-      move_uploaded_file($image_filetemp,$upload_image);
-
+      $upload_image='imgs/'.$image_filename; //save image inside uploads folder
+      $destination='../../'.$upload_image;
+      move_uploaded_file($image_filetemp,$destination);
+      
       $sql="INSERT INTO products (title,price,description,prod_image,category)
        VALUES('$title','$price','$description','$upload_image','$category');";
        $result = mysqli_query($conn,$sql);//excute query

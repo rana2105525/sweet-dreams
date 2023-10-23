@@ -56,8 +56,6 @@
                           </tr>';
                   }
                 ?>
-              
-                
               </tbody>
             </table>
         </div>

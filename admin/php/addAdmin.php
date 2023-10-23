@@ -13,7 +13,6 @@
 </head>
 
 <body>
-
 <?php
    if(isset($_POST['submit'])){ //check if form was submitted
     $Name=htmlspecialchars($_POST["name"]);

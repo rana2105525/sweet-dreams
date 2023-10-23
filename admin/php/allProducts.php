@@ -57,7 +57,7 @@
                             <td class ="cell">'.$title.'</td>
                             <td class ="cell">'.$price.'</td>
                             <td class ="cell">'.$description.'</td>
-                            <td><img class="table_img" src="'.$prod_image.'"alt='.$title.'/></td>
+                            <td><img class="table_img" src="../../'.$prod_image.'"alt='.$title.'/></td>
                             <td class ="cell">'.$category.'</td>
                             <td class ="cell">'.$added_at.'</td>
                             <td>

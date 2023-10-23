@@ -67,12 +67,11 @@ div.content {
 }
 textarea{
   width: 100%;
-
 }
 .input-box label {
   color: #3AB9C0;
 }
-.form :where( .input-box input, .select-box, textarea) {
+.form :where( .input-box input, textarea) {
   position: relative;
   width: 100%;
   outline: none;
@@ -83,7 +82,7 @@ textarea{
   border-radius: 20px;
   padding: 0 15px;
 }
-.input-box input, .select-box{
+.input-box input{
   height: 40px;
 }
 .input-box input:focus {
