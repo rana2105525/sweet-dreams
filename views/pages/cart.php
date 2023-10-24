@@ -53,7 +53,8 @@
    echo '<div class="empty-cart-message">Your cart is empty.</div>';
  } else {
    foreach ($_SESSION['cart'] as $key => $item) {
-     ?>
+  ?>
+
             <div class="product">
             <img class="cartimg" src="../../public/<?php echo $item['prod_image']; ?>">
         <div class="design">
