@@ -9,6 +9,13 @@
     <link rel="icon" href="../../../public/images/Sweet Dreams logo-01.png" type="image/icon type" />
 </head>
 <body>
+<style>
+.error {color: #FF0000;}
+.error-container {
+    text-align: center;
+    margin-top: 20px; 
+}
+</style>
 <?php
 session_start();
 
@@ -24,15 +31,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = isset($_POST['password']) ? $_POST['password'] : '';
     $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 
-    if (empty($name) || empty($phoneNumber) || empty($email) || empty($password) || empty($gender)) {
-        echo "<p style='color: red; text-align: center;'>All fields are required, including selecting a gender.</p>";
+    $errors = [];
+    if (empty($name)&&empty($phoneNumber)&&empty($email)&&empty($password)&&empty($gender))
+    {
+      $errors[] = "All fields are required, including selecting a gender.";
+    }
+    elseif (empty($name)) {
+        $errors[] = "Name is required";
+    }
+    
+    elseif (empty($phoneNumber)) {
+        $errors[] = "Phone number is required";
     } elseif (!ctype_digit($phoneNumber)) {
-        echo "<p style='color: red; text-align: center;'>Phone number should contain only numbers.</p>";
-    } elseif (!ctype_alpha($name)) {
-        echo "<p style='color: red; text-align: center;'>Name should contain only letters.</p>";
+        $errors[] = "Phone number should contain only numbers";
+    }
+
+    elseif (empty($email)) {
+        $errors[] = "Email is required";
     } elseif (!isValidEmail($email)) {
-        echo "<p style='color: red; text-align: center;'>Invalid email format.</p>";
-    } else {
+        $errors[] = "Invalid email format";
+    }
+
+    elseif (empty($password)) {
+        $errors[] = "Password is required";
+    }
+
+    elseif (empty($gender)) {
+        $errors[] = "Gender is required";
+    }
+    if (count($errors) === 0) {
         // Sanitize and escape user input to prevent SQL injection
         $name = mysqli_real_escape_string($conn, $name);
         $phoneNumber = mysqli_real_escape_string($conn, $phoneNumber);
@@ -56,8 +83,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             header("Location: /sweet-dreams/login.php");
             exit();
         } else {
-            echo "<p style='color: red;'>Error updating admin information.</p>";
+            // Display the validation errors
+        echo "<div class='error-container'>";
+        foreach ($errors as $error) {
+            echo "<p class='error'>$error</p>";
         }
+        echo "</div>";
+       }
     }
 }
 ?>
