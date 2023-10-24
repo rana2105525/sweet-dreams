@@ -107,7 +107,7 @@ $email = $_POST['email'];
 </form>
 </section>
 
-<?php include 'partials/footer.php'; ?>
+<?php include '../partials/footer.php'; ?>
 
 
 
