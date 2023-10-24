@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <link rel="icon" href="imgs/sweet dreams logo-01.png" type="image/icon type" />
-    <link rel="stylesheet" href="prod_desc.css" />
+    <link rel="stylesheet" href="../../public/css/prod_desc.css" />
 </head>
 
 <body>
 
     <nav>
-        <?php include 'partials/nav.php'; ?>
-        <?php include 'partials/side.php'; ?>
+        <?php include '../partials/nav.php'; ?>
+        <?php include '../partials/side.php'; ?>
     </nav>
 
     <?php
@@ -24,31 +24,28 @@
   
     if (isset($_POST['add_to_description'])) {
         $product_id = $_POST['product_id'];
-        include_once "includes/dbh.inc.php";
+        include_once "../../config.php";
         // Retrieve the product attributes from the database based on the product ID
         $sql = "SELECT * FROM products WHERE id = $product_id";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
 
-        // Store the product information in a session variable
-        $_SESSION['product_description'] = $row;
-    }
-
     if (isset($_SESSION['product_description'])) {
         $product = $_SESSION['product_description'];
+    }
     ?>
 
-        <div class="cont">
+<div class="cont">
             <div class="product-img">
-                <img src="<?php echo $product['prod_image']; ?>" height="420" width="327">
+                <img src="<?php echo $row['prod_image']; ?>" height="420" width="327">
             </div>
             <div class="product-info">
                 <div class="product-text">
-                    <h1><?php echo $product['title']; ?></h1>
-                    <p><?php echo $product['description']; ?></p>
+                    <h1><?php echo $row['title']; ?></h1>
+                    <p><?php echo $row['description']; ?></p>
                 </div>
                 <div class="product-price-btn">
-                    <p><?php echo $product['price']; ?></p>
+                    <p><?php echo $row['price']; ?></p>
                     <button type="button">buy now</button>
                 </div>
             </div>
@@ -70,7 +67,7 @@
 
 
 
-<?php include 'partials/footer.php'; ?>
+<?php include '../partials/footer.php'; ?>
 
 
 </body>
