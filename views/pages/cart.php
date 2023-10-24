@@ -28,61 +28,65 @@
 
     // Check if the cart array exists in the session
     if (!isset($_SESSION['cart'])) {
-      $_SESSION['cart'] = array();
+        $_SESSION['cart'] = array();
     }
 
     // Add the product ID and attributes to the cart array
     $_SESSION['cart'][] = array(
-      'id' => $product_id,
-      'title' => $row['title'],
-      'description' => $row['description'],
-      'price' => $row['price'],
-      'prod_image' => $row['prod_image'],
-      'category' => $row['category']
+        'id' => $product_id,
+        'title' => $row['title'],
+        'description' => $row['description'],
+        'price' => $row['price'],
+        'prod_image' => $row['prod_image'],
+        'category' => $row['category']
     );
-
-  }
+  
+}
   ?>
 
-<h1>My Cart</h1>
+<!-- Add the rest of the code for cart.php here -->
 
-<div class="our-products">
- <table>
- <?php
- if (empty($_SESSION['cart'])) {
-   echo '<div class="empty-cart-message">Your cart is empty.</div>';
- } else {
-   foreach ($_SESSION['cart'] as $key => $item) {
-  ?>
+    <h1 id = "title">My cart</h1>
+          <div class="our_Products">
 
-            <div class="product">
-            <img class="cartimg" src="../../public/<?php echo $item['prod_image']; ?>">
-        <div class="design">
-                <h5><?php echo $item['title']; ?></h5>
-                <h6><?php echo $item['description']; ?></h6>
-                <h6><?php echo $item['price']; ?></h6>
-                    <form method="post" action="remove_item.php">
-                        <input type="hidden" name="item_index" value="<?php echo $key; ?>">
-                        <button type="submit" class="btn" name="remove_from_cart">Remove <i class="fa fa-remove"></i></button>
-                    </form>
-                    <form method="post" action="wishlist.php">
-                        <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                        <button type="submit" class="btn" name="move_to_wishlist">Move to Wishlist <i class="fa fa-heart"></i></button>
-                    </form>
-                </div>
-            </div>
-       
+        <table>
+        <?php
+    if (empty($_SESSION['cart'])) {
+      echo '<div class="empty-cart-message">Your cart is empty.</div>';
+    } else {
+        foreach ($_SESSION['cart'] as $key => $item) {
+    ?>
+
+<div class="products">
+  <div class="prod">
+  
+
+    <img src="../../public/<?php echo $item['prod_image']; ?>">
+    <div class="design">
+      <h5><?php echo $item['title']; ?></h5>
+      <h6><?php echo $item['description']; ?></h6>
+      <h6><?php echo $item['price']; ?></h6>
+      <form method="post" action="views/pages/wishlist.php">
+    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+    <button type="submit" class="btn" id="cartbtn" name="add_to_">Add to wishlist &nbsp;<i class="fa fa-shopping-bag"></i></button> 
+</form>
+      <form method="post" action="remove_item.php">
+        <input type="hidden" name="item_index" value="<?php echo $key; ?>">
+        <button type="submit" class="btn" id="rmvbtn" name="remove_from_cart">Remove&nbsp;<i class="fa fa-remove"></i></button>
+      </form>
     </div>
-            </div>
-            <div class="checkout-btn">
+  </div>
+</div>
+
+<?php
+
+}
+    }
+
+?> 
+ <div class="checkout-btn">
         <button><a href="checkout.php">Checkout</a></button>
     </div>
-        <?php
-   }
- }
- ?>
-  </table>   
-
 <?php include '../partials/footer.php'; ?>
 
 
