@@ -18,7 +18,6 @@
             align-items: center;
             justify-content: center;
             padding: auto;
-            margin-top;
             height: 50vh;
             font-size: 18px;
             color: #555;

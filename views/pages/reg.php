@@ -222,8 +222,5 @@ function isDateValid($date)
 	$Gender=htmlspecialchars($_POST["gender"]);
 }
 ?>
-
-<?php include '../partials/footer.php'; ?>
-
   </body>
 </html>
