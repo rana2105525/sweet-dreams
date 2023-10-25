@@ -87,13 +87,14 @@ if (isset($_POST['add_to_cart'])) {
                                             class="fa fa-remove"></i></button>
                                 </form>
                                 <!-- Quantity input field -->
-                                <form method="post" action="update_quantity.php">
-                                    <input type="hidden" name="item_index" value="<?php echo $key; ?>">
-                                    <label for="quantity">Quantity:</label>
-                                    <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="1"
-                                        max="100" class="quantity-input" />
-                                    <button type="submit" class="btn" name="update_quantity">Update</button>
-                                </form>
+                                <!-- Quantity input field -->
+<form method="post" action="update_quantity.php">
+    <input type="hidden" name="item_index" value="<?php echo $key; ?>">
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" value="<?php echo max(1, $item['quantity']); ?>" min="1" max="100" class="quantity-input" />
+    <button type="submit" class="btn" name="update_quantity">Update</button>
+</form>
+
                                 <h6>Total: $<?php echo $item['total']; ?></h6>
                             </div>
                         </div>
@@ -102,13 +103,17 @@ if (isset($_POST['add_to_cart'])) {
 <?php
 
 }
+?> 
+<div class="checkout-btn">
+        <button><a href="checkout.php">Checkout</a></button>
+    </div>
+
+<?php
     }
 
 ?> 
 
- <div class="checkout-btn">
-        <button><a href="checkout.php">Checkout</a></button>
-    </div>
+ 
 <?php include '../partials/footer.php'; ?>
 
 
