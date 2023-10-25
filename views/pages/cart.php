@@ -80,11 +80,7 @@ if (isset($_POST['add_to_cart'])) {
                                 <h5><?php echo $item['title']; ?></h5>
                                 <h6><?php echo $item['description']; ?></h6>
                                 <h6>Price: $<?php echo $item['price']; ?></h6>
-                                <form method="post" action="wishlist.php">
-                                    <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
-                                    <button type="submit" class="btn" id="cartbtn" name="add_to_wishlist">Add to wishlist
-                                        &nbsp;<i class="fa fa-shopping-bag"></i></button>
-                                </form>
+                                
                                 <form method="post" action="remove_item.php">
                                     <input type="hidden" name="item_index" value="<?php echo $key; ?>">
                                     <button type="submit" class="btn" id="rmvbtn" name="remove_from_cart">Remove&nbsp;<i
@@ -102,7 +98,7 @@ if (isset($_POST['add_to_cart'])) {
                             </div>
                         </div>
                     </div>
-                    
+
 <?php
 
 }

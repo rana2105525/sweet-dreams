@@ -68,39 +68,38 @@ if (isset($_POST['add_to_wishlist'])) {
 
         <table>
         <?php
+  
     if (empty($_SESSION['wishlist'])) {
-      echo '<div class="empty-wishlist-message">Your wishlist is empty.</div>';
+        echo '<div class="empty-wishlist-message">Your wishlist is empty.</div>';
     } else {
         foreach ($_SESSION['wishlist'] as $key => $item) {
-    ?>
-
-<div class="products">
-  <div class="prod">
-  
-
-    <img src="../../public/<?php echo $item['prod_image']; ?>">
-    <div class="design">
-      <h5><?php echo $item['title']; ?></h5>
-      <h6><?php echo $item['description']; ?></h6>
-      <h6><?php echo $item['price']; ?></h6>
-      <form method="post" action="cart.php">
-    <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
-    <button type="submit" class="btn" id="cartbtn" name="add_to_cart">Add to Cart &nbsp;<i class="fa fa-shopping-bag"></i></button> 
-</form>
-      <form method="post" action="remove_item.php">
-        <input type="hidden" name="item_index" value="<?php echo $key; ?>">
-        <button type="submit" class="btn" id="rmvbtn" name="remove_from_wishlist">Remove&nbsp;<i class="fa fa-remove"></i></button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<?php
-
-}
+            ?>
+    
+            <div class="products">
+                <div class="prod">
+    
+                    <img src="../../public/<?php echo $item['prod_image']; ?>">
+                    <div class="design">
+                        <h5><?php echo $item['title']; ?></h5>
+                        <h6><?php echo $item['description']; ?></h6>
+                        <h6><?php echo $item['price']; ?></h6>
+                        <form method="post" action="cart.php">
+                            <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
+                            <button type="submit" class="btn" id="cartbtn" name="add_to_cart">Add to Cart &nbsp;<i class="fa fa-shopping-bag"></i></button>
+                        </form>
+                        <form method="post" action="remove_item.php">
+                            <input type="hidden" name="item_index" value="<?php echo $key; ?>">
+                            <button type="submit" class="btn" id="rmvbtn" name="remove_from_wishlist">Remove&nbsp;<i class="fa fa-remove"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    
+        <?php
+        }
     }
-
-?>
+    ?>
+    
 
 
 
