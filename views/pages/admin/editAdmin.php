@@ -32,7 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 
 
-    if (empty($name)&&empty($phoneNumber)&&empty($email)&&empty($password)&&empty($gender))
+    if (empty($name)&&empty($phoneNumber)&&empty($email)&&empty($password)&&empty($gender)&& 
+    !$emailTaken)
     {
       $errors[] = "All fields are required, including selecting a gender.";
     }
@@ -50,6 +51,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors[] = "Email is required";
     } elseif (!isValidEmail($email)) {
         $errors[] = "Invalid email format";
+    }
+    $sql = "SELECT * FROM registrations WHERE email = '$email'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $emailErr = "Email is already taken";
+        $emailTaken = true;
     }
 
     elseif (empty($password)) {

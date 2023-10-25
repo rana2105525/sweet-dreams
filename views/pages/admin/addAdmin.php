@@ -28,12 +28,12 @@
   
 </script>
 </head>
-
 <body>
 <?php
 function isValidEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
+
 $errors = [];
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = isset($_POST['name']) ? $_POST['name'] : '';
@@ -42,8 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = isset($_POST['password']) ? $_POST['password'] : '';
     $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 
+  
     
-    if (empty($name)&&empty($phoneNumber)&&empty($email)&&empty($password)&&empty($gender))
+    if (empty($name)&&empty($phoneNumber)&&empty($email)&&empty($password)&&empty($gender)&&!$emailTaken)
     {
       $errors[] = "All fields are required, including selecting a gender.";
     }
@@ -61,6 +62,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors[] = "Email is required";
     } elseif (!isValidEmail($email)) {
         $errors[] = "Invalid email format";
+    }
+    $sql = "SELECT * FROM registrations WHERE email = '$email'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $emailTaken = true;
+        echo "<p class='error'>Email is already taken</p>";
     }
 
     elseif (empty($password)) {
