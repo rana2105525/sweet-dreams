@@ -18,31 +18,47 @@
   </nav>
 
   <?php
-  if (isset($_POST['add_to_cart'])) {
+if (isset($_POST['add_to_cart'])) {
     $product_id = $_POST['product_id'];
-    include_once "../../config.php";
-    // Retrieve the product attributes from the database based on the product ID
-    $sql = "SELECT * FROM products WHERE id = $product_id";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
 
     // Check if the cart array exists in the session
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = array();
     }
 
-    // Add the product ID and attributes to the cart array
-    $_SESSION['cart'][] = array(
-        'id' => $product_id,
-        'title' => $row['title'],
-        'description' => $row['description'],
-        'price' => $row['price'],
-        'prod_image' => $row['prod_image'],
-        'category' => $row['category']
-    );
-  
+    // Flag to check if the product is already in the cart
+    $product_already_in_cart = false;
+
+    // Check if the product with the same ID already exists in the cart
+    foreach ($_SESSION['cart'] as $key => $item) {
+        if ($item['id'] == $product_id) {
+            // Product already exists in the cart, update the quantity or do nothing
+            $product_already_in_cart = true;
+            break;
+        }
+    }
+
+    if (!$product_already_in_cart) {
+        include_once "../../config.php";
+        // Retrieve the product attributes from the database based on the product ID
+        $sql = "SELECT  * ,sum(price) as total FROM products WHERE id = $product_id";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+
+        // Add the product ID and attributes to the cart array
+        $_SESSION['cart'][] = array(
+            'id' => $product_id,
+            'title' => $row['title'],
+            'description' => $row['description'],
+            'price' => $row['price'],
+            'prod_image' => $row['prod_image'],
+            'category' => $row['category'],
+            'total' => $row['total']
+        );
+    }
 }
-  ?>
+?>
+
 
 <!-- Add the rest of the code for cart.php here -->
 
@@ -66,9 +82,10 @@
       <h5><?php echo $item['title']; ?></h5>
       <h6><?php echo $item['description']; ?></h6>
       <h6><?php echo $item['price']; ?></h6>
-      <form method="post" action="views/pages/wishlist.php">
+      
+      <form method="post" action="wishlist.php">
     <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
-    <button type="submit" class="btn" id="cartbtn" name="add_to_">Add to wishlist &nbsp;<i class="fa fa-shopping-bag"></i></button> 
+    <button type="submit" class="btn" id="cartbtn" name="add_to_wishlist">Add to wishlist &nbsp;<i class="fa fa-shopping-bag"></i></button> 
 </form>
       <form method="post" action="remove_item.php">
         <input type="hidden" name="item_index" value="<?php echo $key; ?>">
@@ -84,6 +101,7 @@
     }
 
 ?> 
+<h5><?php echo $item['total']; ?></h5>
  <div class="checkout-btn">
         <button><a href="checkout.php">Checkout</a></button>
     </div>
