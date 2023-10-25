@@ -111,7 +111,7 @@
      
           <form method="post" action="prod_desc.php">
                             <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
-                            <button type="submit" name="add_to_description"><img style= "width:200px;height:250px"src="../../public/<?php echo $prod_image; ?>"><p><?php echo $title; ?></p></button>
+                            <button type="submit" name="add_to_description"><img style= "width:300px;height:250px;padding-top:20px;padding-left:20px;padding-right:20px;"src="../../public/<?php echo $prod_image; ?>"><p><?php echo $title; ?></p></button>
                             
                         </form>
               

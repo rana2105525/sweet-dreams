@@ -321,16 +321,22 @@ header button{
     font-size: 16px;
   }
 }
-.box
+.box 
 {
-    padding-left: 130px;
-    height: 500px;
+    padding-left: 110px;
+    
+    /* height: 500px; */
     justify-content: space-evenly;
    
 }
+
+.b img{
+  width:300px;
+  height: 300px;
+}
 .box button
 {
-    width:95%;
+    /* width:95%; */
     color:#3AB9C0;
     border:none;
     border-radius: 50px;
@@ -345,39 +351,33 @@ header button{
 {
     box-shadow:20px 20px 30px rgba(0,0,0,0.6);
 }
-.box .form img
+ .box .form img
 {
-    width: 30%;
-    height: 100px;
-    margin-top: 10px;
-}
+   
+} 
 
 .Contain
 {
    width: 90%;
    display: flex;
 }
-.Contain1
-{
-   width: 90%;
-   display: flex;
-}
+
+
 #col1
 {
-    width: 100%;
-    height: 50%;
+    width: 70%;
+    height: 40%;
 
 }
 #col2
 {
-    width: 100%;
-    height: 50%;
+    width: 70%;
+    height: 40%;
 }
 #col3
 {
-    width: 100%;
-    height: 50%;
-
+    width: 70%;
+    height: 40%;
 }
 .h_products h2{
   align-items: center;
