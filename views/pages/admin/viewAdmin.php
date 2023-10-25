@@ -29,7 +29,7 @@
 <div class="content">
   <section class="container rows">
     <div class="form">
-      <?php session_start();?>
+      
         <div id="title"><h2>Admin Profile</h2></div>
 
         <div class="input-box">
