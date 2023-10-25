@@ -21,7 +21,7 @@
 
     <?php
     $sql = "SELECT * FROM products WHERE category='Winter_Collection'";
-    include_once "../.../config.php";
+    include_once "../../config.php";
     $result = mysqli_query($conn, $sql);
     ?>
 
@@ -40,7 +40,10 @@
         ?>
                 <div class="products">
                     <div class="prod">
-                        <img src="../../public/<?php echo $prod_image; ?>">
+                          <form method="post" action="prod_desc.php">
+                            <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+                            <button type="submit" name="add_to_description"><img src="../../public/<?php echo $prod_image; ?>"></button>
+                        </form>
                         <div class="design">
                             <h5><?php echo $title; ?></h5>
                             <h6><?php echo $description; ?></h6>

@@ -13,15 +13,12 @@
 </head>
 
 <body>
-
-    <nav>
-        <?php include '../partials/nav.php'; ?>
-        <?php include '../partials/side.php'; ?>
-    </nav>
-
+  <nav>
+            <?php include '../partials/nav.php'; ?>
+            <?php include '../partials/side.php'; ?>
+        </nav>
     <?php
-    
-  
+ // Start the session
     if (isset($_POST['add_to_description'])) {
         $product_id = $_POST['product_id'];
         include_once "../../config.php";
@@ -29,46 +26,46 @@
         $sql = "SELECT * FROM products WHERE id = $product_id";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
+        $_SESSION['product_description'] = $row;
+    }
 
     if (isset($_SESSION['product_description'])) {
         $product = $_SESSION['product_description'];
-    }
     ?>
+        
 
-<div class="cont">
+        <div class="cont">
             <div class="product-img">
-                <img src="<?php echo $row['prod_image']; ?>" height="420" width="327">
+                <img src="../../public/<?php echo $product['prod_image']; ?>" height="420" width="327">
             </div>
             <div class="product-info">
                 <div class="product-text">
-                    <h1><?php echo $row['title']; ?></h1>
-                    <p><?php echo $row['description']; ?></p>
+                    <h1><?php echo $product['title']; ?></h1>
+                    <p><?php echo $product['description']; ?></p>
                 </div>
                 <div class="product-price-btn">
-                    <p><?php echo $row['price']; ?></p>
-                    <button type="button">buy now</button>
+                    <p><?php echo $product['price']; ?></p>
+                    <a href="checkout.php"><button type="button">Buy now</button></a>
+
                 </div>
             </div>
         </div>
-
     <?php
     }
     ?>
-  <h2>Customer Reviews</h2>
-  <form action="" class="form" method="post" >
 
-  <div class="text-field">
-    <label for="name">Review</label> 
-    <input type="text" id="fullname" name="fullname" placeholder="Write your name">
-    <input type="text" id="review" name="review" placeholder="Write your review">
-    <button type="submit" class="btn" name="submit">Submit</button>
-</div>
-</form>
+    <h2>Customer Reviews</h2>
+    <form action="" class="form" method="post">
+        <div class="text-field">
+            <label for="name">Review</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Write your name">
+            <input type="text" id="review" name="review" placeholder="Write your review">
+            <button type="submit" class="btn" name="submit">Submit</button>
+        </div>
+    </form>
 
-
-
-<?php include '../partials/footer.php'; ?>
-
+    <?php include '../partials/footer.php'; ?>
 
 </body>
+
 </html>
