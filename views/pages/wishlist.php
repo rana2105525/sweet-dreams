@@ -18,32 +18,48 @@
   <?php include '../partials/side.php'; ?>
 </nav>
 
-  <?php
-  if (isset($_POST['add_to_wishlist'])) {
+<?php
+if (isset($_POST['add_to_wishlist'])) {
     $product_id = $_POST['product_id'];
     include_once "../../config.php";
-    // Retrieve the product attributes from the database based on the product ID
-    $sql = "SELECT * FROM products WHERE id = $product_id";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
 
     // Check if the wishlist array exists in the session
     if (!isset($_SESSION['wishlist'])) {
         $_SESSION['wishlist'] = array();
     }
 
-    // Add the product ID and attributes to the wishlist array
-    $_SESSION['wishlist'][] = array(
-        'id' => $product_id,
-        'title' => $row['title'],
-        'description' => $row['description'],
-        'price' => $row['price'],
-        'prod_image' => $row['prod_image'],
-        'category' => $row['category']
-    );
-  
+    // Flag to check if the product is already in the wishlist
+    $product_already_in_wishlist = false;
+
+    // Check if the product with the same ID already exists in the wishlist
+    foreach ($_SESSION['wishlist'] as $key => $item) {
+        if ($item['id'] == $product_id) {
+            // Product already exists in the wishlist, set the flag and break the loop
+            $product_already_in_wishlist = true;
+            break;
+        }
+    }
+
+    if (!$product_already_in_wishlist) {
+        // Retrieve the product attributes from the database based on the product ID
+        $sql = "SELECT * FROM products WHERE id = $product_id";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+
+        // Add the product ID and attributes to the wishlist array
+        $_SESSION['wishlist'][] = array(
+            'id' => $product_id,
+            'title' => $row['title'],
+            'description' => $row['description'],
+            'price' => $row['price'],
+            'prod_image' => $row['prod_image'],
+            'category' => $row['category']
+        );
+    }
 }
-  ?>
+?>
+
+
 
 <!-- Add the rest of the code for wishlist.php here -->
 
