@@ -108,15 +108,15 @@
               $prod_image = $row["prod_image"];
             ?>
     <div class="box" id="col1">
-      <a href="#">
-        <button type="button" class="b">
-          <img
-            src="../../public/<?php echo $prod_image; ?>";
-              alt="<?php echo $title; ?>">
+     
+          <form method="post" action="prod_desc.php">
+                            <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+                            <button type="submit" name="add_to_description"><img style= "width:200px;height:250px"src="../../public/<?php echo $prod_image; ?>"><p><?php echo $title; ?></p></button>
+                            
+                        </form>
               
-            <p><?php echo $title; ?></p>
-          </button>
-        </a>
+         
+        
      
       </div> <?php } ?>
   </div>

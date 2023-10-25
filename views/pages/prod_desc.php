@@ -18,10 +18,32 @@
             <?php include '../partials/side.php'; ?>
         </nav>
     <?php
+
+
+include_once "../../config.php";
+
+
+session_start();
+
+if (isset($_POST['submit'])) {
+
+  $fullname = $_POST['fullname'];
+  $review = $_POST['review'];
+
+  $sql = "INSERT INTO reviews (fullname, review) VALUES ('$fullname', '$review');";
+
+  $result = mysqli_query($conn, $sql);
+
+  if (!$result) {
+    die(mysqli_error($conn));
+  }
+}
+
+
+
  // Start the session
     if (isset($_POST['add_to_description'])) {
         $product_id = $_POST['product_id'];
-        include_once "../../config.php";
         // Retrieve the product attributes from the database based on the product ID
         $sql = "SELECT * FROM products WHERE id = $product_id";
         $result = mysqli_query($conn, $sql);
