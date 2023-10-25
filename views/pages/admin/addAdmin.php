@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-          header("Location: /sweet-dreams/admin/php/addAdmin.php");
+          header("Location: /sweet-dreams/views/pages/admin/addAdmin.php");
         } else {
             echo "Error: " . mysqli_error($conn);
         }
