@@ -19,6 +19,17 @@
 <?php
 session_start();
 
+
+      
+
+      // Check if the user is logged in as an admin
+      if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+          // Redirect the user to the login page if not logged in as an admin
+          header("Location: /sweet-dreams/views/pages/");
+          exit();
+      }
+      
+
 include_once "../../../config.php";
 function isValidEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);

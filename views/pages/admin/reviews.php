@@ -14,6 +14,16 @@
   <div class="component">
       <div class="sidebar rows">
       <?php include '../../partials/adminSidebar.php';?>
+      <?php 
+      session_start();
+
+      // Check if the user is logged in as an admin
+      if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+          // Redirect the user to the login page if not logged in as an admin
+          header("Location: /sweet-dreams/views/pages/");
+          exit();
+      }
+      ?>
       </div>
 
       <div class="content">
