@@ -88,13 +88,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             echo "Error: " . mysqli_error($conn);
         }
-    // } else {
-    //     // Display the validation errors
-    //     echo "<div class='error-container'>";
-    //     foreach ($errors as $error) {
-    //         echo "<p class='error'>$error</p>";
-    //     }
-    //     echo "</div>";
     }
 }
 ?>

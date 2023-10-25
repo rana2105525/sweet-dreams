@@ -83,14 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Redirect to the login page after updating admin info
             header("Location: /sweet-dreams/login.php");
             exit();}
-    //      else {
-    //         // Display the validation errors
-    //     echo "<div class='error-container'>";
-    //     foreach ($errors as $error) {
-    //         echo "<p class='error'>$error</p>";
-    //     }
-    //     echo "</div>";
-    //    }
     }
 }
 ?>
