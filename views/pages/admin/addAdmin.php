@@ -34,7 +34,7 @@
 function isValidEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
-
+$errors = [];
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = isset($_POST['name']) ? $_POST['name'] : '';
     $phoneNumber = isset($_POST['number']) ? $_POST['number'] : '';
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = isset($_POST['password']) ? $_POST['password'] : '';
     $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 
-    $errors = [];
+    
     if (empty($name)&&empty($phoneNumber)&&empty($email)&&empty($password)&&empty($gender))
     {
       $errors[] = "All fields are required, including selecting a gender.";
@@ -88,13 +88,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             echo "Error: " . mysqli_error($conn);
         }
-    } else {
-        // Display the validation errors
-        echo "<div class='error-container'>";
-        foreach ($errors as $error) {
-            echo "<p class='error'>$error</p>";
-        }
-        echo "</div>";
+    // } else {
+    //     // Display the validation errors
+    //     echo "<div class='error-container'>";
+    //     foreach ($errors as $error) {
+    //         echo "<p class='error'>$error</p>";
+    //     }
+    //     echo "</div>";
     }
 }
 ?>
@@ -144,6 +144,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <button type ="submit">Add Admin</button>
       </form>
+      <div class="error-container">
+        <?php
+        foreach ($errors as $error) {
+            echo "<p class='error'>$error</p>";
+        }
+        ?>
+    </div>
     </section>
 </div>
 </div>
