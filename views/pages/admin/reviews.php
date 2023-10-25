@@ -24,7 +24,6 @@
                 <tr>
                   <th class = "tableHeader">User &nbsp; name</th>
                   <th class = "tableHeader">User &nbsp; Review</th>
-                  <th class = "tableHeader">Added &nbsp; At</th>
                   <th class = "tableHeader">Operation</th>
                 </tr>
               </thead>
@@ -37,11 +36,9 @@
                     $id = $row["id"];
                     $fullname = $row["fullname"];
                     $review = $row["review"];
-                    $added_at = $row["added_at"];
                     echo '<tr>
                             <td>'.$fullname.'</td>
                             <td>'.$review.'</td>
-                            <td>'.$added_at.'</td>
                             <td>
                               <form action="" method="post">
                                 <button><a href="deleteReview.php?delete_id='.$id.'">Delete</button>

@@ -37,6 +37,7 @@ echo "<h1>Customers reviews</h1>";
 if (mysqli_num_rows($result) > 0) {
   // Loop through the products and display them dynamically
   while ($row = mysqli_fetch_assoc($result)) {
+    $id=$row["id"];
     $fullname = $row["fullname"];
     $review = $row["review"];
 
