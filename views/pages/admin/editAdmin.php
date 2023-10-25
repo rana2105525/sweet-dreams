@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $name = mysqli_real_escape_string($conn, $name);
         $phoneNumber = mysqli_real_escape_string($conn, $phoneNumber);
         $email = mysqli_real_escape_string($conn, $email);
-        $password = mysqli_real_escape_string($conn, $password);
+        $password = password_hash($password, PASSWORD_DEFAULT);
         $gender = mysqli_real_escape_string($conn, $gender);
 
         // Update the session variables based on form data
