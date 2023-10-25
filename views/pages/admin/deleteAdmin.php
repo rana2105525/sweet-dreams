@@ -8,7 +8,7 @@ include_once "../../../config.php";
 // Check if the user is logged in.
 if (!isset($_SESSION['Username'])) {
     // Redirect the user to the login page.
-    header("Location: login.php");
+    header("Location: /sweet-dreams/views/pages/login.php");
     exit();
 } 
 
