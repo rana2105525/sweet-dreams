@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['gender'] = $gender;
 
         // Update the admin information in the database
-        $sql = "UPDATE admins SET Username='$name', Phone='$phoneNumber', Email='$email', Password='$password', Gender='$gender' WHERE Email='" . $_SESSION['email'] . "'";
+        $sql = "UPDATE admins SET Username='$name', Phone='$phoneNumber', Email='$email', Password='$password', Gender='$gender' WHERE Email='" . $_SESSION['email'] . "'or ID='". $_SESSION['id'] ."'";
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
