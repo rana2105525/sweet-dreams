@@ -91,7 +91,7 @@ if (isset($_POST['add_to_cart'])) {
 <form method="post" action="update_quantity.php">
     <input type="hidden" name="item_index" value="<?php echo $key; ?>">
     <label for="quantity">Quantity:</label>
-    <input type="number" name="quantity" value="<?php echo max(1, $item['quantity']); ?>" min="1" max="100" class="quantity-input" />
+    <input type="number" name="quantity" value="<?php echo max(1, isset($item['quantity']) ? $item['quantity'] : 1); ?>" min="1" max="100" class="quantity-input" />
     <button type="submit" class="btn" name="update_quantity">Update</button>
 </form>
 
