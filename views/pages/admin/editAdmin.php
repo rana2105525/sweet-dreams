@@ -87,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $gender = mysqli_real_escape_string($conn, $gender);
 
         // Update the session variables based on form data
+        $_SESSION['id'] = $id;
         $_SESSION['name'] = $name;
         $_SESSION['number'] = $phoneNumber;
         $_SESSION['email'] = $email;
@@ -94,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['gender'] = $gender;
 
         // Update the admin information in the database
-        $sql = "UPDATE admins SET Username='$name', Phone='$phoneNumber', Email='$email', Password='$password', Gender='$gender' WHERE Email='" . $_SESSION['email'] . "'";
+        $sql = "UPDATE admins SET Username='$name', Phone='$phoneNumber', Email='$email', Password='$password', Gender='$gender' WHERE Email='" . $_SESSION['email'] . "'or ID='". $_SESSION['id'] ."'";
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
