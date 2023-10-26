@@ -301,7 +301,6 @@ border: none;
 background-color: #F27144;
 color:white;
 border-radius: 15px;
-width:80px;
 padding-top:7px;
 padding-bottom:7px;
 padding-left:15px;
@@ -309,9 +308,8 @@ padding-right:15px;
 justify-content: space-between;
 margin-left:7px;
 margin-top:20px;
-
-
 }
+
 .btn:hover {
 color: #fff;
 background-color:#3AB9C0;
@@ -473,28 +471,12 @@ margin-top:10px;
     
     .cartimg{
       width:20%;
-    }
-    .checkout_btn button {
-        height: 55px;
-        width:80%;
-        color: #fff;
-        font-size: 1rem;
-        font-weight: 400;
-        margin-top: 30px;
-        border: none;
-        cursor: pointer;
-        margin-left:120px;
-        transition: all 0.2s ease;
-        background:#F27144;
-        border-radius: 50px;
-      }
-      .checkout_btn button:hover{
-        background:#3AB9C0;
-      }
-      .checkout_btn a{
+    } 
+    
+    a{
         text-decoration: none;
         color:white;
-      }
+    }
     footer{
         display:flex;
         padding-top:80px;

@@ -13,26 +13,9 @@
 </head>
 
 <body>
- 
-<?php
-
-  ?>
   <nav>
   <?php include '../partials/nav.php'; ?>
-
-      </ul>
-    </div>
-
-    <!-- <div class="wrap">
-      <div class="search">
-        <input type="text" class="searchTerm" placeholder="What are you looking for?">
-        <button type="submit" class="searchButton">
-          <i class="fa fa-search"></i>
-        </button>
-      </div>
-    </div> -->
-
-    <?php include '../partials/side.php'; ?>
+  <?php include '../partials/side.php'; ?>
   </nav>
 
   <header>
@@ -91,33 +74,25 @@
     $sql = "SELECT id, title, price, prod_image FROM products ORDER BY id DESC LIMIT 3;";
     include_once "../../config.php";
     $result = mysqli_query($conn, $sql);
-    ?>
-  <br>
-  <br>
+  ?>
+  <br><br>
   <div class="h_products">
     <h2>New arrivals</h2>
   </div><br>
   <div class="Contain">
-  <?php
-
-            // Loop through the products and display them dynamically
-            while ($row = mysqli_fetch_assoc($result)) {
-              $id = $row["id"];
-              $title = $row["title"];
-              $price = $row["price"];
-              $prod_image = $row["prod_image"];
-            ?>
-    <div class="box" id="col1">
-     
-          <form method="post" action="prod_desc.php">
-                            <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
-                            <button type="submit" name="add_to_description"><img style= "width:300px;height:250px;padding-top:20px;padding-left:20px;padding-right:20px;"src="../../public/<?php echo $prod_image; ?>"><p><?php echo $title; ?></p></button>
-                            
-                        </form>
-              
-         
-        
-     
+    <?php
+      // Loop through the products and display them dynamically
+      while ($row = mysqli_fetch_assoc($result)) {
+        $id = $row["id"];
+        $title = $row["title"];
+        $price = $row["price"];
+        $prod_image = $row["prod_image"];
+    ?>
+      <div class="box" id="col1">
+        <form method="post" action="prod_desc.php">
+          <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+          <button type="submit" name="add_to_description"><img style= "width:300px;height:250px;padding-top:20px;padding-left:20px;padding-right:20px;"src="../../public/<?php echo $prod_image; ?>"><p><?php echo $title; ?></p></button>                      
+        </form>
       </div> <?php } ?>
   </div>
   

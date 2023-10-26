@@ -104,7 +104,7 @@ if (isset($_POST['add_to_cart'])) {
 
 }
 ?> 
-<div class="checkout-btn">
+<div>
         <button class="btn"><a href="checkout.php">Checkout</a></button>
     </div>
 
