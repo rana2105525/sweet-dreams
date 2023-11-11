@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     $email = test_input($_POST["email"]);
-    $sql = "SELECT * FROM registrations WHERE email = '$email'";
+    $sql = "SELECT * FROM reg WHERE email = '$email'";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
         $emailErr = "Email is already taken";
@@ -105,15 +105,15 @@ if (empty($_POST["password"])) {
     if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($confirmErr) && empty($birthErr)&& 
     !$emailTaken) {
         // Grap data from user if form was submitted
-        $Fname = htmlspecialchars($_POST["name"]);
-        $Email = htmlspecialchars($_POST["email"]);
-        $Password = htmlspecialchars($_POST["password"]);
-        $Birth = htmlspecialchars($_POST["birth"]);
-        $Gender = htmlspecialchars($_POST["gender"]);
+        $name = htmlspecialchars($_POST["name"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $password = htmlspecialchars($_POST["password"]);
+        $birth = htmlspecialchars($_POST["birth"]);
+        $gender = htmlspecialchars($_POST["gender"]);
         $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         // Insert data into the database
-        $sql = "INSERT INTO registrations(fullname,email,password,birth,gender) 
-                VALUES ('$Fname','$Email','$hashed_password','$Birth','$Gender')";
+        $sql = "INSERT INTO reg(name,email,password,birth,gender) 
+                VALUES ('$name','$email','$hashed_password','$birth','$gender')";
         $result = mysqli_query($conn, $sql);
 
         // Check if the data was inserted successfully
@@ -215,11 +215,11 @@ function isDateValid($date)
  //grap data from user if form was submitted 
 
  if (isset($_POST['submit'])){ //check if form was submitted
-	$Fname=htmlspecialchars($_POST["name"]);
-	$Email=htmlspecialchars($_POST["email"]);
-	$Password=htmlspecialchars($_POST["password"]);
-	$Birth=htmlspecialchars($_POST["birth"]);
-	$Gender=htmlspecialchars($_POST["gender"]);
+	$name=htmlspecialchars($_POST["name"]);
+	$email=htmlspecialchars($_POST["email"]);
+	$password=htmlspecialchars($_POST["password"]);
+	$birth=htmlspecialchars($_POST["birth"]);
+	$gender=htmlspecialchars($_POST["gender"]);
 }
 ?>
   </body>

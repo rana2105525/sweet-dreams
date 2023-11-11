@@ -23,7 +23,7 @@ echo "<h1>Your Profile</h1>";
 <div class="input-box">
 <label>Fullname: </label>
 <?php
-echo  $_SESSION["fullname"];
+echo  $_SESSION["name"];
 ?>
 </div>
 <div class="input-box">

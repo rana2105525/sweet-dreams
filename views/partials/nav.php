@@ -3,8 +3,8 @@
             <ul class="nav-links">
             <?php
 session_start();
-if (isset($_SESSION['fullname'])) {
-    $fullname = $_SESSION['fullname'];
+if (isset($_SESSION['name'])) {
+    $name = $_SESSION['name'];
     $profile = "profile.php";
     $home = "signout.php";
     $signout = "Logout";
@@ -12,7 +12,7 @@ if (isset($_SESSION['fullname'])) {
     $cart_class="Cart";
     $wish="wishlist.php";
     $wish_class="Wishlist";
-    echo "<li><a href=$profile>$fullname</a></li>";
+    echo "<li><a href=$profile>$name</a></li>";
     echo"<li><a href=$cart>$cart_class</a></li>";
     echo"<li><a href=$wish>$wish_class</a></li>";
     echo "<li><a href=$home>$signout</a></li>";

@@ -51,19 +51,19 @@ require_once "../../config.php";
 
 // Grab data from user and see if it exists in the admins table
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-$Email = $_POST["email"];
- $Password = $_POST["password"];
+$email = $_POST["email"];
+ $password = $_POST["password"];
 
  if ($conn->connect_error) {
  die("Failed to connect to database: " . $conn->connect_error);
  }
 
 
- $sql_admin = "SELECT * FROM admins WHERE Email = '$Email'";
+ $sql_admin = "SELECT * FROM admins WHERE Email = '$email'";
  $result_admin = mysqli_query($conn, $sql_admin);
 
  if ($row_admin = mysqli_fetch_assoc($result_admin)) {
- if (password_verify($Password, $row_admin['Password'])) {
+ if (password_verify($password, $row_admin['Password'])) {
  $_SESSION['admin'] = true;
  $_SESSION['ID'] = $row_admin['ID'];
  $_SESSION['Name'] = $row_admin['Username'];
@@ -79,16 +79,16 @@ $Email = $_POST["email"];
  }
  } else {
 
- $sql_reg = "SELECT * FROM registrations WHERE email = '$Email'";
+ $sql_reg = "SELECT * FROM reg WHERE email = '$email'";
  $result_reg = mysqli_query($conn, $sql_reg);
 
 if ($row_reg = mysqli_fetch_assoc($result_reg)) {
 
-if (password_verify($Password, $row_reg['password'])) {
+if (password_verify($password, $row_reg['password'])) {
 
  $_SESSION['admin'] = false;
- $_SESSION['ID'] = $row_reg['id'];
- $_SESSION['fullname'] = $row_reg['fullname'];
+ $_SESSION['iD'] = $row_reg['id'];
+ $_SESSION['name'] = $row_reg['name'];
  $_SESSION['email'] = $row_reg['email'];
  $_SESSION['password'] = $row_reg['password'];
  $_SESSION['birth'] = $row_reg['birth'];

@@ -296,17 +296,18 @@ margin-bottom: 0px
 outline: none;
 border: none
 }
-.btn {
+.check-btn {
 border: none;
 background-color: #F27144;
 color:white;
 border-radius: 15px;
 padding-top:7px;
 padding-bottom:7px;
-padding-left:15px;
-padding-right:15px;
+padding-left:50px;
+padding-right:50px;
 justify-content: space-between;
-margin-left:7px;
+margin-left:550px;
+font-size:18px;
 margin-top:20px;
 }
 
@@ -426,18 +427,23 @@ margin-top:10px;
     .prod img{
        width:80%;
        border-radius:20px;
-       width: 120px;
-       height: 180px;
       margin-left:10px;
       margin-top:10px;
       justify-content: start;
     
     }
-    
+    .prod .btn{
+      background-color: none;
+      background: none;
+      color:black;
+      margin-left:800px;
+      margin-top:10px;
+      border: none;
+    }
      .prod .design{
        text-align:start;
        padding-left: 30px;
-       padding-top:20px;
+       padding-top:40px;
        padding-bottom: 10px;
        line-height: 0.0001px;
     
@@ -449,6 +455,13 @@ margin-top:10px;
         font-weight: 600;
     
     }
+   .prod .format{
+      margin-left:600px;
+      
+   }
+   .prod .format h6{
+    font-size:14px;
+   }
     .prod .design h5{
         padding-top:11px;
         color:#3AB9C0 ;

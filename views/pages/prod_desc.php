@@ -65,6 +65,16 @@ if (isset($_POST['submit'])) {
                     <h1><?php echo $product['title']; ?></h1>
                     <p><?php echo $product['description']; ?></p>
                 </div>
+                <!-- <form method="post" action="update_quantity.php">
+                                    <input type="hidden" name="item_index" value="<?php echo $key; ?>">
+                                    <h6><label for="quantity">Quantity:</label></h6>
+                                    <input type="number" name="quantity"
+                                        value="<?php echo max(1, isset($item['quantity']) ? $item['quantity'] : 1); ?>" min="1"
+                                        max="100" class="quantity-input" />
+                                        
+                                    <button type="submit" class="btn" name="update_quantity">Update</button>
+                
+                                </form> -->
                 <div class="product-price-btn">
                     <p><?php echo $product['price']; ?></p>
                     <a href="checkout.php"><button type="button">Buy now</button></a>

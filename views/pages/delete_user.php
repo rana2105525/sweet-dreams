@@ -6,7 +6,7 @@ session_start();
 include_once "includes/dbh.inc.php";
 
 // Check if the user is logged in.
-if (!isset($_SESSION['fullname'])) {
+if (!isset($_SESSION['name'])) {
     // Redirect the user to the login page.
     header('Location: login.php');
     exit();
@@ -16,7 +16,7 @@ if (!isset($_SESSION['fullname'])) {
 $email = mysqli_real_escape_string($conn, $_SESSION['email']);
 
 // Delete the user from the database.
-$sql = "DELETE FROM registrations WHERE email = '$email'";
+$sql = "DELETE FROM reg WHERE email = '$email'";
 $result = mysqli_query($conn, $sql);
 
 // Check if the deletion was successful.
