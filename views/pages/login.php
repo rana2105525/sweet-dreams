@@ -14,49 +14,32 @@
 
   <body>
   <?php
-// $emailerr = $passworderr =$error="";
+ $emailerr = $passworderr =$error="";
+ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if (empty($_POST["email"])) {
+  $emailerr = "Email is required";
+  } else {
+  $email = test_input($_POST["email"]);
 
-//  if (empty($_POST["email"])) {
-//  $emailerr = "Email is required";
-//  } else {
-//  $email = test_input($_POST["email"]);
-
-//  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-//  $emailerr = "Invalid email format";
-//  }
-// }
-
-
-// if (empty($_POST["password"])) {
-//  $passworderr = "Password is required";
-//  }
-// }
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  $emailerr = "Invalid email format";
+  }
+ }
 
 
+ if (empty($_POST["password"])) {
+  $passworderr = "Password is required";
+  }
+ }
+ function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+ }
 
-// function test_input($data) {
-//  $data = trim($data);
-//  $data = stripslashes($data);
-//  $data = htmlspecialchars($data);
-//  return $data;
-// }
 
-// // Start session
-// session_start();
-
-// // Include database connection file
-// require_once "../../config.php";
-
-// // Grab data from user and see if it exists in the admins table
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-// $email = $_POST["email"];
-//  $password = $_POST["password"];
-
-//  if ($conn->connect_error) {
-//  die("Failed to connect to database: " . $conn->connect_error);
-//  }
 
 
 //  $sql_admin = "SELECT * FROM admins WHERE Email = '$email'";
@@ -104,7 +87,7 @@
 //  $error = "Invalid credentials.";
 // }
 // }
-// }
+ //}
 
 if(isset($_POST['submit'])){
 	include_once "../../User.php";
@@ -120,17 +103,13 @@ if(isset($_POST['submit'])){
 	}
 }
 ?>
-
-
-
-
 <section class="container">
     <a href="index.php"><img src="../../public/images/sweet dreams logo-01.png" alt="logo"></a>
     <form method="post" class="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <div class="input-box">
             <label>Email</label>
             <input type="text" name="email" placeholder="username@email.com" required />
-            <!-- <span class="error" style="color:red">echo $emailerr</span> -->
+             <span class="error" style="color:red"><?php echo $emailerr?></span> 
           
 
             <br>
@@ -140,19 +119,13 @@ if(isset($_POST['submit'])){
         <div class="input-box">
             <label>Password</label>
             <input type="password" name="password" placeholder="Enter your password" required />
-            <!-- <span class="error"> echo $passworderr</span> -->
-            <!-- <span class="error">echo $error</span> -->
+             <span class="error"> <?php echo $passworderr?></span> 
+             <span class="error"><?php echo $error?></span> 
             <a href="#">Forget password?</a>
         </div>
 
         <button type="submit" name="submit" value="Submit">Submit</button>
     </form>
 </section>
-<?php 
-
-
-
-?>
-
   </body>
 </html>

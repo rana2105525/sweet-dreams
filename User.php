@@ -43,14 +43,22 @@ class User
 			return false;
 	}
 
-    static function login($email,$password){
-		$sql="SELECT * FROM reg WHERE email='$email' and password='$password'";	
-		$result=mysqli_query($GLOBALS['conn'],$sql);
-		if ($row=mysqli_fetch_array($result)){
-			return new User($row[0]); 		
-		}
-		return NULL;
-	}
+  static function login($email, $password)
+{
+  $sql = "SELECT * FROM reg WHERE email='$email'";
+  $result = mysqli_query($GLOBALS['conn'], $sql);
+  if ($row = mysqli_fetch_array($result)) {
+    $storedPassword = $row['password'];
+    if (password_verify($password, $storedPassword)) {
+      return new User($row['id']); 
+    } else {
+      echo "Email or password is incorrect";
+    }
+  } else {
+    echo "Email or password is incorrect";
+  }
+}
+  
 
     // public function deleteUser() {
     //     $sql = "DELETE FROM reg WHERE id=$this->id";

@@ -28,7 +28,7 @@
 <?php
 session_start();	
 include_once "../../User.php";
-
+if (isset($_SESSION["id"])) {
 $UserObject=new User($_SESSION["id"]);
 $profile = "profile.php";
 $home = "signout.php";
@@ -42,7 +42,12 @@ echo "<li><a href = $profile> $UserObject->name</a></li>";
 echo "<li><a href = $cart> $cart_class</a></li>";
 echo "<li><a href = $wish> $wish_class</a></li>";
 echo "<li><a href = $home> $signout</a></li>";
-
+}
+else{
+  $login = "login.php";
+  $log = "Login";
+  echo "<li><a href=$login>$log</a></li>";  
+}
 
 // echo"<a href='index.php'>Back</a>";
 
