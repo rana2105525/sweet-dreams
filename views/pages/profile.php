@@ -15,24 +15,36 @@
 <body>
   
 <?php
-session_start();
 echo "<h1>Your Profile</h1>";
+?>
+<?php
+session_start();	
+include_once "../../User.php";
+
+$UserObject=new User($_SESSION["id"]);
+
+
+
 ?>
 <section class=container>
 <form class="form">
 <div class="input-box">
 <label>Fullname: </label>
 <?php
-echo  $_SESSION["name"];
+echo " $UserObject->name<br>";
+
 ?>
 </div>
 <div class="input-box">
 <label>Email: </label>
 <?php
-echo   	$_SESSION["email"];
+echo " $UserObject->email<br>";
 
 ?>
 </div>
+<?php
+include_once "../../User.php";
+?>
 <button ><a href="edit_info.php"class="button" >Update info</a></button>
 <button ><a href="delete_user.php"class="button" >Delete account</a></button>
 

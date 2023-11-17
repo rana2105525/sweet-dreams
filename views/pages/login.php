@@ -14,96 +14,110 @@
 
   <body>
   <?php
-$emailerr = $passworderr =$error="";
+// $emailerr = $passworderr =$error="";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
- if (empty($_POST["email"])) {
- $emailerr = "Email is required";
- } else {
- $email = test_input($_POST["email"]);
+//  if (empty($_POST["email"])) {
+//  $emailerr = "Email is required";
+//  } else {
+//  $email = test_input($_POST["email"]);
 
- if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
- $emailerr = "Invalid email format";
- }
-}
-
-
-if (empty($_POST["password"])) {
- $passworderr = "Password is required";
- }
-}
+//  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+//  $emailerr = "Invalid email format";
+//  }
+// }
 
 
-
-function test_input($data) {
- $data = trim($data);
- $data = stripslashes($data);
- $data = htmlspecialchars($data);
- return $data;
-}
-
-// Start session
-session_start();
-
-// Include database connection file
-require_once "../../config.php";
-
-// Grab data from user and see if it exists in the admins table
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-$email = $_POST["email"];
- $password = $_POST["password"];
-
- if ($conn->connect_error) {
- die("Failed to connect to database: " . $conn->connect_error);
- }
+// if (empty($_POST["password"])) {
+//  $passworderr = "Password is required";
+//  }
+// }
 
 
- $sql_admin = "SELECT * FROM admins WHERE Email = '$email'";
- $result_admin = mysqli_query($conn, $sql_admin);
 
- if ($row_admin = mysqli_fetch_assoc($result_admin)) {
- if (password_verify($password, $row_admin['Password'])) {
- $_SESSION['admin'] = true;
- $_SESSION['ID'] = $row_admin['ID'];
- $_SESSION['Name'] = $row_admin['Username'];
- $_SESSION['Phone'] = $row_admin['Phone'];
- $_SESSION['Email'] = $row_admin['Email'];
- $_SESSION['Password'] = $row_admin['Password'];
- $_SESSION['Gender'] = $row_admin['Gender'];
+// function test_input($data) {
+//  $data = trim($data);
+//  $data = stripslashes($data);
+//  $data = htmlspecialchars($data);
+//  return $data;
+// }
 
- header("Location:admin/viewAdmin.php");
- exit();
- } else {
- $error = "Invalid credentials.";
- }
- } else {
+// // Start session
+// session_start();
 
- $sql_reg = "SELECT * FROM reg WHERE email = '$email'";
- $result_reg = mysqli_query($conn, $sql_reg);
+// // Include database connection file
+// require_once "../../config.php";
 
-if ($row_reg = mysqli_fetch_assoc($result_reg)) {
+// // Grab data from user and see if it exists in the admins table
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// $email = $_POST["email"];
+//  $password = $_POST["password"];
 
-if (password_verify($password, $row_reg['password'])) {
-
- $_SESSION['admin'] = false;
- $_SESSION['iD'] = $row_reg['id'];
- $_SESSION['name'] = $row_reg['name'];
- $_SESSION['email'] = $row_reg['email'];
- $_SESSION['password'] = $row_reg['password'];
- $_SESSION['birth'] = $row_reg['birth'];
- $_SESSION['gender'] = $row_reg['gender'];
+//  if ($conn->connect_error) {
+//  die("Failed to connect to database: " . $conn->connect_error);
+//  }
 
 
-header("Location: index.php");
-exit();
-} else {
-$error = "Invalid credentials.";
- }
- } else {
- $error = "Invalid credentials.";
-}
-}
+//  $sql_admin = "SELECT * FROM admins WHERE Email = '$email'";
+//  $result_admin = mysqli_query($conn, $sql_admin);
+
+//  if ($row_admin = mysqli_fetch_assoc($result_admin)) {
+//  if (password_verify($password, $row_admin['Password'])) {
+//  $_SESSION['admin'] = true;
+//  $_SESSION['ID'] = $row_admin['ID'];
+//  $_SESSION['Name'] = $row_admin['Username'];
+//  $_SESSION['Phone'] = $row_admin['Phone'];
+//  $_SESSION['Email'] = $row_admin['Email'];
+//  $_SESSION['Password'] = $row_admin['Password'];
+//  $_SESSION['Gender'] = $row_admin['Gender'];
+
+//  header("Location:admin/viewAdmin.php");
+//  exit();
+//  } else {
+//  $error = "Invalid credentials.";
+//  }
+//  } else {
+
+//  $sql_reg = "SELECT * FROM reg WHERE email = '$email'";
+//  $result_reg = mysqli_query($conn, $sql_reg);
+
+// if ($row_reg = mysqli_fetch_assoc($result_reg)) {
+
+// if (password_verify($password, $row_reg['password'])) {
+
+//  $_SESSION['admin'] = false;
+//  $_SESSION['iD'] = $row_reg['id'];
+//  $_SESSION['name'] = $row_reg['name'];
+//  $_SESSION['email'] = $row_reg['email'];
+//  $_SESSION['password'] = $row_reg['password'];
+//  $_SESSION['birth'] = $row_reg['birth'];
+//  $_SESSION['gender'] = $row_reg['gender'];
+
+
+// header("Location: index.php");
+// exit();
+// } else {
+// $error = "Invalid credentials.";
+//  }
+//  } else {
+//  $error = "Invalid credentials.";
+// }
+// }
+// }
+
+if(isset($_POST['submit'])){
+	include_once "../../User.php";
+	$email=$_POST["email"];
+	$password=$_POST["password"];
+
+	$UserObject=User::login($email,$password);
+	if ($UserObject!==NULL)
+	{	
+		session_start();
+		$_SESSION["id"]=$UserObject->id;
+		header("Location:index.php");
+	}
 }
 ?>
 
@@ -116,7 +130,7 @@ $error = "Invalid credentials.";
         <div class="input-box">
             <label>Email</label>
             <input type="text" name="email" placeholder="username@email.com" required />
-            <span class="error" style="color:red"><?php echo $emailerr;?></span>
+            <!-- <span class="error" style="color:red">echo $emailerr</span> -->
           
 
             <br>
@@ -126,8 +140,8 @@ $error = "Invalid credentials.";
         <div class="input-box">
             <label>Password</label>
             <input type="password" name="password" placeholder="Enter your password" required />
-            <span class="error"><?php echo $passworderr;?></span>
-            <span class="error"><?php echo $error;?></span>
+            <!-- <span class="error"> echo $passworderr</span> -->
+            <!-- <span class="error">echo $error</span> -->
             <a href="#">Forget password?</a>
         </div>
 
