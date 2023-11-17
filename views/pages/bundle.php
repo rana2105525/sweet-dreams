@@ -39,7 +39,7 @@
         ?>
                 <div class="products">
                     <div class="prod">
-                    <form method="post" action="prod_desc.php">
+                    <form method="post" action="prod.php">
                             <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
                             <button type="submit" name="add_to_description"><img src="../../public/<?php echo $prod_image; ?>"></button>
                         </form>
