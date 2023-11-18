@@ -24,9 +24,7 @@
     include_once "../../config.php";
     $result = mysqli_query($conn, $sql);
     ?>
-
-    <div class="our_Products">
-        <?php
+<?php
         // Check if there are products to display
         if (mysqli_num_rows($result) > 0) {
             // Loop through the products and display them dynamically
@@ -36,39 +34,46 @@
                 $price = $row["price"];
                 $description = $row["description"];
                 $prod_image = $row["prod_image"];
-                $category = $row["category"];
+                $category= $row["category"];
         ?>
-                <div class="products">
-                    <div class="prod">
-                          <form method="post" action="prod.php">
-                            <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
-                            <button type="submit" name="add_to_description"><img src="../../public/<?php echo $prod_image; ?>"></button>
-                        </form>
-                        <div class="design">
-                            <h5><?php echo $title; ?></h5>
-                            <h6><?php echo $description; ?></h6>
-                            <h6><?php echo $price; ?></h6>
-                            <form method="post" action="wishlist.php">
-                                <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
-                                <button type="submit" class="btn" name="add_to_wishlist"><i class="fa fa-heart"></i></button>
-                            </form>
-                            <form method="post" action="cart.php">
-                                <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
-                                <button type="submit" class="btn" name="add_to_cart"><i class="fa fa-shopping-bag"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-        <?php
+       <div class="prod">
+<div class="product-card">
+
+		
+		<div class="product-tumb">
+        <form method="post" action="prod.php">
+        <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">  
+        <button type="submit"  name="add_to_description"><img src="../../public/<?php echo $prod_image; ?>"></button>
+        </form>
+
+		</div>
+		<div class="product-details">
+			<span class="product-catagory"><?php echo $category; ?></span>
+			<h4><?php echo $title; ?></h4>
+			<p><?php echo $description; ?></p>
+			<div class="product-bottom-details">
+				<div class="product-price"><?php echo $price; ?>LE</div>
+				<div class="product-links">
+					<a href=""><i class="fa fa-heart"></i></a>
+					<a href=""><i class="fa fa-shopping-cart"></i></a>
+				</div>
+			</div>
+		</div>
+
+        
+	</div>
+            </div>   
+    <?php
             }
         } else {
             // If there are no products, display a message
             echo "<p>No products found in the Winter Collection.</p>";
         }
         ?>
-    </div>
-
+    
     <?php include '../partials/footer.php'; ?>
+
+    
 </body>
 
 </html>
