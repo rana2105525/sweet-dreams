@@ -102,6 +102,12 @@ $email = $_POST['email'];
   <input type='text' value="<?php echo $_SESSION['email']; ?>" name='email' required/><br>
   <span class="error"> <?php echo $emailErr;?></span>
 </div>
+
+<div class="input-box">
+<label>Change password</label>
+  <input type='password' value="" name='password' required/><br>
+  <span class="error"></span>
+</div>
   
   <button class="button" type='submit' value='Submit' name='Submit'>Save</button>
 </form>
