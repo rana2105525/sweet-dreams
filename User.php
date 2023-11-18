@@ -77,12 +77,32 @@ class User
             echo 'Error deleting user.';
         }
      }
+     public function editUser($name, $email){
+      $sql = "UPDATE reg SET name='$name', email='$email' WHERE id=$this->id";
+      $result = mysqli_query($GLOBALS['conn'], $sql);
+  
+      // Check if the update was successful.
+      if ($result) {
+          // Update the session variables.
+          $_SESSION['name'] = $name;
+          $_SESSION['email'] = $email;
+  
+          // Redirect the user to the index page.
+          header('Location: index.php');
+          exit();
+      } else {
+          // Display an error message.
+          echo 'Error updating user profile.';
+      }
+  }
+  
+     
 
-    // static function logout($id) {
-    //     session_start();
-    //     session_destroy();
-    //     header("Location:index.php");
-    // }
+     public function logout() {
+         session_start();
+         session_destroy();
+         header("Location:index.php");
+     }
 }
 
 

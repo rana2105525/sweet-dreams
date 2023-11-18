@@ -26,13 +26,10 @@ function test_input($data)
 
 // Include connection
 include_once "../../config.php";
+include_once "../../User.php";
 
 // Check if the user is logged in.
-if (!isset($_SESSION['name']) || !isset($_SESSION['email'])) {
 
- header('Location: login.php');
-exit();
-}
 
 // Check if the user has submitted the form.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -62,61 +59,46 @@ $email = $_POST['email'];
 
 
     if (empty($nameErr) && empty($emailErr)) {
-        $sql = "UPDATE reg SET name='$name', email='$email' WHERE email = '" . $_SESSION['email'] . "'";
-        $result = mysqli_query($conn, $sql);
-
-        // Check if the update was successful.
-        if ($result) {
-            // Update the session variables.
-            $_SESSION['name'] = $name;
-            $_SESSION['email'] = $email;
-
-            // Redirect the user to the index page.
-            header('Location: index.php');
-            exit();
-        } else {
-            // Display an error message.
-            echo 'Error updating user profile.';
-        }
-    }
+     // Assuming User class has an updateUserInfo() method
+     $UserObject->editUser($name, $email); // Passing the new name and email to the method
+     header('Location: index.php');
+     exit();
+ }
 }
 
+$UserObject=new User($_SESSION["id"]);
 ?>
-
-
-
-
-
-
 <h1>Edit Profile</h1>
 <section class=container>
 <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' method='post' class="form">
 <div class="input-box">
 <label>Fullname</label>
-  <input type='text' value="<?php echo $_SESSION['name']; ?>" name='name' required/><br>
+  <input type='text' value= " <?php
+      echo " $UserObject->name ";
+      ?>" name='name' required/><br>
   <span class="error"> <?php echo $nameErr;?></span>
 
 </div>
 <div class="input-box">
 <label>Email</label>
-  <input type='text' value="<?php echo $_SESSION['email']; ?>" name='email' required/><br>
+  <input type='text' value=  "<?php
+      echo " $UserObject->email";
+      ?>" name='email' required/><br>
   <span class="error"> <?php echo $emailErr;?></span>
 </div>
 
-<div class="input-box">
-<label>Change password</label>
-  <input type='password' value="" name='password' required/><br>
-  <span class="error"></span>
-</div>
+
   
-  <button class="button" type='submit' value='Submit' name='Submit'>Save</button>
+<button type="submit" name="save" class="button">save</button>
 </form>
 </section>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
+    $UserObject->editUser($name,$email);
+}
+?>
 
 <?php include '../partials/footer.php'; ?>
-
-
-
 </body>
 
 </html> 

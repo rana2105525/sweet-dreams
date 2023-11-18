@@ -39,11 +39,11 @@ $UserObject=new User($_SESSION["id"]);
       echo " $UserObject->email<br>";
       ?>
     </div>
-
     <button><a href="edit_info.php" class="button">Update info</a></button>
-
     <button type="submit" name="deleteButton" class="button">Delete account</button>
+    
   </form>
+  
 </section>
 
 <?php
