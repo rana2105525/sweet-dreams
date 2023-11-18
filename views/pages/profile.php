@@ -20,38 +20,39 @@ echo "<h1>Your Profile</h1>";
 <?php
 session_start();	
 include_once "../../User.php";
+include_once "../../config.php";
 
 $UserObject=new User($_SESSION["id"]);
-
-
-
 ?>
-<section class=container>
-<form class="form">
-<div class="input-box">
-<label>Fullname: </label>
-<?php
-echo " $UserObject->name<br>";
 
-?>
-</div>
-<div class="input-box">
-<label>Email: </label>
-<?php
-echo " $UserObject->email<br>";
+<section class="container">
+  <form class="form" method="post">
+    <div class="input-box">
+      <label>Fullname: </label>
+      <?php
+      echo " $UserObject->name<br>";
+      ?>
+    </div>
+    <div class="input-box">
+      <label>Email: </label>
+      <?php
+      echo " $UserObject->email<br>";
+      ?>
+    </div>
 
-?>
-</div>
-<?php
-include_once "../../User.php";
-?>
-<button ><a href="edit_info.php"class="button" >Update info</a></button>
-<button ><a href="delete_user.php"class="button" >Delete account</a></button>
+    <button><a href="edit_info.php" class="button">Update info</a></button>
 
-</form>
+    <button type="submit" name="deleteButton" class="button">Delete account</button>
+  </form>
 </section>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteButton'])) {
+    $UserObject->deleteUser();
+}
+?>
+
 <?php include '../partials/footer.php'; ?>
 
-
 </body>
-</html> 
+</html>

@@ -10,6 +10,7 @@ if(!$conn){
     die("Connection failed: " . mysqli_connect_error());
 }
 
+
 class User
 {
     public $id;
@@ -60,14 +61,22 @@ class User
 }
   
 
-    // public function deleteUser() {
-    //     $sql = "DELETE FROM reg WHERE id=$this->id";
-    //     if (mysqli_query($GLOBALS['conn'], $sql)) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
+   public function deleteUser() {
+        $sql = "DELETE FROM reg WHERE id=$this->id";
+        $result = mysqli_query($GLOBALS['conn'], $sql);
+
+        // Check if the deletion was successful.
+        if ($result) {
+            // Destroy the session.
+            session_destroy();
+        
+            // Display a success message.
+            header("Location:index.php");
+        } else {
+            // Display an error message.
+            echo 'Error deleting user.';
+        }
+     }
 
     // static function logout($id) {
     //     session_start();
