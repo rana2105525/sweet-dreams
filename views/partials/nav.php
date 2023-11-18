@@ -46,7 +46,7 @@ if (isset($_SESSION["id"])) {
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["logout"])) {
     if (isset($_SESSION["id"])) {
         $UserObject = new User($_SESSION["id"]);
-        $UserObject->logout(); // Call the logout method from User class
+        $UserObject->logout("id"); // Call the logout method from User class
     }
 }
 ?>

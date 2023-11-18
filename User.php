@@ -98,7 +98,7 @@ class User
   
      
 
-     public function logout() {
+     public function logout($id) {
          session_start();
          session_destroy();
          header("Location:index.php");
