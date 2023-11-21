@@ -35,7 +35,7 @@ class Product
 	}
 
     static function InsertinDB_Static($title,$price,$description,$upload_image,$category)	{
-     $title = $_POST['title'];
+    $title = $_POST['title'];
     $price = $_POST['price'];
     $description = $_POST['description'];
     $prod_image =$_FILES['prod_image'];//2D global array

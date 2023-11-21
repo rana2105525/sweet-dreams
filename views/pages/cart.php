@@ -19,45 +19,51 @@
     </nav>
 
     <?php
-    if (isset($_POST['add_to_cart'])) {
-        $product_id = $_POST['product_id'];
+    include_once '../../cartClass.php';
 
-        // Check if the cart array exists in the session
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = array();
-        }
+    $cartObj=new Cart($_SESSION["id"]);
+    Cart::addItem($email, $prod_title, $prod_desc, $prod_price, $upload_image, $quantity, $totalPrice);
+   
 
-        // Flag to check if the product is already in the cart
-        $product_already_in_cart = false;
+    // if (isset($_POST['add_to_cart'])) {
+    //     $product_id = $_POST['product_id'];
 
-        // Check if the product with the same ID already exists in the cart
-        foreach ($_SESSION['cart'] as $key => $item) {
-            if ($item['id'] == $product_id) {
-                // Product already exists in the cart, update the quantity or do nothing
-                $product_already_in_cart = true;
-                break;
-            }
-        }
+    //     // Check if the cart array exists in the session
+    //     if (!isset($_SESSION['cart'])) {
+    //         $_SESSION['cart'] = array();
+    //     }
 
-        if (!$product_already_in_cart) {
-            include_once "../../config.php";
-            // Retrieve the product attributes from the database based on the product ID
-            $sql = "SELECT  * ,sum(price) as total FROM products WHERE id = $product_id";
-            $result = mysqli_query($conn, $sql);
-            $row = mysqli_fetch_assoc($result);
+    //     // Flag to check if the product is already in the cart
+    //     $product_already_in_cart = false;
 
-            // Add the product ID and attributes to the cart array
-            $_SESSION['cart'][] = array(
-                'id' => $product_id,
-                'title' => $row['title'],
-                'description' => $row['description'],
-                'price' => $row['price'],
-                'prod_image' => $row['prod_image'],
-                'category' => $row['category'],
-                'total' => $row['total']
-            );
-        }
-    }
+    //     // Check if the product with the same ID already exists in the cart
+    //     foreach ($_SESSION['cart'] as $key => $item) {
+    //         if ($item['id'] == $product_id) {
+    //             // Product already exists in the cart, update the quantity or do nothing
+    //             $product_already_in_cart = true;
+    //             break;
+    //         }
+    //     }
+
+    //     if (!$product_already_in_cart) {
+    //         include_once "../../config.php";
+    //         // Retrieve the product attributes from the database based on the product ID
+    //         $sql = "SELECT  * ,sum(price) as total FROM products WHERE id = $product_id";
+    //         $result = mysqli_query($conn, $sql);
+    //         $row = mysqli_fetch_assoc($result);
+
+    //         // Add the product ID and attributes to the cart array
+    //         $_SESSION['cart'][] = array(
+    //             'id' => $product_id,
+    //             'title' => $row['title'],
+    //             'description' => $row['description'],
+    //             'price' => $row['price'],
+    //             'prod_image' => $row['prod_image'],
+    //             'category' => $row['category'],
+    //             'total' => $row['total']
+    //         );
+    //     }
+    // }
     ?>
 
 
@@ -69,23 +75,25 @@
 
         <table>
             <?php
-            if (empty($_SESSION['cart'])) {
-                echo '<div class="empty-cart-message">Your cart is empty.</div>';
-            } else {
-                foreach ($_SESSION['cart'] as $key => $item) {
+            // if (empty($_SESSION['cart'])) {
+            //     echo '<div class="empty-cart-message">Your cart is empty.</div>';
+            // } else {
+            //     foreach ($_SESSION['cart'] as $key => $item) {
                     ?>
                     <div class="products">
-                        <div class="prod">
-                            <img src="../../public/<?php echo $item['prod_image']; ?>" style="width:90px;height:100px">
+                    <div class="prod">
+                    <img src="../../public/<?php echo $cartObj->items[$prod_image]; ?>" style="width:90px;height:100px">
+                    </div>
+
                             <div class="design">
                                 <h4>
-                                    <?php echo $item['title']; ?>
+                                <?php echo $cartObj->items[$prod_title]; ?>
                                     </h5>
                                     <h6>
-                                        <?php echo $item['description']; ?>
+                                    <?php echo $cartObj->items[$prod_desc]; ?>
                                     </h6>
                                     <h6>Total price: $
-                                        <?php echo $item['price']; ?>
+                                    <?php echo $cartObj->items[$prod_price]; ?>
                                     </h6>
                             </div>
 
@@ -94,7 +102,7 @@
 
 
                             <!-- <h5>Total: $
-                                <?php echo $item['total']; ?>
+                               
                             </h5> -->
                             <form method="post" action="remove_item.php">
                                 <input type="hidden" name="item_index" value="<?php echo $key; ?>">
@@ -105,20 +113,51 @@
 
                         </div>
                     </div>
+                    <form method="post" class="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div>
-                        <button class="check-btn"><a href="checkout.php">Checkout</a></button>
+                        <button input type="submit" name="submit" id="submit-button" value="submit" class="check-btn"><a href="checkout.php">Checkout</a></button>
                     </div>
-
+                     </form>
                     <?php
 
-                }
+                // }
                 ?>
 
 
                 <?php
+            // }
+         
+            //grap data from user if form was submitted 
+           
+            if (isset($_POST['submit'])) { // check if form was submitted
+                $prod_title = $product['prod_title'];
+                $prod_desc = $product['prod_desc'];
+                $prod_price = $product['prod_price'];
+                $upload_image = $product['upload_image'];
+                $quantity = 1;
+                $totalPrice = $quantity * $prod_price;
+                $email = $_POST['email'];
+                $prod_title = $_POST['prod_title'];
+                $prod_desc = $_POST['prod_desc'];
+                $prod_price = $_POST['prod_price'];
+            
+                // Retrieve image file information from $_FILES
+                $prod_image = $_FILES['upload_image'];
+                $image_filename = $prod_image['name']; // get image name
+                $image_filetemp = $prod_image['tmp_name']; // get temp path
+            
+                $upload_image = 'images/' . $image_filename; // save image inside imgs folder
+                $destination = '../../../public/' . $upload_image;
+                move_uploaded_file($image_filetemp, $destination);
+            
+                $quantity = $_POST['quantity'];
+                $totalPrice = $_POST['price'];
+            
+                // Proceed with further processing using the retrieved form data
             }
-
-            ?>
+            
+           ?>
+            
 
 
             <?php include '../partials/footer.php'; ?>

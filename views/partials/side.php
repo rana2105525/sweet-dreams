@@ -10,6 +10,6 @@
                 <!-- <li><a href="#">Gifts</a></li> -->
                 <li><a href="reviews.php">Reviews</a></li>
                 <li><a href="about.php">About us</a></li>
-                <!-- <li><a href="#">Contact us</a></li> -->
+                <li><a href="contact.php">Contact us</a></li>
             </ul>
         </div>
