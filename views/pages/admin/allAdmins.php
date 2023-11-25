@@ -20,7 +20,7 @@
       // Check if the user is logged in as an admin
       if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
           // Redirect the user to the login page if not logged in as an admin
-          header("Location: /sweet-dreams/views/pages/");
+          header("Location: /sweet-dreams/views/pages/login.php");
           exit();
       }
       ?>

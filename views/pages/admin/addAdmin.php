@@ -33,10 +33,11 @@
 <?php
 session_start();
 include_once "../../../config.php";
+include_once "../../../Admin.php";
 
 // Authorization Check
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
-  header("Location: /sweet-dreams/views/pages/");
+  header("Location: /sweet-dreams/views/pages/login.php");
     exit();
 }
 
@@ -61,29 +62,40 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors[] = "Invalid email format.";
     }
 
-    // Check if email already exists in the database
-    $sql = "SELECT * FROM admins WHERE Email = '$email'";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        $errors[] = "Email is already taken.";
-    }
-
-    if (count($errors) === 0) {
-        // Hash the password
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        // Insert data into the "admins" table
-        $sql = "INSERT INTO admins (Username, Phone, Email, Password, Gender) VALUES ('$name', '$phoneNumber', '$email', '$hashedPassword', '$gender')";
-        $result = mysqli_query($conn, $sql);
-
-        if ($result) {
-            header("Location: /sweet-dreams/views/pages/admin/addAdmin.php");
-            exit();
-        } else {
-            $errors[] = "Error: " . mysqli_error($conn);
+    if(isset($_POST['submit'])){
+        if (empty($errors)) {
+            
+            $AddAdmin = Admin::addAdmin($name, $phoneNumber, $email, $password, $gender);
+    
+            if ($AddAdmin !== NULL) {
+                header("Location: /sweet-dreams/views/pages/admin/addAdmin.php");
+                exit();
+            }
         }
     }
-}
+    }
+    // // Check if email already exists in the database
+    // $sql = "SELECT * FROM admins WHERE Email = '$email'";
+    // $result = mysqli_query($conn, $sql);
+    // if (mysqli_num_rows($result) > 0) {
+    //     $errors[] = "Email is already taken.";
+    // }
+
+    // if (count($errors) === 0) {
+    //     // Hash the password
+    //     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    //     // Insert data into the "admins" table
+    //     $sql = "INSERT INTO admins (Username, Phone, Email, Password, Gender) VALUES ('$name', '$phoneNumber', '$email', '$hashedPassword', '$gender')";
+    //     $result = mysqli_query($conn, $sql);
+
+    //     if ($result) {
+    //         header("Location: /sweet-dreams/views/pages/admin/addAdmin.php");
+    //         exit();
+    //     } else {
+    //         $errors[] = "Error: " . mysqli_error($conn);
+    //     }
+    // }
 ?>
     <div class="component">
         <div class="sidebar rows">

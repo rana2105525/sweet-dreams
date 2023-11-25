@@ -14,6 +14,7 @@
 
   <body>
   <?php
+  session_start();
  $emailerr = $passworderr =$error="";
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -97,9 +98,20 @@ if(isset($_POST['submit'])){
 	$UserObject=User::login($email,$password);
 	if ($UserObject!==NULL)
 	{	
-		session_start();
 		$_SESSION["id"]=$UserObject->id;
 		header("Location:index.php");
+	}
+}
+else if(isset($_POST['submit'])){
+	include_once "../../../Admin.php";
+	$email=$_POST["email"];
+	$password=$_POST["password"];
+
+	$UserAdmin=Admin::adminLogin($email,$password);
+	if ($UserObject!==NULL)
+	{	
+		$_SESSION["ID"]=$UserAdmin->ID;
+		header("Location: /sweet-dreams/views/pages/admin/viewAdmin.php");
 	}
 }
 ?>
