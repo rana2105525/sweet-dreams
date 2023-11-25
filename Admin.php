@@ -55,23 +55,23 @@ static function adminLogin($Email, $Password)
 
 static function addAdmin($Username,$Phone,$Email,$Password,$Gender)
 {
-    global $conn;
-    $sql = "SELECT * FROM admins WHERE Email = '$Email'";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        return "Email is already taken.";
-    }
+    // global $conn;
+    // $sql = "SELECT * FROM admins WHERE Email = '$Email'";
+    // $result = mysqli_query($conn, $sql);
+    // if (mysqli_num_rows($result) > 0) {
+    //     return "Email is already taken.";
+    // }
 
-        $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+        // $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
         
-        $sql = "INSERT INTO admins (Username, Phone, Email, Password, Gender) VALUES ('$Username', '$Phone', '$Email', '$hashedPassword', '$Gender')";
-        $result = mysqli_query($conn, $sql);
-    
+        $sql = "INSERT INTO admins (Username, Phone, Email, Password, Gender) VALUES ('$Username', '$Phone', '$Email', '$Password', '$Gender')";
+        if(mysqli_query($GLOBALS['conn'],$sql))
+        return true;
+        else
+        return false;
+ 
 }
-
-
-
 }
 
 

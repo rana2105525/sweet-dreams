@@ -36,10 +36,10 @@ include_once "../../../config.php";
 include_once "../../../Admin.php";
 
 // Authorization Check
-if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
-  header("Location: /sweet-dreams/views/pages/login.php");
-    exit();
-}
+// if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+//   header("Location: /sweet-dreams/views/pages/login.php");
+//     exit();
+// }
 
 function isValidEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
         <div class="content">
             <section class="container rows">
-                <form action="" method="post" class="form">
+                <form method="post" class="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                     <div id="title">
                         <h2>Add a new admin</h2>
                     </div>
@@ -143,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                     </div>
 
-                    <button type="submit">Add Admin</button>
+                    <button input type="submit" name="submit" id="submit-button" value="submit">Add Admin</button>
                 </form>
                 <div class="error-container">
                     <?php
@@ -156,5 +156,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
 </body>
+<?php
+ //grap data from user if form was submitted 
 
+  if (isset($_POST['submit'])){ //check if form was submitted
+    $Username=htmlspecialchars($_POST["Username"]);	
+    $Phone=htmlspecialchars($_POST["Phone"]); 	
+	$Email=htmlspecialchars($_POST["Email"]);
+    $Password=htmlspecialchars($_POST["Password"]);
+ 	$Gender=htmlspecialchars($_POST["Gender"]);
+ }
+?>
 </html>
