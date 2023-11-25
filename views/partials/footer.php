@@ -19,7 +19,7 @@
     </div>
     <div class="col">
       <h4>About</h4>
-      <a href="about.php">About us</a>
+      <a href="views/pages/about.php">About us</a>
       <a href="index.php">Home</a>
       <a href="privacy.php">Privacy policy</a>
       <a href="t&cond.php">Terms & conditions</a>
