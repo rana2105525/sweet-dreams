@@ -22,8 +22,8 @@ public $Gender;
 function __construct($ID)	{
     if ($ID !=""){
         $sql="select * from admins where 	ID=$ID";
-        $User = mysqli_query($GLOBALS['conn'],$sql);
-        if ($row = mysqli_fetch_array($User)){
+        $Admin = mysqli_query($GLOBALS['conn'],$sql);
+        if ($row = mysqli_fetch_array($Admin)){
             $this->Username=$row["Username"];
              $this->Phone=$row["Phone"];
             $this->Email=$row["Email"];
@@ -39,8 +39,7 @@ static function adminLogin($Email, $Password)
     {
       $sql = "SELECT * FROM admins WHERE Email='$Email'";
       $result = mysqli_query($GLOBALS['conn'], $sql);
-      if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
+      if ($row = mysqli_fetch_array($result)) {
         $storedPassword = $row['Password'];
         if (password_verify($Password, $storedPassword)) {
           return new Admin($row['ID']); 

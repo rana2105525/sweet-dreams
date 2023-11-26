@@ -64,16 +64,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if(isset($_POST['submit'])){
         if (empty($errors)) {
-            
-            $AddAdmin = Admin::addAdmin($name, $phoneNumber, $email, $password, $gender);
-    
-            if ($AddAdmin !== NULL) {
-                header("Location: /sweet-dreams/views/pages/admin/addAdmin.php");
-                exit();
+          $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            if(Admin::addAdmin($name, $phoneNumber, $email, $hashed_password, $gender)) {
+              header("Location: ../login.php");
+              exit();
+            } else {
+              echo "Error inserting data into the database: " . mysqli_error($conn);
             }
+          }
+            }
+    
+          
         }
-    }
-    }
+    
+    
     // // Check if email already exists in the database
     // $sql = "SELECT * FROM admins WHERE Email = '$email'";
     // $result = mysqli_query($conn, $sql);

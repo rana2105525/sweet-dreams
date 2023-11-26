@@ -90,8 +90,10 @@
 // }
  //}
 
-if(isset($_POST['submit'])){
+ if(isset($_POST['submit'])){
 	include_once "../../User.php";
+	include_once "../../Admin.php";
+
 	$email=$_POST["email"];
 	$password=$_POST["password"];
 
@@ -101,17 +103,13 @@ if(isset($_POST['submit'])){
 		$_SESSION["id"]=$UserObject->id;
 		header("Location:index.php");
 	}
-}
-else if(isset($_POST['submit'])){
-	include_once "../../../Admin.php";
-	$email=$_POST["email"];
-	$password=$_POST["password"];
-
-	$UserAdmin=Admin::adminLogin($email,$password);
-	if ($UserObject!==NULL)
-	{	
-		$_SESSION["ID"]=$UserAdmin->ID;
-		header("Location: /sweet-dreams/views/pages/admin/viewAdmin.php");
+	else {
+		$UserAdmin=Admin::adminLogin($email,$password);
+		if ($UserAdmin!==NULL)
+		{	
+			$_SESSION["ID"]=$UserAdmin->ID;
+			header("Location: admin/addAdmin.php");
+		}
 	}
 }
 ?>
