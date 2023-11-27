@@ -20,148 +20,77 @@
 
     <?php
     include_once '../../cartClass.php';
+    include_once '../../productClass.php'; // Make sure to include the Product class
 
-    $cartObj=new Cart($_SESSION["id"]);
-    Cart::addItem($email, $prod_title, $prod_desc, $prod_price, $upload_image, $quantity, $totalPrice);
-   
+    $cart = new Cart();
 
-    // if (isset($_POST['add_to_cart'])) {
-    //     $product_id = $_POST['product_id'];
+    if (!empty($_POST['cart'])) {
+        $cart->productsQuantity = json_decode($_POST['cart'], true);
+    }
 
-    //     // Check if the cart array exists in the session
-    //     if (!isset($_SESSION['cart'])) {
-    //         $_SESSION['cart'] = array();
-    //     }
-
-    //     // Flag to check if the product is already in the cart
-    //     $product_already_in_cart = false;
-
-    //     // Check if the product with the same ID already exists in the cart
-    //     foreach ($_SESSION['cart'] as $key => $item) {
-    //         if ($item['id'] == $product_id) {
-    //             // Product already exists in the cart, update the quantity or do nothing
-    //             $product_already_in_cart = true;
-    //             break;
-    //         }
-    //     }
-
-    //     if (!$product_already_in_cart) {
-    //         include_once "../../config.php";
-    //         // Retrieve the product attributes from the database based on the product ID
-    //         $sql = "SELECT  * ,sum(price) as total FROM products WHERE id = $product_id";
-    //         $result = mysqli_query($conn, $sql);
-    //         $row = mysqli_fetch_assoc($result);
-
-    //         // Add the product ID and attributes to the cart array
-    //         $_SESSION['cart'][] = array(
-    //             'id' => $product_id,
-    //             'title' => $row['title'],
-    //             'description' => $row['description'],
-    //             'price' => $row['price'],
-    //             'prod_image' => $row['prod_image'],
-    //             'category' => $row['category'],
-    //             'total' => $row['total']
-    //         );
-    //     }
-    // }
+    if (!empty($_GET["action"])) {
+        switch ($_GET["action"]) {
+            case "add":
+                if (!empty($_POST["quantity"])) {
+                    $cart->addProduct($_GET["id"], $_POST["quantity"]);
+                }
+                break;
+            case "remove":
+                $cart->removeProduct($_GET["id"]);
+                break;
+            case "empty":
+                $cart->emptyCart();
+                break;
+        }
+    }
     ?>
 
+    <div id="shopping-cart">
+        <div class="txt-heading">
+            Shopping Cart <a id="btnEmpty" href="index.php?action=empty">Empty Cart</a>
+        </div>
+        <?php
+        $total_quantity = 0;
+        $total_price = 0;
 
-
-
-
-    <h1 id="title">My cart</h1>
-    <div class="our_Products">
-
-        <table>
-            <?php
-            // if (empty($_SESSION['cart'])) {
-            //     echo '<div class="empty-cart-message">Your cart is empty.</div>';
-            // } else {
-            //     foreach ($_SESSION['cart'] as $key => $item) {
-                    ?>
-                    <div class="products">
-                    <div class="prod">
-                    <img src="../../public/<?php echo $cartObj->items[$prod_image]; ?>" style="width:90px;height:100px">
-                    </div>
-
-                            <div class="design">
-                                <h4>
-                                <?php echo $cartObj->items[$prod_title]; ?>
-                                    </h5>
-                                    <h6>
-                                    <?php echo $cartObj->items[$prod_desc]; ?>
-                                    </h6>
-                                    <h6>Total price: $
-                                    <?php echo $cartObj->items[$prod_price]; ?>
-                                    </h6>
-                            </div>
-
-                            <!-- Quantity input field -->
-                            <!-- Quantity input field -->
-
-
-                            <!-- <h5>Total: $
-                               
-                            </h5> -->
-                            <form method="post" action="remove_item.php">
-                                <input type="hidden" name="item_index" value="<?php echo $key; ?>">
-                                <button type="submit" class="btn" id="rmvbtn" name="remove_from_cart">&nbsp;<i
-                                        class="fa fa-remove"></i></button>
-                            </form>
-
-
-                        </div>
-                    </div>
-                    <form method="post" class="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                    <div>
-                        <button input type="submit" name="submit" id="submit-button" value="submit" class="check-btn"><a href="checkout.php">Checkout</a></button>
-                    </div>
-                     </form>
-                    <?php
-
-                // }
-                ?>
-
-
+        if (count($cart->productsQuantity) > 0) {
+        ?>
+            <table cellpadding="10" cellspacing="1">
+                <tr>
+                    <th><strong>Name</strong></th>
+                    <th><strong>Quantity</strong></th>
+                    <th><strong>Price</strong></th>
+                    <th><strong>Action</strong></th>
+                </tr>
                 <?php
-            // }
-         
-            //grap data from user if form was submitted 
-           
-            if (isset($_POST['submit'])) { // check if form was submitted
-                $prod_title = $product['prod_title'];
-                $prod_desc = $product['prod_desc'];
-                $prod_price = $product['prod_price'];
-                $upload_image = $product['upload_image'];
-                $quantity = 1;
-                $totalPrice = $quantity * $prod_price;
-                $email = $_POST['email'];
-                $prod_title = $_POST['prod_title'];
-                $prod_desc = $_POST['prod_desc'];
-                $prod_price = $_POST['prod_price'];
-            
-                // Retrieve image file information from $_FILES
-                $prod_image = $_FILES['upload_image'];
-                $image_filename = $prod_image['name']; // get image name
-                $image_filetemp = $prod_image['tmp_name']; // get temp path
-            
-                $upload_image = 'images/' . $image_filename; // save image inside imgs folder
-                $destination = '../../../public/' . $upload_image;
-                move_uploaded_file($image_filetemp, $destination);
-            
-                $quantity = $_POST['quantity'];
-                $totalPrice = $_POST['price'];
-            
-                // Proceed with further processing using the retrieved form data
-            }
-            
-           ?>
-            
+                foreach ($cart->productsQuantity as $productID => $quantity) {
+                    // Assuming you have a Product class with a method getDetailsById
+                    $product = Product::getDetailsById($productID);
+                    if ($product) {
+                ?>
+                        <tr>
+                            <td><?php echo $product->name; ?></td>
+                            <td><?php echo $quantity; ?></td>
+                            <td><?php echo "$" . $product->price; ?></td>
+                            <td><a href="index.php?action=remove&id=<?php echo $productID; ?>">Remove Item</a></td>
+                        </tr>
+                <?php
+                        $total_quantity += $quantity;
+                        $total_price += ($product->price * $quantity);
+                    }
+                }
+                ?>
+                <tr>
+                    <td colspan="2" align="right">Total:</td>
+                    <td align="right"><?php echo $total_quantity; ?></td>
+                    <td align="right" colspan="2"><strong><?php echo "$" . $total_price; ?></strong></td>
+                    <td></td>
+                </tr>
+            </table>
+        <?php } ?>
+    </div>
 
-
-            <?php include '../partials/footer.php'; ?>
-
+    <?php include '../partials/footer.php'; ?>
 
 </body>
 
