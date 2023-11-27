@@ -14,7 +14,7 @@ $deleteResult = Admin::deleteAdmin($adminID);
 
 if ($deleteResult) {
     session_destroy();
-    header("Location: /allAdmins.php"); 
+    header("Location: login.php"); 
 } else {
     echo 'Error deleting user.';
 }

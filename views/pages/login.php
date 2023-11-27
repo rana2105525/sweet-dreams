@@ -39,57 +39,7 @@
   $data = htmlspecialchars($data);
   return $data;
  }
-
-
-
-
-//  $sql_admin = "SELECT * FROM admins WHERE Email = '$email'";
-//  $result_admin = mysqli_query($conn, $sql_admin);
-
-//  if ($row_admin = mysqli_fetch_assoc($result_admin)) {
-//  if (password_verify($password, $row_admin['Password'])) {
-//  $_SESSION['admin'] = true;
-//  $_SESSION['ID'] = $row_admin['ID'];
-//  $_SESSION['Name'] = $row_admin['Username'];
-//  $_SESSION['Phone'] = $row_admin['Phone'];
-//  $_SESSION['Email'] = $row_admin['Email'];
-//  $_SESSION['Password'] = $row_admin['Password'];
-//  $_SESSION['Gender'] = $row_admin['Gender'];
-
-//  header("Location:admin/viewAdmin.php");
-//  exit();
-//  } else {
-//  $error = "Invalid credentials.";
-//  }
-//  } else {
-
-//  $sql_reg = "SELECT * FROM reg WHERE email = '$email'";
-//  $result_reg = mysqli_query($conn, $sql_reg);
-
-// if ($row_reg = mysqli_fetch_assoc($result_reg)) {
-
-// if (password_verify($password, $row_reg['password'])) {
-
-//  $_SESSION['admin'] = false;
-//  $_SESSION['iD'] = $row_reg['id'];
-//  $_SESSION['name'] = $row_reg['name'];
-//  $_SESSION['email'] = $row_reg['email'];
-//  $_SESSION['password'] = $row_reg['password'];
-//  $_SESSION['birth'] = $row_reg['birth'];
-//  $_SESSION['gender'] = $row_reg['gender'];
-
-
-// header("Location: index.php");
-// exit();
-// } else {
-// $error = "Invalid credentials.";
-//  }
-//  } else {
-//  $error = "Invalid credentials.";
-// }
-// }
- //}
-
+ 
  if(isset($_POST['submit'])){
 	include_once "../../User.php";
 	include_once "../../Admin.php";
