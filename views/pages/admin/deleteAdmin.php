@@ -14,7 +14,7 @@ $deleteResult = Admin::deleteAdmin($adminID);
 
 if ($deleteResult) {
     session_destroy();
-    header("Location: /allAdmins.php"); // Redirect as per your application's flow
+    header("Location: /allAdmins.php"); 
 } else {
     echo 'Error deleting user.';
 }
