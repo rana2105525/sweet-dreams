@@ -35,21 +35,24 @@ function __construct($ID)	{
     }
 }
 
-static function adminLogin($Email, $Password) 
-    {
-      $sql = "SELECT * FROM admins WHERE Email='$Email'";
-      $result = mysqli_query($GLOBALS['conn'], $sql);
-      if ($row = mysqli_fetch_array($result)) {
+static function adminLogin($Email, $Password) {
+    $sql = "SELECT * FROM admins WHERE Email='$Email'";
+    $result = mysqli_query($GLOBALS['conn'], $sql);
+    
+    if ($row = mysqli_fetch_array($result)) {
         $storedPassword = $row['Password'];
         if (password_verify($Password, $storedPassword)) {
-          return new Admin($row['ID']); 
+            $_SESSION['ID'] = $row['ID']; 
+            return new Admin($row['ID']);
         } else {
-          echo "Email or password is incorrect";
+            echo "Email or password is incorrect";
         }
-      } else {
+    } else {
         echo "Email or password is incorrect";
-      }
     }
+}
+
+
 
 
 static function addAdmin($Username,$Phone,$Email,$Password,$Gender)
@@ -63,35 +66,65 @@ static function addAdmin($Username,$Phone,$Email,$Password,$Gender)
 
         // $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
-        
-        $sql = "INSERT INTO admins (Username, Phone, Email, Password, Gender) VALUES ('$Username', '$Phone', '$Email', '$Password', '$Gender')";
+        $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO admins (Username, Phone, Email, Password, Gender) VALUES ('$Username', '$Phone', '$Email', '$hashedPassword', '$Gender')";
         if(mysqli_query($GLOBALS['conn'],$sql))
         return true;
         else
         return false;
  
 }
-public static function displayAdminInfo($admin) {
-  
+
+static function updateAdmin($id, $name, $phoneNumber, $email, $password, $gender) {
+  global $conn;
+
+  $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+  $sql = "UPDATE admins SET Username='$name', Phone='$phoneNumber', Email='$email', Password='$hashedPassword', Gender='$gender' WHERE ID='$id'";
+  $result = mysqli_query($conn, $sql);
+
+  if ($result) {
+      
+      $sql = "SELECT * FROM admins WHERE ID='$id'";
+      $result = mysqli_query($conn, $sql);
+
+      if ($row = mysqli_fetch_assoc($result)) {
+        
+          $_SESSION['id'] = $row['ID'];
+          $_SESSION['name'] = $row['Username'];
+          $_SESSION['number'] = $row['Phone'];
+          $_SESSION['email'] = $row['Email'];
+          $_SESSION['password'] = $row['Password'];
+          $_SESSION['gender'] = $row['Gender'];
+
+          return true; 
+      }
+  }
+  return false; 
+}
+
+
+ static function displayAdminInfo($admin) {
   echo "<div class='input-box'>
             <label for='name'>Name: &nbsp;</label>
-            " . $admin->Username . "
-          </div>";
+            " . htmlspecialchars($admin->Username) . "
+        </div>";
 
   echo "<div class='input-box'>
             <label for='number'>Phone Number: &nbsp;</label>
-            " . $admin->Phone . "
-          </div>";
+            " . htmlspecialchars($admin->Phone) . "
+        </div>";
 
   echo "<div class='input-box'>
             <label for='email'>Email: &nbsp;</label>
-            " . $admin->Email . "
-          </div>";
+            " . htmlspecialchars($admin->Email) . "
+        </div>";
 
   echo "<div class='input-box'>
             <label for='gender'>Gender: &nbsp;</label>
-            " . $admin->Gender . "
-          </div>";
+            " . htmlspecialchars($admin->Gender) . "
+        </div>";
 }
 
 

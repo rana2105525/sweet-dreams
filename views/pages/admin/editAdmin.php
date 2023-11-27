@@ -7,6 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="../../../public/css/admin/editAdmin.css" />
     <link rel="icon" href="../../../public/images/Sweet Dreams logo-01.png" type="image/icon type" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#email').on('blur', function () {
+                var email = $(this).val();
+                $.ajax({
+                    url: 'check_emails.php',
+                    type: 'POST',
+                    data: {
+                        Email: email
+                    },
+                    success: function (response) {
+                        $('#email-error').text(response);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <style>
@@ -19,91 +37,48 @@
 <?php
 session_start();
 
-
-      
-
-      // Check if the user is logged in as an admin
-      if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
-          // Redirect the user to the login page if not logged in as an admin
-          header("Location: /sweet-dreams/views/pages/");
-          exit();
-      }
+    //   // Check if the user is logged in as an admin
+    //   if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+    //       // Redirect the user to the login page if not logged in as an admin
+    //       header("Location: /sweet-dreams/views/pages/");
+    //       exit();
+    //   }
       
 
 include_once "../../../config.php";
+include_once "../../../Admin.php";
 function isValidEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 $errors = [];
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = isset($_POST['name']) ? $_POST['name'] : '';
-    $phoneNumber = isset($_POST['number']) ? $_POST['number'] : '';
-    $email = isset($_POST['email']) ? $_POST['email'] : '';
-    $password = isset($_POST['password']) ? $_POST['password'] : '';
-    $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
+    $name = isset($_POST['name']) ? mysqli_real_escape_string($conn, $_POST['name']) : '';
+    $phoneNumber = isset($_POST['number']) ? mysqli_real_escape_string($conn, $_POST['number']) : '';
+    $email = isset($_POST['email']) ? mysqli_real_escape_string($conn, $_POST['email']) : '';
+    $password = isset($_POST['password']) ? mysqli_real_escape_string($conn, $_POST['password']) : '';
+    $gender = isset($_POST['gender']) ? mysqli_real_escape_string($conn, $_POST['gender']) : '';
 
+if(isset($_POST['submit'])){
+if (empty($name) || empty($phoneNumber) || empty($email) || empty($password) || empty($gender)) {
+    $errors[] = "All fields are required.";
+}
 
-    if (empty($name)&&empty($phoneNumber)&&empty($email)&&empty($password)&&empty($gender)&& 
-    !$emailTaken)
-    {
-      $errors[] = "All fields are required, including selecting a gender.";
-    }
-    elseif (empty($name)) {
-        $errors[] = "Name is required";
-    }
-    
-    elseif (empty($phoneNumber)) {
-        $errors[] = "Phone number is required";
-    } elseif (!ctype_digit($phoneNumber)) {
-        $errors[] = "Phone number should contain only numbers";
-    }
+if (!isValidEmail($email)) {
+    $errors[] = "Invalid email format.";
+}
 
-    elseif (empty($email)) {
-        $errors[] = "Email is required";
-    } elseif (!isValidEmail($email)) {
-        $errors[] = "Invalid email format";
-    }
-    $sql = "SELECT * FROM registrations WHERE email = '$email'";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        $emailErr = "Email is already taken";
-        $emailTaken = true;
-    }
+    if (empty($errors)) {
 
-    elseif (empty($password)) {
-        $errors[] = "Password is required";
-    }
+        $updateResult = Admin::updateAdmin($_SESSION['id'], $name, $phoneNumber, $email, $password, $gender);
 
-    elseif (empty($gender)) {
-        $errors[] = "Gender is required";
-    }
-
-    if (count($errors) === 0) {
-        // Sanitize and escape user input to prevent SQL injection
-        $name = mysqli_real_escape_string($conn, $name);
-        $phoneNumber = mysqli_real_escape_string($conn, $phoneNumber);
-        $email = mysqli_real_escape_string($conn, $email);
-        $password = password_hash($password, PASSWORD_DEFAULT);
-        $gender = mysqli_real_escape_string($conn, $gender);
-
-        // Update the session variables based on form data
-        $_SESSION['id'] = $id;
-        $_SESSION['name'] = $name;
-        $_SESSION['number'] = $phoneNumber;
-        $_SESSION['email'] = $email;
-        $_SESSION['password'] = $password;
-        $_SESSION['gender'] = $gender;
-
-        // Update the admin information in the database
-        $sql = "UPDATE admins SET Username='$name', Phone='$phoneNumber', Email='$email', Password='$password', Gender='$gender' WHERE Email='" . $_SESSION['email'] . "'or ID='". $_SESSION['id'] ."'";
-        $result = mysqli_query($conn, $sql);
-
-        if ($result) {
+        if ($updateResult) {
             // Redirect to the login page after updating admin info
             header("Location: /sweet-dreams/views/pages/login.php");
-            exit();}
-    }
-}
+            exit();
+        }
+
+    }}}
+
 ?>
 <div class="component">
 <div class="sidebar rows">
@@ -148,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </span>
     </div>
 
-    <button type="submit">Edit Admin</button>
+    <button type="submit" name="submit">Edit Admin</button>
 </form>
 <div class="error-container">
         <?php

@@ -13,14 +13,12 @@
 <?php 
       session_start();
       include_once "../../../Admin.php";
-      // Check if the user is logged in as an admin
-      if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
-          // Redirect the user to the login page if not logged in as an admin
-          header("Location: /sweet-dreams/views/pages/");
-          exit();
-      }
-$admin = new Admin($_SESSION['ID']);
-Admin::displayAdminInfo($admin);
+    //   // Check if the user is logged in as an admin
+    //   if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+    //       // Redirect the user to the login page if not logged in as an admin
+    //       header("Location: /sweet-dreams/views/pages/");
+    //       exit();
+    //   }
       ?>
 
 <div class="component">
@@ -33,6 +31,12 @@ Admin::displayAdminInfo($admin);
     <div class="form">
       
         <div id="title"><h2>Admin Profile</h2></div>
+        <div class="admin-details">
+          <?php
+            $admin = new Admin($_SESSION['ID']);
+            Admin::displayAdminInfo($admin);
+          ?>
+        </div>
 
         <!-- <div class="input-box">
             <label for="name:">Name: &nbsp;</label>
