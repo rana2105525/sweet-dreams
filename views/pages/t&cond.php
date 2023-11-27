@@ -14,10 +14,6 @@
     <body>
     <nav>
   <?php include '../partials/nav.php'; ?>
-
-      </ul>
-    
-    </div>
   
     <?php include '../partials/side.php'; ?>
 </nav>

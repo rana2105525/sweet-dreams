@@ -212,36 +212,49 @@ nav .wrapper1 .nav-items{
       
 }
 
-   .search {
-     width: 100%;
-     position: relative;
-     display: flex;
-   }
+
    
-   .searchTerm {
-     border: none;
-     padding: 5px;
-     height: 30px;
-     border-radius: 5px 0 0 5px;
-     outline: none;
-     margin-left: 80%;
-     color: #9DBFAF;
-   }
-   
-   .searchTerm:focus{
-     color:#3AB9C0;
-   }
-   
-   .searchButton {
-     height: 36px;
-    border: none;     
-    background: #F27144;
-     text-align: center;
-     color: #fff;
-     border-radius: 0 5px 5px 0;
-     cursor: pointer;
-     font-size: 20px;
-   }
+     
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  border: none;
+  padding: 5px;
+  height: 30px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  margin-left: 80%;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color:#3AB9C0;
+}
+
+.searchButton {
+  height: 36px;
+ border: none;     
+ background: #F27144;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
    
 .product-card {
   margin-top:30px;

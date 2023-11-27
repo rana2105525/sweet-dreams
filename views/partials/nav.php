@@ -13,7 +13,15 @@ if (isset($_SESSION["id"])) {
     $UserObject = new User($_SESSION["id"]);
     $profile = "profile.php";
     $signout = "Logout";
-
+    echo "</div>";
+    echo"<div class='wrap'>";
+    echo"<div class='search'>";
+    echo'<input type="text" class="searchTerm" placeholder="What are you looking for?">';
+    echo' <button type="submit" class="searchButton">';
+    echo   ' <i class="fa fa-search"></i>';
+     echo' </button>';
+   echo' </div>';
+ echo'</div>';
     echo "<div class='wrapper1'>";
     echo "<div class='logo'><a href='index.php'><img src='../../public/images/sweet dreams logo-01.png' alt='logo'></a></div>";
     echo "<ul class='nav-links'>";
@@ -24,12 +32,21 @@ if (isset($_SESSION["id"])) {
     echo "</ul>";
     echo "</div>";
 } else {
+  
     echo "<div class='wrapper1'>";
     echo "<div class='logo'><a href='index.php'><img src='../../public/images/sweet dreams logo-01.png' alt='logo'></a></div>";
     echo "<ul class='nav-links'>";
     echo "<li><a href='$login'>$log</a></li>";
     echo "</ul>";
     echo "</div>";
+    echo"<div class='wrap'>";
+    echo"<div class='search'>";
+    echo'<input type="text" class="searchTerm" placeholder="What are you looking for?">';
+    echo' <button type="submit" class="searchButton">';
+    echo   ' <i class="fa fa-search"></i>';
+     echo' </button>';
+   echo' </div>';
+ echo'</div>';
 }
 ?>
 
