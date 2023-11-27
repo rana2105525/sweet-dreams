@@ -196,6 +196,28 @@ static function deleteUser($id)
     }
     return false; 
 }
+
+static function addToBlog($blog_img, $blog_text)
+{
+    global $conn;
+
+    $image_filename = $blog_img['name'];
+    $image_filetemp = $blog_img['tmp_name'];
+
+    $upload_image = 'images/' . $image_filename;
+    $destination = '../../../public/' . $upload_image;
+    move_uploaded_file($image_filetemp, $destination);
+
+    $sql = "INSERT INTO blog (blog_img, blog_text) VALUES ('$upload_image', '$blog_text')";
+    $result = mysqli_query($conn, $sql);
+
+    if (!$result) {
+        die(mysqli_error($conn));
+    }
+    return true;
+}
+
+
 }
 
 
