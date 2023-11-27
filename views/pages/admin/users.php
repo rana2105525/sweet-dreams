@@ -13,13 +13,17 @@
   <body>
   <?php 
       session_start();
+      include("../../../config.php");
+      include_once("../../../Admin.php");
 
-      // Check if the user is logged in as an admin
-      if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
-          // Redirect the user to the login page if not logged in as an admin
-          header("Location: /sweet-dreams/views/pages/");
-          exit();
-      }
+      $users = Admin::getAllUsers();
+
+      // // Check if the user is logged in as an admin
+      // if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+      //     // Redirect the user to the login page if not logged in as an admin
+      //     header("Location: /sweet-dreams/views/pages/");
+      //     exit();
+      // }
       ?>
   <div class="component">
   <div class="sidebar rows">
@@ -41,26 +45,20 @@
               </thead>
               <tbody>
                 <?php
-                  $sql = "SELECT * FROM registrations";
-                  $result = mysqli_query($conn,$sql);
-                   //fetch all data inside the database
-                  while($row = mysqli_fetch_assoc($result)){
-                    $id = $row["id"];
-                    $fullname = $row["fullname"];
-                    $email = $row["email"];
-                    $birth = $row["birth"];
-                    $gender = $row["gender"];
+                  foreach ($users as $user) {
                     echo '<tr>
-                            <td> #'.$id.'</td>
-                            <td>'.$fullname.'</td>
-                            <td>'.$email.'</td>
-                            <td>'.$birth.'</td>
-                            <td>'.$gender.'</td>
+                            <td> #' . $user['id'] . '</td>
+                            <td>' . $user['name'] . '</td>
+                            <td>' . $user['email'] . '</td>
+                            <td>' . $user['birth'] . '</td>
+                            <td>' . $user['gender'] . '</td>
                             <td>
-                              <button class = "buttons" id ="delete"><a href="deleteUser.php?delete_id='.$id.'">Delete</a></button>
+                                <button class="buttons" id="delete">
+                                    <a href="deleteUser.php?delete_id=' . $user['id'] . '">Delete</a>
+                                </button>
                             </td>
-                          </tr>';
-                  }
+                        </tr>';
+                }
                 ?>
               
                 

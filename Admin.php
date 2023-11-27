@@ -162,7 +162,27 @@ static function getAllAdmins() {
 
     return $admins;
 }
+static function getAllUsers() {
+    global $conn;
 
+    $sql = "SELECT * FROM reg";
+    $result = mysqli_query($conn, $sql);
+    $users = [];
+
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $users[] = [
+                'id' => $row['id'],
+                'name' => $row['name'],
+                'email' => $row['email'],
+                'birth' => $row['birth'],
+                'gender' => $row['gender']
+            ];
+        }
+    }
+
+    return $users;
+}
 }
 
 
