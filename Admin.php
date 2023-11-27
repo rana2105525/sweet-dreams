@@ -141,6 +141,27 @@ static function deleteAdmin($id)
         </div>";
 }
 
+static function getAllAdmins() {
+    global $conn;
+
+    $sql = "SELECT * FROM admins";
+    $result = mysqli_query($conn, $sql);
+    $admins = [];
+
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $admins[] = [
+                'ID' => $row['ID'],
+                'Username' => $row['Username'],
+                'Email' => $row['Email'],
+                'Phone' => $row['Phone'],
+                'Gender' => $row['Gender']
+            ];
+        }
+    }
+
+    return $admins;
+}
 
 }
 

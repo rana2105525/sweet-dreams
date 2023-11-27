@@ -1,4 +1,9 @@
-<?php include("../../../config.php");?>
+<?php
+include("../../../config.php");
+include_once("../../../Admin.php");
+
+$admins = Admin::getAllAdmins();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,25 +45,17 @@
                 </tr>
               </thead>
               <tbody>
-                <?php
-                  $sql = "SELECT * FROM admins";
-                  $result = mysqli_query($conn,$sql);
-                   //fetch all data inside the database
-                  while($row = mysqli_fetch_assoc($result)){
-                    $id = $row["ID"];
-                    $name = $row["Username"];
-                    $email = $row["Email"];
-                    $phoneNumber = $row["Phone"];
-                    $gender = $row["Gender"];
-                    echo '<tr>
-                            <td> #'.$id.'</td>
-                            <td>'.$name.'</td>
-                            <td>'.$email.'</td>
-                            <td>'.$phoneNumber.'</td>
-                            <td>'.$gender.'</td>
-                          </tr>';
-                  }
-                ?>
+              <?php
+                        foreach ($admins as $admin) {
+                            echo '<tr>
+                                    <td> #' . $admin['ID'] . '</td>
+                                    <td>' . $admin['Username'] . '</td>
+                                    <td>' . $admin['Email'] . '</td>
+                                    <td>' . $admin['Phone'] . '</td>
+                                    <td>' . $admin['Gender'] . '</td>
+                                </tr>';
+                        }
+                        ?>
               </tbody>
             </table>
         </div>
