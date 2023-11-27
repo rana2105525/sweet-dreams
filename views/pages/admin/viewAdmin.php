@@ -12,7 +12,7 @@
 <body>
 <?php 
       session_start();
-
+      include_once "../../../Admin.php";
       // Check if the user is logged in as an admin
       if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
           // Redirect the user to the login page if not logged in as an admin
