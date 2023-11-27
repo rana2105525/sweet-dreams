@@ -69,10 +69,10 @@ if (!isValidEmail($email)) {
 
     if (empty($errors)) {
 
-        $updateResult = Admin::updateAdmin($_SESSION['id'], $name, $phoneNumber, $email, $password, $gender);
+        $updateResult = Admin::updateAdmin($_SESSION['ID'], $name, $phoneNumber, $email, $password, $gender);
 
         if ($updateResult) {
-            header("Location: /sweet-dreams/views/pages/login.php");
+            header("Location: ../login.php");
             exit();
         }
 
