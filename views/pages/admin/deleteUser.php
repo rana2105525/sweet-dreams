@@ -1,17 +1,18 @@
 <?php
 session_start();
 
-// Include connection
 include_once "../../../config.php";
-if(isset($_GET['delete_id'])){//delete_id in the url 
-    $id = $_GET['delete_id']; //access the delete_id variable
-    $sql = "DELETE FROM registrations WHERE id = '$id';";
-    $result = mysqli_query($conn,$sql);
-    if($result){
-        header("location:users.php");
-    }
-    if(!$result){
+include_once "../../../Admin.php";
+
+if(isset($_GET['delete_id'])) {
+    $id = $_GET['delete_id'];
+
+    // Use the static function deleteUser from the Admin class
+    if(Admin::deleteUser($id)) {
+        header("location: users.php");
+        exit();
+    } else {
         die(mysqli_error($conn));
     }
-} 
+}
 ?>

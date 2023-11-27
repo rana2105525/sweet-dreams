@@ -182,6 +182,20 @@ static function getAllUsers() {
 
     return $users;
 }
+static function deleteUser($id)
+{
+    global $conn;
+
+    $escapedID = mysqli_real_escape_string($conn, $id);
+
+    $sql = "DELETE FROM reg WHERE id = '$escapedID'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+        return true;
+    }
+    return false; 
+}
 }
 
 
