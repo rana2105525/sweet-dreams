@@ -29,8 +29,8 @@ class User
 				$this->name=$row["name"];
 				$this->email=$row["email"];
         $this->phone=$row["phone"];
-                $this->password=$row["password"];
-                $this->birth=$row["birth"];
+        $this->password=$row["password"];
+        $this->birth=$row["birth"];
                 $this->gender=$row["gender"];
 				$this->id=$row["id"];
 				// $this->UserType_obj=new UserType($row["UserType_id"]);
@@ -39,7 +39,7 @@ class User
 	}
 
     static function InsertinDB_Static($name,$email,$phone,$password,$birth,$gender)	{
-		$sql="insert into reg(name,email,phone,password,birth,gender) values ('$name','$email','$phone',$password','$birth','$gender')";
+		$sql="insert into reg(name,email,phone,password,birth,gender) values ('$name','$email','$phone','$password','$birth','$gender')";
 		if(mysqli_query($GLOBALS['conn'],$sql))
 			return true;
 		else
