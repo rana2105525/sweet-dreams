@@ -72,7 +72,6 @@ if (!isValidEmail($email)) {
         $updateResult = Admin::updateAdmin($_SESSION['id'], $name, $phoneNumber, $email, $password, $gender);
 
         if ($updateResult) {
-            // Redirect to the login page after updating admin info
             header("Location: /sweet-dreams/views/pages/login.php");
             exit();
         }
