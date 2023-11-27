@@ -11,11 +11,10 @@
     <h1>Contact us</h1>
         <form method="post" action="send.php">
             <div class="send">
-            <h5>Please type the number with the international format</h5>
-            <label for="number">number: </label>
-            <input type="text" name="number" id="number">
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name">
 
-            <label for="message">message: </label>
+            <label for="message">Message: </label>
             <textarea name="message" id="message"></textarea>
 <div class="send_btn">
             <button>send</button>

@@ -16,7 +16,7 @@
 
     require __DIR__."/vendor/autoload.php";
 
-    $number=$_POST["number"];
+    $name=$_POST["name"];
     $message=$_POST["message"];
 
   
@@ -25,11 +25,11 @@
 
         $configuration = new Configuration(host:$base_url, apiKey:$api_key);
         $api = new SmsApi(config:$configuration);
-        $destination = new SmsDestination(to:$number);
+        $destination = new SmsDestination(to:"00-20-1004222194");
         $message = new SmsTextualMessage(
             destinations:[$destination],
             text:$message,
-            from:"SweetDreams"
+            from:"$name"
         );
         $request = new SmsAdvancedTextualRequest(messages:[$message]);
         $response = $api->sendSmsMessage($request);
