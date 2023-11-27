@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // If there are no errors, insert data into the database
   if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($confirmErr) && empty($birthErr)) {
     $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    if (User::InsertinDB_Static($name, $email, $hashed_password, $birth, $gender)) {
+    if (User::InsertinDB_Static($name, $email,$phone,$hashed_password, $birth, $gender)) {
       header("Location: login.php");
       exit();
     } else {
@@ -150,6 +150,11 @@ function isDateValid($date)
           <input type="text" name="email" id="email" placeholder="username@email.com" required />
            <span class="error"> <?php echo $emailErr?></span> 
        <span class="error"  id="email-error"></span> 
+        </div>
+
+        <div class="input-box">
+          <label>Phone number</label>
+          <input type="text" name="phone" id="phone"  required />
 
         </div>
 
@@ -197,6 +202,7 @@ function isDateValid($date)
   if (isset($_POST['submit'])){ //check if form was submitted
  	$name=htmlspecialchars($_POST["name"]);
 	$email=htmlspecialchars($_POST["email"]);
+  $phone=htmlspecialchars($_POST["phone"]);
 	$password=htmlspecialchars($_POST["password"]); 	
   $birth=htmlspecialchars($_POST["birth"]);
  	$gender=htmlspecialchars($_POST["gender"]);

@@ -16,6 +16,7 @@ class User
     public $id;
     public $name;
     public $email;
+    public $phone;
     public $password;
     public $birth;
     public $gender; 
@@ -27,6 +28,7 @@ class User
 			if ($row = mysqli_fetch_array($User)){
 				$this->name=$row["name"];
 				$this->email=$row["email"];
+        $this->phone=$row["phone"];
                 $this->password=$row["password"];
                 $this->birth=$row["birth"];
                 $this->gender=$row["gender"];
@@ -36,8 +38,8 @@ class User
 		}
 	}
 
-    static function InsertinDB_Static($name,$email,$password,$birth,$gender)	{
-		$sql="insert into reg(name,email,password,birth,gender) values ('$name','$email','$password','$birth','$gender')";
+    static function InsertinDB_Static($name,$email,$phone,$password,$birth,$gender)	{
+		$sql="insert into reg(name,email,phone,password,birth,gender) values ('$name','$email','$phone',$password','$birth','$gender')";
 		if(mysqli_query($GLOBALS['conn'],$sql))
 			return true;
 		else
