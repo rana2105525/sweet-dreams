@@ -13,11 +13,13 @@
 </head>
 
 <body>
+
   <nav>
   <?php include '../partials/nav.php'; ?>
   <?php include '../partials/side.php'; ?>
-  </nav>
 
+  </nav>
+  <?php include '../partials/chatbot.php'; ?>
   <header>
     <section class='hero-header'>
       <h1>Shop and explore our new collection to get the chance to earn gifts</h1>
