@@ -19,6 +19,8 @@
           header("Location: /sweet-dreams/views/pages/");
           exit();
       }
+$admin = new Admin($_SESSION['ID']);
+Admin::displayAdminInfo($admin);
       ?>
 
 <div class="component">
@@ -32,25 +34,25 @@
       
         <div id="title"><h2>Admin Profile</h2></div>
 
-        <div class="input-box">
+        <!-- <div class="input-box">
             <label for="name:">Name: &nbsp;</label>
-              <?php echo $_SESSION["Name"];?>
+              <?php //echo $_SESSION["Name"];?>
             </div>
 
         <div class="input-box">
             <label for="number">Phone Number: &nbsp;</label>
-            <?php echo $_SESSION["Phone"]; ?>
+            <?php //echo $_SESSION["Phone"]; ?>
         </div>
 
         <div class="input-box">
             <label for="email">Email: &nbsp;</label>
-            <?php echo $_SESSION["Email"]; ?>
+            <?php //echo $_SESSION["Email"]; ?>
         </div> 
 
         <div class="input-box">
             <label for ="gender" >Gender: &nbsp;</label>
-            <?php echo $_SESSION["Gender"]; ?>
-        </div> 
+            <?php //echo $_SESSION["Gender"]; ?>
+        </div>  -->
 
         <button id ="edit"><a href="editAdmin.php">Edit Profile</a></button>
         <button id ="delete"><a href="deleteAdmin.php">Delete Account</button>

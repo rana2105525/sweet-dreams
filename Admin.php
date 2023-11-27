@@ -71,6 +71,30 @@ static function addAdmin($Username,$Phone,$Email,$Password,$Gender)
         return false;
  
 }
+public static function displayAdminInfo($admin) {
+  
+  echo "<div class='input-box'>
+            <label for='name'>Name: &nbsp;</label>
+            " . $admin->Username . "
+          </div>";
+
+  echo "<div class='input-box'>
+            <label for='number'>Phone Number: &nbsp;</label>
+            " . $admin->Phone . "
+          </div>";
+
+  echo "<div class='input-box'>
+            <label for='email'>Email: &nbsp;</label>
+            " . $admin->Email . "
+          </div>";
+
+  echo "<div class='input-box'>
+            <label for='gender'>Gender: &nbsp;</label>
+            " . $admin->Gender . "
+          </div>";
+}
+
+
 }
 
 
