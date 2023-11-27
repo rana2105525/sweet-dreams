@@ -3,7 +3,7 @@ include_once "../../config.php";
 include_once "../../User.php";
 
 // Define variables and set them to empty values
-$name = $email = $password = $confirm = $birth = $gender = "";
+$name = $email = $password = $confirm = $birth = $gender =$phone= "";
 $nameErr = $emailErr = $passwordErr = $confirmErr = $birthErr = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -63,10 +63,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
+    // ... (other validations)
+
+    // Validate the phone number field
+    if (empty($_POST["phone"])) {
+        $phoneErr = "Enter phone number";
+    } else {
+      $phone = test_input($_POST["phone"]);
+      $desiredLength = 11; // Change this value to the desired phone number length
+
+      if (!isValidPhoneNumber($phone, $desiredLength)) {
+          $phoneErr = "Invalid phone number format or length"; // Set an error message if the phone number format or length is invalid
+      }
+    }
+
   // If there are no errors, insert data into the database
   if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($confirmErr) && empty($birthErr)) {
     $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    if (User::InsertinDB_Static($name, $email,$phone,$hashed_password, $birth, $gender)) {
+    if (User::InsertinDB_Static($name,$email,$phone,$hashed_password, $birth, $gender)) {
       header("Location: login.php");
       exit();
     } else {
@@ -81,6 +95,16 @@ function test_input($data)
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
   return $data;
+}
+function isValidPhoneNumber($phoneNumber, $desiredLength) {
+    // Validate phone number format using a regular expression
+    $pattern = '/^\+?[0-9]+$/'; // Update the pattern based on your specific phone number format;
+    $isValidFormat = preg_match($pattern, $phoneNumber);
+
+    // Validate phone number length
+    $isValidLength = (strlen($phoneNumber) === $desiredLength);
+
+    return ($isValidFormat && $isValidLength);
 }
 
 function isStrongPassword($password)
@@ -199,14 +223,16 @@ function isDateValid($date)
     <?php
  //grap data from user if form was submitted 
 
-  if (isset($_POST['submit'])){ //check if form was submitted
- 	$name=htmlspecialchars($_POST["name"]);
-	$email=htmlspecialchars($_POST["email"]);
-  $phone=htmlspecialchars($_POST["phone"]);
-	$password=htmlspecialchars($_POST["password"]); 	
-  $birth=htmlspecialchars($_POST["birth"]);
- 	$gender=htmlspecialchars($_POST["gender"]);
- }
+ if (isset($_POST['submit'])) { //check if form was submitted
+  $name = htmlspecialchars($_POST["name"]);
+  $email = htmlspecialchars($_POST["email"]);
+  $phone = htmlspecialchars($_POST["phone"]);
+  $password = htmlspecialchars($_POST["password"]);
+  $birth = htmlspecialchars($_POST["birth"]);
+  $gender = htmlspecialchars($_POST["gender"]);
+
+  // Handle the form submission here, e.g., store data in a database
+}
 ?>
   </body>
 </html>
