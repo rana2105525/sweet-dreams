@@ -35,14 +35,13 @@ function __construct($ID)	{
     }
 }
 
-static function adminLogin($Email, $Password) {
+static function adminLogin($Email, $Password)
+ {
     $sql = "SELECT * FROM admins WHERE Email='$Email'";
     $result = mysqli_query($GLOBALS['conn'], $sql);
-    
     if ($row = mysqli_fetch_array($result)) {
         $storedPassword = $row['Password'];
         if (password_verify($Password, $storedPassword)) {
-            $_SESSION['ID'] = $row['ID']; 
             return new Admin($row['ID']);
         } else {
             echo "Email or password is incorrect";
@@ -66,9 +65,9 @@ static function addAdmin($Username,$Phone,$Email,$Password,$Gender)
 
         // $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
 
-        $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+        
 
-        $sql = "INSERT INTO admins (Username, Phone, Email, Password, Gender) VALUES ('$Username', '$Phone', '$Email', '$hashedPassword', '$Gender')";
+        $sql = "INSERT INTO admins (Username, Phone, Email, Password, Gender) VALUES ('$Username', '$Phone', '$Email', '$Password', '$Gender')";
         if(mysqli_query($GLOBALS['conn'],$sql))
         return true;
         else
