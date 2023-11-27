@@ -105,6 +105,20 @@ static function updateAdmin($id, $name, $phoneNumber, $email, $password, $gender
 }
 
 
+static function deleteAdmin($id)
+{
+    global $conn;
+
+    $escapedID = mysqli_real_escape_string($conn, $id);
+
+    $sql = "DELETE FROM admins WHERE ID = '$escapedID'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+        return true;
+    }
+    return false; 
+}
  static function displayAdminInfo($admin) {
   echo "<div class='input-box'>
             <label for='name'>Name: &nbsp;</label>

@@ -1,34 +1,21 @@
 <?php
-
 session_start();
 
-// Include connection
 include_once "../../../config.php";
+include_once "../../../Admin.php";
 
-// Check if the user is logged in.
-if (!isset($_SESSION['Email'])) {
-    // Redirect the user to the login page.
+if (!isset($_SESSION['ID'])) {
     header("Location: /sweet-dreams/views/pages/login.php");
     exit();
 } 
 
-// Escape the user input.
-$username = mysqli_real_escape_string($conn, $_SESSION['Email']);
+$adminID = $_SESSION['ID'];
+$deleteResult = Admin::deleteAdmin($adminID);
 
-// Delete the user from the database.
-$sql = "DELETE FROM admins WHERE Email = '$username'";
-$result = mysqli_query($conn, $sql);
-
-// Check if the deletion was successful.
-if ($result) {
-    // Destroy the session.
+if ($deleteResult) {
     session_destroy();
-
-    // Display a success message.
-    header("Location:users.php");
+    header("Location: /allAdmins.php"); // Redirect as per your application's flow
 } else {
-    // Display an error message.
     echo 'Error deleting user.';
 }
-
 ?>
