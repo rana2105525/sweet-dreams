@@ -35,10 +35,10 @@ class Product {
             $this->price = $row["Price"];
 			$this->options =array();
 		}
-		$sql="SELECT options.Name,product_s_o_v.value
-		FROM product_s_o_v 
-		INNER JOIN product_type_s_o ON product_type_s_o.ID = product_s_o_v.Product_Type_S_O
-		INNER JOIN options ON product_type_s_o.Options = options.ID
+		$sql="SELECT product.Name,product.price
+		FROM cart 
+		INNER JOIN product ON product.ID = cart.prod_id
+		INNER JOIN reg ON reg.id = cart.user_id
 		WHERE product_id=".$id;
 		$result = mysqli_query($db_handle->conn,$sql);
 		while($row = mysqli_fetch_array($result)){
