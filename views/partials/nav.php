@@ -29,6 +29,14 @@ if (isset($_SESSION["id"])) {
     echo "<li><a href='$cart'>$cart_class</a></li>";
     echo "<li><a href='$wish'>$wish_class</a></li>";
     echo "<li><a href='#' onclick='event.preventDefault(); document.getElementById(\"logout-form\").submit();'>$signout</a></li>";
+    echo"<div class='wrap'>";
+    echo"<div class='search'>";
+    echo'<input type="text" class="searchTerm" placeholder="What are you looking for?">';
+    echo' <button type="submit" class="searchButton">';
+    echo   ' <i class="fa fa-search"></i>';
+     echo' </button>';
+   echo' </div>';
+ echo'</div>';
     echo "</ul>";
     echo "</div>";
 } else {
