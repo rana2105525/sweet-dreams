@@ -234,7 +234,19 @@ static function getAllReviews() {
 
     return $reviews;
 }
+static function deleteReview($id) {
+    global $conn;
 
+    $escapedID = mysqli_real_escape_string($conn, $id);
+
+    $sql = "DELETE FROM reviews WHERE id = '$escapedID'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+        return true;
+    }
+    return false;
+}
 }
 
 

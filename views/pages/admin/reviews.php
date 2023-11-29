@@ -28,7 +28,7 @@
       </div>
 
       <div class="content">
-      <div id="header"><h2>Customers' &nbsp; Reviews</h2></div>
+      <div id="header"><h2>Customers'&nbsp; Reviews</h2></div>
         <div class="tablecont">
             <table>
               <thead class="tablehead">
