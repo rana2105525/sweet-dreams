@@ -216,7 +216,24 @@ static function addToBlog($blog_img, $blog_text)
     }
     return true;
 }
+static function getAllReviews() {
+    $sql = "SELECT * FROM reviews";
+    $result = mysqli_query($GLOBALS['conn'],$sql);
+    $reviews = [];
 
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $reviews[] = [
+                'id' => $row['id'],
+                'fullname' => $row['fullname'],
+                'review' => $row['review']
+                // Add other columns as needed
+            ];
+        }
+    }
+
+    return $reviews;
+}
 
 }
 
