@@ -16,6 +16,7 @@
       <?php include '../../partials/adminSidebar.php';?>
       <?php 
       session_start();
+      include_once "../../../Admin.php";
 
       // Check if the user is logged in as an admin
       // if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
@@ -27,7 +28,7 @@
       </div>
 
       <div class="content">
-      <div id="header"><h2>Customers' &nbsp; Reviews</h2></div>
+      <div id="header"><h2>Customers'&nbsp; Reviews</h2></div>
         <div class="tablecont">
             <table>
               <thead class="tablehead">
@@ -39,7 +40,23 @@
               </thead>
               <tbody>
                 <?php
-                Review::getReviews();
+                  $sql = "SELECT * FROM reviews";
+                  $result = mysqli_query($conn,$sql);
+                   //fetch all data inside the database
+                  while($row = mysqli_fetch_assoc($result)){
+                    $id = $row["id"];
+                    $fullname = $row["fullname"];
+                    $review = $row["review"];
+                    echo '<tr>
+                            <td>'.$fullname.'</td>
+                            <td>'.$review.'</td>
+                            <td>
+                              <form action="" method="post">
+                                <button><a href="deleteReview.php?delete_id='.$id.'">Delete</button>
+                              </form>
+                            </td>
+                          </tr>';
+                  }
                 ?>
               </tbody>
             </table>
