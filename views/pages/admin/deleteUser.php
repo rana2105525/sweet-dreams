@@ -13,6 +13,6 @@ if(isset($_GET['delete_id'])) {
         exit();
     } else {
         die(mysqli_error($conn));
-    }
+    } 
 }
 ?>

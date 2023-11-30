@@ -1,5 +1,5 @@
-<!--displaying from db-->
-<?php include("../../../config.php");?>
+<?php include("productClass.php");?>
+
 <!DOCTYPE html>
 <html lang="en"> 
   <head>
@@ -12,31 +12,7 @@
   </head> 
 <body>
 
-<?php
- //whenever this submit button is clicked, this functions will be performed 
-//  if(isset($_POST['submit'])){
-//     //storing values 
-//     $title = $_POST['title'];
-//     $price = $_POST['price'];
-//     $description = $_POST['description'];
-//     $prod_image =$_FILES['prod_image'];//2D global array
-//     $category = $_POST['category'];
 
-//     $image_filename = $prod_image['name']; //get image name
-//     $image_filetemp = $prod_image['tmp_name']; //get temp path
-
-//       $upload_image='images/'.$image_filename; //save image inside imgs folder
-//       $destination='../../../public/'.$upload_image;
-//       move_uploaded_file($image_filetemp,$destination);
-
-//       $sql="INSERT INTO products (title,price,description,prod_image,category)
-//        VALUES('$title','$price','$description','$upload_image','$category');";
-//        $result = mysqli_query($conn,$sql);//excute query
-//        if(!$result)
-//         die(mysqli_error($conn));
-//     }
- 
-?>
 <!--validation-->
 <?php
       // if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -61,22 +37,25 @@
           //     echo "<p>Product Description: $productDescription</p>";
           // }
       //}
+?>
 
-
-include_once "../../../productClass.php";
-      
+<?php
+//whenever this submit button is clicked, this functions will be performed 
 if(isset($_POST['submit'])){ //check if form was submitted
-
+//storing values 
 	$title=$_POST['title'];
 	$price=$_POST['price'];
   $description=$_POST['description'];
   $prod_image=$_FILES['prod_image'];
   $category=$_POST['category'];
-	
-	if(Product::InsertinDB_Static($title,$price,$description,$upload_image,$category)){
-		header("Location:index.php");
-	}
-	
+
+  $image_filename = $prod_image['name']; //get image name
+  $image_filetemp = $prod_image['tmp_name']; //get temp path
+  $upload_image='images/'.$image_filename; //save image inside imgs folder
+  $destination='../../../public/'.$upload_image;
+  move_uploaded_file($image_filetemp,$destination);
+
+	Products::insertProducts($title,$price,$description,$upload_image,$category);
 }
 ?>
 
@@ -105,7 +84,7 @@ if(isset($_POST['submit'])){ //check if form was submitted
               <textarea id="description" name="description" rows="4" cols="85" placeholder="Enter product's description"></textarea>
           </div> 
 
-          <div class="input-box">
+          <div class="input-box"> 
               <label for="prod_image">Product image</label>
               <input type="file" id="prod_image" name="prod_image" accept =".png,.jpg,.jpeg"/>
           </div>

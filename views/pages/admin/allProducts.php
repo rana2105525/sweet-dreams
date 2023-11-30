@@ -1,4 +1,4 @@
-<?php include("../../../config.php");?>
+<?php include("productClass.php");?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,14 +12,14 @@
 
   <body>
   <?php 
-      session_start();
+      // session_start();
 
-      // Check if the user is logged in as an admin
-      if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
-          // Redirect the user to the login page if not logged in as an admin
-          header("Location: /sweet-dreams/views/pages/");
-          exit();
-      }
+      // // Check if the user is logged in as an admin
+      // if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+      //     // Redirect the user to the login page if not logged in as an admin
+      //     header("Location: /sweet-dreams/views/pages/");
+      //     exit();
+      // }
       ?>
   <div class="component">
       <div class="sidebar rows">
@@ -40,35 +40,11 @@
                   <th class = "tableHeader">Category</th>
                   <th class = "tableHeader">Added &nbsp; at</th>
                   <th class = "tableHeader">Operation</th>
-                </tr>
+                </tr> 
               </thead>
               <tbody>
                 <?php
-                  $sql = "SELECT * FROM products";
-                  $result = mysqli_query($conn,$sql);
-                   //fetch all data inside the database
-                  while($row = mysqli_fetch_assoc($result)){
-                    $id = $row["id"];
-                    $title = $row["title"];
-                    $price = $row["price"];
-                    $description = $row["description"];
-                    $prod_image = $row["prod_image"];
-                    $added_at = $row["added_at"];
-                    $category = $row["category"];
-                    echo '<tr>
-                            <td class ="cell"> #'.$id.'</td>
-                            <td class ="cell">'.$title.'</td>
-                            <td class ="cell">'.$price.'</td>
-                            <td class ="cell">'.$description.'</td>
-                            <td><img class="table_img" src="../../../public/'.$prod_image.'"alt='.$title.'/></td>
-                            <td class ="cell">'.$category.'</td>
-                            <td class ="cell">'.$added_at.'</td>
-                            <td>
-                              <button class = "buttons" id ="edit"><a href="editProduct.php?update_id='.$id.'">Edit</a></button>
-                              <button class = "buttons" id ="delete"><a href="deleteProduct.php?delete_id='.$id.'">Delete</a></button>
-                            </td>
-                          </tr>';
-                  }
+                Products::getProducts();
                 ?>  
               </tbody>
             </table>
